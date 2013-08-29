@@ -1,8 +1,8 @@
 package com.fa11.dvdverleih;
 /**
- * Kurzbeschreibung der Klasse
+ * Main
  * @version 1.0 vom 29.08.2013
- * @author Manfred Mustermann
+ * @author Paul Manthei
  */
 public class DVDVerleih {
 
