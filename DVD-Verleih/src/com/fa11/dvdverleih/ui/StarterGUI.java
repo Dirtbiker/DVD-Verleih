@@ -46,7 +46,7 @@ public class StarterGUI extends JFrame {
 	 */
 	public StarterGUI() {
 		setResizable(false);
-		setTitle("DVD-Verwaltung Launcher");
+		setTitle("DVD-Verleih");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 332, 140);
 		this.contentPane = new JPanel();
