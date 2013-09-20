@@ -14,6 +14,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class StarterGUI extends JFrame {
 
@@ -45,6 +46,7 @@ public class StarterGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public StarterGUI() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StarterGUI.class.getResource("/com/fa11/dvdverleih/ui/ressources/dvd_unmount.png")));
 		setResizable(false);
 		setTitle("DVD-Verleih");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
