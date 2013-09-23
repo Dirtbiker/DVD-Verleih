@@ -3,25 +3,30 @@
  */
 package com.fa11.dvdverleih.datenhaltung;
 
+import java.util.Date;
+
 /**
  * @author Paul Manthei
  *
  */
 public class Verleih {
 
+	private int leihvorgangs_nr;
 	private int dvd_nr;
-	private String titel;
-	private String genre;
-	private int erscheinungsjahr;
+	private int kunden_nr;
+	private Date ausleihe;
+	private Date rueckgabe;
 	
 	public Verleih() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Verleih(String titel, String genre, int erscheinungsjahr) {
-		setTitel(titel);
-		setGenre(genre);
-		setErscheinungsjahr(erscheinungsjahr);
+
+	public int getLeihvorgangs_nr() {
+		return leihvorgangs_nr;
+	}
+
+	public void setLeihvorgangs_nr(int leihvorgangs_nr) {
+		this.leihvorgangs_nr = leihvorgangs_nr;
 	}
 
 	public int getDvd_nr() {
@@ -32,28 +37,28 @@ public class Verleih {
 		this.dvd_nr = dvd_nr;
 	}
 
-	public String getTitel() {
-		return titel;
+	public int getKunden_nr() {
+		return kunden_nr;
 	}
 
-	public void setTitel(String titel) {
-		this.titel = titel;
+	public void setKunden_nr(int kunden_nr) {
+		this.kunden_nr = kunden_nr;
 	}
 
-	public String getGenre() {
-		return genre;
+	public Date getAusleihe() {
+		return ausleihe;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setAusleihe(Date ausleihe) {
+		this.ausleihe = ausleihe;
 	}
 
-	public int getErscheinungsjahr() {
-		return erscheinungsjahr;
+	public Date getRueckgabe() {
+		return rueckgabe;
 	}
 
-	public void setErscheinungsjahr(int erscheinungsjahr) {
-		this.erscheinungsjahr = erscheinungsjahr;
+	public void setRueckgabe(Date rueckgabe) {
+		this.rueckgabe = rueckgabe;
 	}
 	
 }
