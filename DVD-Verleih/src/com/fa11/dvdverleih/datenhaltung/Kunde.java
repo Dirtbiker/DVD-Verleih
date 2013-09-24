@@ -14,7 +14,7 @@ public class Kunde {
 	private int kunden_nr;
 	private String anrede;
 	private String vorname;
-	private int nachname;
+	private String nachname;
 	private Date geburtstag;
 	private String plz;
 	private String ort;
@@ -23,9 +23,22 @@ public class Kunde {
 	private String telefon_nummer;
 	
 	public Kunde() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
+	public Kunde(int kunden_nr, String anrede, String vorname, String nachname, Date geburtstag, String plz, String ort, String strasse, int hausnummer, String telefon_nummer) {
+		this.setKunden_nr(kunden_nr);
+		this.setAnrede(anrede);
+		this.setVorname(vorname);
+		this.setNachname(nachname);
+		this.setGeburtstag(geburtstag);
+		this.setPlz(plz);
+		this.setOrt(ort);
+		this.setStrasse(strasse);
+		this.setHausnummer(hausnummer);
+		this.setTelefon_nummer(telefon_nummer);
+	}
+	
 	public int getKunden_nr() {
 		return kunden_nr;
 	}
@@ -50,11 +63,11 @@ public class Kunde {
 		this.vorname = vorname;
 	}
 
-	public int getNachname() {
+	public String getNachname() {
 		return nachname;
 	}
 
-	public void setNachname(int nachname) {
+	public void setNachname(String nachname) {
 		this.nachname = nachname;
 	}
 

@@ -3,16 +3,19 @@
  */
 package com.fa11.dvdverleih.datenhaltung;
 
+import java.sql.SQLException;
+import java.util.List;
+
 /**
  * @author Paul Manthei
  *
  */
 public interface IDatenhaltung {
 
-	public Kunde getKunde(int kunden_nr);
+	public List<Kunde> getKundenList() throws SQLException;
 	
-	public DVD getDVD(int dvd_nr);
+	public List<DVD> getDVDList() throws SQLException;
 	
-	public Verleih getVerleih(int kunden_nr, int dvd_nr);
+	public List<Verleih> getVerleihList() throws SQLException;
 	
 }

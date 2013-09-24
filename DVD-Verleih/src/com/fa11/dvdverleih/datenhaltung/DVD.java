@@ -15,7 +15,14 @@ public class DVD {
 	private int erscheinungsjahr;
 
 	public DVD() {
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	public DVD(int dvd_nr, String titel, String genre, int erscheinungsjahr) {
+		this.setDvd_nr(dvd_nr);
+		this.setTitel(titel);
+		this.setGenre(genre);
+		this.setErscheinungsjahr(erscheinungsjahr);
 	}
 
 	public int getDvd_nr() {

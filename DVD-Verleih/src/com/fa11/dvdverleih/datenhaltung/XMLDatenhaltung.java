@@ -3,6 +3,8 @@
  */
 package com.fa11.dvdverleih.datenhaltung;
 
+import java.util.List;
+
 /**
  * @author Paul Manthei
  *
@@ -10,19 +12,19 @@ package com.fa11.dvdverleih.datenhaltung;
 public class XMLDatenhaltung implements IDatenhaltung {
 
 	@Override
-	public Kunde getKunde(int kunden_nr) {
+	public List<Kunde> getKundenList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public DVD getDVD(int dvd_nr) {
+	public List<DVD> getDVDList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Verleih getVerleih(int kunden_nr, int dvd_nr) {
+	public List<Verleih> getVerleihList() {
 		// TODO Auto-generated method stub
 		return null;
 	}

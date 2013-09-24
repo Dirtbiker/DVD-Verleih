@@ -18,7 +18,15 @@ public class Verleih {
 	private Date rueckgabe;
 	
 	public Verleih() {
-		// TODO Auto-generated constructor stub
+		
+	}
+
+	public Verleih(int leihvorgangs_nr, int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
+		this.setLeihvorgangs_nr(leihvorgangs_nr);
+		this.setDvd_nr(dvd_nr);
+		this.setKunden_nr(kunden_nr);
+		this.setAusleihe(ausleihe);
+		this.setRueckgabe(rueckgabe);
 	}
 
 	public int getLeihvorgangs_nr() {
