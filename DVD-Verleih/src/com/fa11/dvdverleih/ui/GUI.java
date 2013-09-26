@@ -8,17 +8,30 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JTabbedPane;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
+
+import javax.swing.DefaultListSelectionModel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.UIManager;
 
 /**
  * Grafische Benutzeroberfläche für den DVD-Verleih mit Swing.
@@ -86,11 +99,19 @@ public class GUI extends JFrame {
 	private JScrollPane scrollPaneCustomers;
 	private JScrollPane scrollPaneDvd;
 	private JScrollPane scrollPaneLending;
+	private JTable tableDvd;
+	private JTable tableCustomers;
+	private JTable tableLending;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -295,6 +316,32 @@ public class GUI extends JFrame {
 		gbc_scrollPaneLending.gridy = 0;
 		panelLendingList.add(scrollPaneLending, gbc_scrollPaneLending);
 		
+		tableLending = new JTable();
+		tableLending.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Leih-Nr.", "DVD-Titel", "Ausleihe", "R\u00FCckgabe"
+			}
+		));
+		tableLending.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+
+					public void valueChanged(ListSelectionEvent lse) {
+						if (!lse.getValueIsAdjusting()) {
+//							DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse
+//									.getSource();
+//							DefaultTableModel model = (DefaultTableModel) tableLending
+//									.getModel();
+//							System.out.println("Selection Changed: "
+//									+ dlsm.getLeadSelectionIndex());
+							System.out.println("Selection Changed: "
+									+ tableLending.getSelectedRow());
+						}
+					}
+				});
+		scrollPaneLending.setViewportView(tableLending);
+		
 		this.panelDvd = new JPanel();
 		this.tabbedPane.addTab("DVD-Verwaltung", null, this.panelDvd, null);
 		GridBagLayout gbl_panelDvd = new GridBagLayout();
@@ -436,6 +483,42 @@ public class GUI extends JFrame {
 		gbc_scrollPaneDvd.gridx = 0;
 		gbc_scrollPaneDvd.gridy = 0;
 		panelDvdList.add(scrollPaneDvd, gbc_scrollPaneDvd);
+		
+		this.tableDvd = new JTable();
+		this.tableDvd.setModel(new DefaultTableModel(new Object[][] {},
+				new String[] { "DVD-Nr.", "Titel", "Genre", "Jahr" }));
+
+		tableDvd.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+
+					public void valueChanged(ListSelectionEvent lse) {
+						if (!lse.getValueIsAdjusting()) {
+							DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse
+									.getSource();
+							DefaultTableModel model = (DefaultTableModel) tableDvd
+									.getModel();
+							System.out.println("Selection Changed: "
+									+ dlsm.getLeadSelectionIndex());
+							System.out.println(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 0));
+							System.out.println(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 1));
+							System.out.println(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 2));
+							System.out.println(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 3));
+							txtDvdNo.setText(String.valueOf(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 0)));
+							txtDvdTitle.setText(String.valueOf(model
+									.getValueAt(dlsm.getLeadSelectionIndex(), 1)));
+							txtDvdGenre.setText(String.valueOf(model
+									.getValueAt(dlsm.getLeadSelectionIndex(), 2)));
+							txtDvdYear.setText(String.valueOf(model.getValueAt(
+									dlsm.getLeadSelectionIndex(), 3)));
+						}
+					}
+				});
+		this.scrollPaneDvd.setViewportView(this.tableDvd);
 		
 		this.panelCustomers = new JPanel();
 		this.tabbedPane.addTab("Kunden-Verwaltung", null, this.panelCustomers, null);
@@ -647,6 +730,30 @@ public class GUI extends JFrame {
 		gbc_scrollPaneCustomers.gridx = 0;
 		gbc_scrollPaneCustomers.gridy = 0;
 		panelCustomersList.add(scrollPaneCustomers, gbc_scrollPaneCustomers);
+		
+		tableCustomers = new JTable();
+		tableCustomers.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Kd.-Nr.", "Nachname", "Vorname", "Telefon"
+			}
+		));
+		tableCustomers.getSelectionModel().addListSelectionListener(
+				new ListSelectionListener() {
+
+					public void valueChanged(ListSelectionEvent lse) {
+						if (!lse.getValueIsAdjusting()) {
+							DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse
+									.getSource();
+							DefaultTableModel model = (DefaultTableModel) tableCustomers
+									.getModel();
+							System.out.println("Selection Changed: "
+									+ dlsm.getLeadSelectionIndex());
+						}
+					}
+				});
+		scrollPaneCustomers.setViewportView(tableCustomers);
 	}
 
 }
