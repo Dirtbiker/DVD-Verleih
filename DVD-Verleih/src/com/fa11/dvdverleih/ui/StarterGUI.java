@@ -1,29 +1,25 @@
 package com.fa11.dvdverleih.ui;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.GridBagLayout;
-
 import javax.swing.JLabel;
-
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
 import java.awt.Font;
-
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.sql.SQLException;
 import javax.swing.UIManager;
+import com.fa11.dvdverleih.datenhaltung.SQLiteDatenhaltung;
+import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
+import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 
 public class StarterGUI extends JFrame {
 
@@ -32,12 +28,12 @@ public class StarterGUI extends JFrame {
 	private JLabel lblBitteTreffenSie;
 	private JLabel lblOberflche;
 	private JLabel lblDatenhaltung;
-	private JComboBox<String> cmbUserInterface;
-	private JComboBox<String> cmbData;
+	private JComboBox cmbUserInterface;
+	private JComboBox cmbData;
 	private JButton btnStarten;
 
 	/**
-	 * Launch the application.
+	 * StarterGUI testweise starten
 	 */
 	public static void main(String[] args) {
 		try {
@@ -58,7 +54,7 @@ public class StarterGUI extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * StarterGUI erstellen
 	 */
 	public StarterGUI() {
 		setResizable(false);
@@ -102,8 +98,8 @@ public class StarterGUI extends JFrame {
 		gbc_lblDatenhaltung.gridy = 1;
 		this.contentPane.add(this.lblDatenhaltung, gbc_lblDatenhaltung);
 
-		this.cmbUserInterface = new JComboBox<String>();
-		this.cmbUserInterface.setModel(new DefaultComboBoxModel<String>(
+		this.cmbUserInterface = new JComboBox();
+		this.cmbUserInterface.setModel(new DefaultComboBoxModel(
 				new String[] { "GUI", "TUI" }));
 		GridBagConstraints gbc_cmbUserInterface = new GridBagConstraints();
 		gbc_cmbUserInterface.insets = new Insets(0, 0, 5, 5);
@@ -112,8 +108,8 @@ public class StarterGUI extends JFrame {
 		gbc_cmbUserInterface.gridy = 2;
 		this.contentPane.add(this.cmbUserInterface, gbc_cmbUserInterface);
 
-		this.cmbData = new JComboBox<String>();
-		this.cmbData.setModel(new DefaultComboBoxModel<String>(new String[] {
+		this.cmbData = new JComboBox();
+		this.cmbData.setModel(new DefaultComboBoxModel(new String[] {
 				"XML", "SQLite" }));
 		GridBagConstraints gbc_cmbData = new GridBagConstraints();
 		gbc_cmbData.insets = new Insets(0, 0, 5, 0);
@@ -125,19 +121,44 @@ public class StarterGUI extends JFrame {
 		this.btnStarten = new JButton("Starten");
 		this.btnStarten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				switch (cmbUserInterface.getSelectedIndex()) {
-				case 0:
-					JFrame gui = new GUI();
-					gui.setVisible(true);
-					break;
-				case 1:
-					System.out.println("Hier wird noch gearbeitet!");
-					System.exit(1);
-					break;
-				default:
-					break;
+				
+				// GUI
+				if(cmbUserInterface.getSelectedIndex() == 0){
+					if(cmbData.getSelectedIndex() == 0){
+						JFrame gui = new GUI(new Fachkonzept(new XMLDatenhaltung()));
+						gui.setVisible(true);
+						setVisible(false);
+					}
+					else if (cmbData.getSelectedIndex() == 1){
+						JFrame gui;
+						try {
+							gui = new GUI(new Fachkonzept(new SQLiteDatenhaltung()));
+							gui.setVisible(true);
+							setVisible(false);
+						} catch (SQLException e) {
+							JOptionPane.showMessageDialog(null,
+									"Es ist ein SQL-Fehler aufgetreten:\n\n" + e.toString(),
+									"SQL-Fehler",
+									JOptionPane.ERROR_MESSAGE,
+									null);
+							e.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							JOptionPane.showMessageDialog(null,
+									"Der JDBC Datenbanktreiber für SQLite wurde nicht gefunden!\n\n" + e.toString(),
+									"JDBC-Fehler",
+									JOptionPane.ERROR_MESSAGE,
+									null);
+							e.printStackTrace();
+						}
+					}
 				}
-				setVisible(false);
+				// TUI
+				else if (cmbUserInterface.getSelectedIndex() == 1){
+					JOptionPane.showMessageDialog(null, "Hier wird noch gearbeitet!",
+							"Eine schöne Fehlermeldung",
+							JOptionPane.INFORMATION_MESSAGE,
+							null);
+				}
 			}
 		});
 		GridBagConstraints gbc_btnStarten = new GridBagConstraints();
