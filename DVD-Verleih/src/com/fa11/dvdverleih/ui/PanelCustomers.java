@@ -6,14 +6,11 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
-import javax.swing.DefaultListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -52,6 +49,9 @@ public class PanelCustomers extends JPanel {
 	private JTextField txtTitle;
 	private JTable tableCustomers;
 	
+	/**
+	 * PanelCustomers erstellen
+	 */
 	public PanelCustomers() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -283,21 +283,25 @@ public class PanelCustomers extends JPanel {
         
         this.tableCustomers.getTableHeader().setReorderingAllowed(false);
 		
-		this.tableCustomers.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-
-					public void valueChanged(ListSelectionEvent lse) {
-						if (!lse.getValueIsAdjusting()) {
-							DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse
-									.getSource();
-							DefaultTableModel model = (DefaultTableModel) tableCustomers
-									.getModel();
-							System.out.println("Selection Changed: "
-									+ dlsm.getLeadSelectionIndex());
-						}
-					}
-				});
+//		this.tableCustomers.getSelectionModel().addListSelectionListener(
+//				new ListSelectionListener() {
+//
+//					public void valueChanged(ListSelectionEvent lse) {
+//						if (!lse.getValueIsAdjusting()) {
+//							DefaultListSelectionModel dlsm = (DefaultListSelectionModel) lse
+//									.getSource();
+//							DefaultTableModel model = (DefaultTableModel) tableCustomers
+//									.getModel();
+//							System.out.println("Selection Changed: "
+//									+ dlsm.getLeadSelectionIndex());
+//						}
+//					}
+//				});
 		this.scrollPaneCustomersTable.setViewportView(tableCustomers);
+	}
+	
+	public void setTableCustomersListSelectionListener(ListSelectionListener listener){
+		tableCustomers.getSelectionModel().addListSelectionListener(listener);
 	}
 
 	public JTextField getTxtCustomerNo() {

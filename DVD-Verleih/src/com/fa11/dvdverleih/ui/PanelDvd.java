@@ -6,13 +6,11 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -44,6 +42,9 @@ public class PanelDvd extends JPanel {
 	private JTable tableDvd;
 	private JButton btnDelete;
 	
+	/**
+	 * PanelDvd erstellen
+	 */
 	public PanelDvd() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -225,21 +226,25 @@ public class PanelDvd extends JPanel {
         
         tableDvd.getTableHeader().setReorderingAllowed(false);
 
-		tableDvd.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-
-					public void valueChanged(ListSelectionEvent lse) {
-						if (!lse.getValueIsAdjusting()) {
-							DefaultTableModel model = (DefaultTableModel) tableDvd
-									.getModel();
-							txtDvdNo.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 0)));
-							txtDvdTitle.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 1)));
-							txtDvdGenre.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 2)));
-							txtDvdYear.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 3)));
-						}
-					}
-				});
+//		tableDvd.getSelectionModel().addListSelectionListener(
+//				new ListSelectionListener() {
+//
+//					public void valueChanged(ListSelectionEvent lse) {
+//						if (!lse.getValueIsAdjusting()) {
+//							DefaultTableModel model = (DefaultTableModel) tableDvd
+//									.getModel();
+//							txtDvdNo.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 0)));
+//							txtDvdTitle.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 1)));
+//							txtDvdGenre.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 2)));
+//							txtDvdYear.setText(String.valueOf(model.getValueAt(tableDvd.getSelectedRow(), 3)));
+//						}
+//					}
+//				});
 		this.scrollPaneDvdTable.setViewportView(this.tableDvd);
+	}
+	
+	public void setTableDvdListSelectionListener(ListSelectionListener listener){
+		tableDvd.getSelectionModel().addListSelectionListener(listener);
 	}
 
 	public JTextField getTxtDvdNo() {

@@ -6,14 +6,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
-
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -47,6 +45,9 @@ public class PanelLending extends JPanel {
 	private JScrollPane scrollPaneLendingTable;
 	private JTable tableLending;
 	
+	/**
+	 * PanelLending erstellen
+	 */
 	public PanelLending() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
@@ -249,27 +250,31 @@ public class PanelLending extends JPanel {
         tableLendingSorter.setModel(tableLending.getModel());
         
         tableLending.getTableHeader().setReorderingAllowed(false);
-		tableLending.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-
-					public void valueChanged(ListSelectionEvent lse) {
-						if (!lse.getValueIsAdjusting()) {
-							// DefaultListSelectionModel dlsm =
-							// (DefaultListSelectionModel) lse
-							// .getSource();
-							// DefaultTableModel model = (DefaultTableModel)
-							// tableLending
-							// .getModel();
-							// System.out.println("Selection Changed: "
-							// + dlsm.getLeadSelectionIndex());
-							System.out.println("Selection Changed: "
-									+ tableLending.getSelectedRow());
-						}
-					}
-				});
+//		tableLending.getSelectionModel().addListSelectionListener(
+//				new ListSelectionListener() {
+//
+//					public void valueChanged(ListSelectionEvent lse) {
+//						if (!lse.getValueIsAdjusting()) {
+//							// DefaultListSelectionModel dlsm =
+//							// (DefaultListSelectionModel) lse
+//							// .getSource();
+//							// DefaultTableModel model = (DefaultTableModel)
+//							// tableLending
+//							// .getModel();
+//							// System.out.println("Selection Changed: "
+//							// + dlsm.getLeadSelectionIndex());
+//							System.out.println("Selection Changed: "
+//									+ tableLending.getSelectedRow());
+//						}
+//					}
+//				});
 		scrollPaneLendingTable.setViewportView(tableLending);
 	}
 
+	public void setTableLendingListSelectionListener(ListSelectionListener listener){
+		tableLending.getSelectionModel().addListSelectionListener(listener);
+	}
+	
 	public JTextField getTxtCustomerNo() {
 		return txtCustomerNo;
 	}
