@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fa11.dvdverleih.datenhaltung;
+package com.fa11.dvdverleih.datenhaltung.tables;
 
 /**
  * @author Paul Manthei
@@ -9,7 +9,7 @@ package com.fa11.dvdverleih.datenhaltung;
  */
 public class DVD {
 
-	private int dvd_nr;
+	private int p_dvd_nr;
 	private String titel;
 	private String genre;
 	private int erscheinungsjahr;
@@ -26,11 +26,11 @@ public class DVD {
 	}
 
 	public int getDvd_nr() {
-		return dvd_nr;
+		return p_dvd_nr;
 	}
 
 	public void setDvd_nr(int dvd_nr) {
-		this.dvd_nr = dvd_nr;
+		this.p_dvd_nr = dvd_nr;
 	}
 
 	public String getTitel() {

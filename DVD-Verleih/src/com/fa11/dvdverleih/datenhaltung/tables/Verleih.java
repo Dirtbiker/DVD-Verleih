@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fa11.dvdverleih.datenhaltung;
+package com.fa11.dvdverleih.datenhaltung.tables;
 
 import java.util.Date;
 
@@ -11,9 +11,9 @@ import java.util.Date;
  */
 public class Verleih {
 
-	private int leihvorgangs_nr;
-	private int dvd_nr;
-	private int kunden_nr;
+	private int p_leihvorgangs_nr;
+	private int f_dvd_nr;
+	private int f_kunden_nr;
 	private Date ausleihe;
 	private Date rueckgabe;
 	
@@ -30,27 +30,27 @@ public class Verleih {
 	}
 
 	public int getLeihvorgangs_nr() {
-		return leihvorgangs_nr;
+		return p_leihvorgangs_nr;
 	}
 
 	public void setLeihvorgangs_nr(int leihvorgangs_nr) {
-		this.leihvorgangs_nr = leihvorgangs_nr;
+		this.p_leihvorgangs_nr = leihvorgangs_nr;
 	}
 
 	public int getDvd_nr() {
-		return dvd_nr;
+		return f_dvd_nr;
 	}
 
 	public void setDvd_nr(int dvd_nr) {
-		this.dvd_nr = dvd_nr;
+		this.f_dvd_nr = dvd_nr;
 	}
 
 	public int getKunden_nr() {
-		return kunden_nr;
+		return f_kunden_nr;
 	}
 
 	public void setKunden_nr(int kunden_nr) {
-		this.kunden_nr = kunden_nr;
+		this.f_kunden_nr = kunden_nr;
 	}
 
 	public Date getAusleihe() {

@@ -1,27 +1,29 @@
 package com.fa11.dvdverleih.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JMenuBar;
-import javax.swing.JTabbedPane;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
-import javax.swing.UIManager;
-import com.fa11.dvdverleih.datenhaltung.DVD;
-import com.fa11.dvdverleih.datenhaltung.Kunde;
-import com.fa11.dvdverleih.datenhaltung.Verleih;
+
 import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
+import com.fa11.dvdverleih.datenhaltung.tables.DVD;
+import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
+import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
 import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
-import java.awt.Toolkit;
 
 /**
  * Grafische Benutzeroberfläche für den DVD-Verleih mit Swing

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.fa11.dvdverleih.datenhaltung;
+package com.fa11.dvdverleih.datenhaltung.tables;
 
 import java.util.Date;
 
@@ -11,7 +11,7 @@ import java.util.Date;
  */
 public class Kunde {
 
-	private int kunden_nr;
+	private int p_kunden_nr;
 	private String anrede;
 	private String vorname;
 	private String nachname;
@@ -40,11 +40,11 @@ public class Kunde {
 	}
 	
 	public int getKunden_nr() {
-		return kunden_nr;
+		return p_kunden_nr;
 	}
 
 	public void setKunden_nr(int kunden_nr) {
-		this.kunden_nr = kunden_nr;
+		this.p_kunden_nr = kunden_nr;
 	}
 
 	public String getAnrede() {
