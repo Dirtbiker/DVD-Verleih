@@ -29,23 +29,12 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	private Statement statement = null;
 	private Connection sqliteConnection = null;
 	
-	public SQLiteDatenhaltung() throws ClassNotFoundException, SQLException {
-		Class.forName("org.sqlite.JDBC");
-		sqliteConnection = DriverManager.getConnection(DATABASE_PATH);
-		sqliteConnection.setAutoCommit(false);
-		statement = sqliteConnection.createStatement();
-	}
-
-	@Override
-	public Kunde getKunde(int kunden_nr) {
-		
-		return null;
-	}
+	public SQLiteDatenhaltung() {	}
 	
 	@Override
-	public List<Kunde> getKundenList() throws SQLException {
-		Construct construct = new Construct(null, KUNDEN_TABLE, null);
-		ResultSet kundenResultSet = getResultSetFromTable(construct);
+	public List<Kunde> getKundenList() throws SQLException, ClassNotFoundException {
+		openDatabase();
+		ResultSet kundenResultSet = getResultSetFromTable(KUNDEN_TABLE);
 		List<Kunde> kundenList = new ArrayList<Kunde>();
 		while (kundenResultSet.next()) {
 			Kunde kunde = new Kunde(	kundenResultSet.getInt("p_kunden_nr"), 
@@ -65,45 +54,9 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Kunde> updateKunde(Kunde kunde) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Kunde> insertKunde(Kunde kunde) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Kunde> insertKunde(List<Kunde> kundeList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Kunde> deleteKunde(Kunde kunde) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Kunde> deleteKunde(List<Kunde> kundeList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public DVD getDVD(int dvd_nr) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DVD> getDVDList() throws SQLException {
-		Construct construct = new Construct(null, DVD_TABLE, null);
-		ResultSet dvdResultSet = getResultSetFromTable(construct);
+	public List<DVD> getDVDList() throws SQLException, ClassNotFoundException {
+		openDatabase();
+		ResultSet dvdResultSet = getResultSetFromTable(DVD_TABLE);
 		List<DVD> dvdList = new ArrayList<DVD>();
 		while (dvdResultSet.next()) {
 			DVD dvd = new DVD(	dvdResultSet.getInt("p_dvd_nr"), 
@@ -117,45 +70,9 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 	
 	@Override
-	public List<DVD> updateDVD(DVD dvd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DVD> insertDVD(DVD dvd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DVD> insertDVD(List<DVD> dvdList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DVD> deleteDVD(DVD dvd) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DVD> deleteDVD(List<DVD> dvdList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Verleih getVerleih(int verleih_nr) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Verleih> getVerleihList() throws SQLException {
-		Construct construct = new Construct(null, VERLEIH_TABLE, null); 
-		ResultSet verleihResultSet = getResultSetFromTable(construct);
+	public List<Verleih> getVerleihList() throws SQLException, ClassNotFoundException {
+		openDatabase();
+		ResultSet verleihResultSet = getResultSetFromTable(VERLEIH_TABLE);
 		List<Verleih> verleihList = new ArrayList<Verleih>();
 		while (verleihResultSet.next()) {
 			Verleih dvd = new Verleih(	verleihResultSet.getInt("p_leihvorgangs_nr"), 
@@ -169,52 +86,18 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 		return verleihList;
 	}
 	
-	@Override
-	public List<Verleih> updateVerleih(Verleih verleih) {
-		// TODO Auto-generated method stub
-		return null;
+	private ResultSet getResultSetFromTable(String tablename) throws SQLException{
+		return statement.executeQuery("SELECT * FROM " + tablename );
 	}
 
-	@Override
-	public List<Verleih> insertVerleih(Verleih verleih) {
-		// TODO Auto-generated method stub
-		return null;
+	private void openDatabase() throws ClassNotFoundException, SQLException {
+		Class.forName("org.sqlite.JDBC");
+		sqliteConnection = DriverManager.getConnection(DATABASE_PATH);
+		sqliteConnection.setAutoCommit(false);
+		statement = sqliteConnection.createStatement();
 	}
-
-	@Override
-	public List<Verleih> insertVerleih(List<Verleih> verleihList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Verleih> deleteVerleih(Verleih verleih) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Verleih> deleteVerleih(List<Verleih> verleihList) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private ResultSet getResultSetFromTable(Construct construct) throws SQLException{
-		String whatPart = "";
-		String wherePart = "";
-		boolean firstWhereConstruct = true;
-		for (String what : construct.getWhat()) {
-			whatPart += ", " + what;
-		}
-		for (WhereConstruct where : construct.getWhere()) {
-			if (firstWhereConstruct) {
-				wherePart += " WHERE " + where.getField() + where.getOperator() ;
-			}
-		}
-		return statement.executeQuery("SELECT " + whatPart + " FROM " + construct.getTableName() + wherePart );
-	}
-
-	public void closeDatabase() throws SQLException {
+	
+	private void closeDatabase() throws SQLException {
 		sqliteConnection.close();
 		statement.close();
 	}
