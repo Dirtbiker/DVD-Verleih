@@ -5,13 +5,10 @@ package com.fa11.dvdverleih.datenhaltung.tables;
 
 import java.util.Date;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 /**
  * @author Paul Manthei
  *
  */
-@XmlRootElement(name="Kunde")
 public class Kunde {
 
 	private int p_kunden_nr;

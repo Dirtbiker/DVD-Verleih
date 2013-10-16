@@ -29,8 +29,6 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	private Statement statement = null;
 	private Connection sqliteConnection = null;
 	
-	public SQLiteDatenhaltung() {	}
-	
 	@Override
 	public List<Kunde> getKundenList() throws SQLException, ClassNotFoundException {
 		openDatabase();
