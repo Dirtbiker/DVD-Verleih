@@ -3,7 +3,6 @@
  */
 package com.fa11.dvdverleih.datenhaltung;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
@@ -16,9 +15,9 @@ import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
  */
 public class XMLDatenhaltung implements IDatenhaltung {
 
-	List<Kunde> kunden = new LinkedList<>();
-	List<DVD> dvds = new LinkedList<>();
-	List<Verleih> verleihungen = new LinkedList<>();
+	List<Kunde> kunden;
+	List<DVD> dvds;
+	List<Verleih> verleihungen;
 	
 	public XMLDatenhaltung() {
 		
