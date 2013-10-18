@@ -99,6 +99,60 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 		sqliteConnection.close();
 		statement.close();
 	}
+
+	@Override
+	public List<Kunde> addKunde(Kunde kunde) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Kunde> updateKunde(Kunde kunde) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Kunde> deleteKunde(Kunde kunde) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<DVD> addDVD(DVD dvd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<DVD> updateDVD(DVD dvd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<DVD> deleteDVD(DVD dvd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Verleih> addVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Verleih> updateVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Verleih> deleteVerleih(Verleih verleih) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
 
