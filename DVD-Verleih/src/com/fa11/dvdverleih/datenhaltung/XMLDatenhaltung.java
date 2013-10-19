@@ -9,7 +9,6 @@ import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
@@ -26,28 +25,31 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	private static final String XML_PATH = "./DVDVerleihStore.xml";
 	private DVDVerleihStore store;
 	
+	public XMLDatenhaltung() throws FileNotFoundException, JAXBException {
+		getBookstore();
+	}
+	
 	@Override
 	public List<Kunde> getKundenList() {
-		// TODO Auto-generated method stub
-		return null;
+		return store.getKundensList();
 	}
 	
 	@Override
 	public List<DVD> getDVDList() {
-		// TODO Auto-generated method stub
-		return null;
+		return store.getDvdsList();
 	}
 	
 	@Override
 	public List<Verleih> getVerleihList() {
-		// TODO Auto-generated method stub
-		return null;
+		return store.getVerleihsList();
 	}
 
 	@Override
 	public List<Kunde> addKunde(Kunde kunde) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Kunde> kundenList = getKundenList();
+		kundenList.add(kunde);
+		store.setKundenList(kundenList);
+		return getKundenList();
 	}
 
 	@Override
@@ -58,14 +60,18 @@ public class XMLDatenhaltung implements IDatenhaltung {
 
 	@Override
 	public List<Kunde> deleteKunde(Kunde kunde) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Kunde> kundenList = getKundenList();
+		kundenList.remove(kunde);
+		store.setKundenList(kundenList);
+		return getKundenList();
 	}
 
 	@Override
 	public List<DVD> addDVD(DVD dvd) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DVD> dvds = getDVDList();
+		dvds.add(dvd);
+		store.setDvdList(dvds);
+		return getDVDList();
 	}
 
 	@Override
@@ -76,14 +82,18 @@ public class XMLDatenhaltung implements IDatenhaltung {
 
 	@Override
 	public List<DVD> deleteDVD(DVD dvd) {
-		// TODO Auto-generated method stub
-		return null;
+		List<DVD> dvds = getDVDList();
+		dvds.remove(dvd);
+		store.setDvdList(dvds);
+		return getDVDList();
 	}
 
 	@Override
 	public List<Verleih> addVerleih(Verleih verleih) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Verleih> verleihs = getVerleihList();
+		verleihs.add(verleih);
+		store.setVerleihList(verleihs);
+		return getVerleihList();
 	}
 
 	@Override
@@ -94,14 +104,16 @@ public class XMLDatenhaltung implements IDatenhaltung {
 
 	@Override
 	public List<Verleih> deleteVerleih(Verleih verleih) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Verleih> verleihs = getVerleihList();
+		verleihs.remove(verleih);
+		store.setVerleihList(verleihs);
+		return getVerleihList();
 	}
 	
 	private void getBookstore() throws JAXBException, FileNotFoundException{
 		JAXBContext context = JAXBContext.newInstance(DVDVerleihStore.class);
 		Unmarshaller unmarshaller = context.createUnmarshaller();
-		store = (DVDVerleihStore) unmarshaller.unmarshal(new FileReader("./verleih.xml"));
+		store = (DVDVerleihStore) unmarshaller.unmarshal(new FileReader(XML_PATH));
 	}
 	
 }
