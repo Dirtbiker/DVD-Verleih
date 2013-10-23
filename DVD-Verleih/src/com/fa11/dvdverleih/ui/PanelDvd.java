@@ -267,7 +267,7 @@ public class PanelDvd extends JPanel {
 		return tableDvd;
 	}
 	
-	public void setBtnResetActionListener(ActionListener listener){
+	public void setBtnNewActionListener(ActionListener listener){
 		btnNew.addActionListener(listener);
 	}
 	
