@@ -97,7 +97,7 @@ public class GUI extends JFrame {
 		this.tabbedPane.addTab("DVD-Leihe", null, this.panelLending, null);
 
 		this.panelDvd = new PanelDvd();
-		this.panelDvd.setBtnResetActionListener(new ActionListener() {
+		this.panelDvd.setBtnNewActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -220,7 +220,7 @@ public class GUI extends JFrame {
 	 * Überträgt Parameter der ausgewählten DVD in der Tabelle in die Textfelder
 	 */
 	private void dvdTableListSelectionChanged(){
-		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(0, panelDvd.getTableDvd().getSelectedRow()));
+		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
 		DVD dvd = fachkonzept.getDVDByID(dvdid);
 		panelDvd.getTxtDvdNo().setText(String.valueOf(dvd.getDvd_nr()));
 		panelDvd.getTxtDvdTitle().setText(dvd.getTitel());
@@ -232,7 +232,7 @@ public class GUI extends JFrame {
 	 * Überträgt Parameter des ausgewählten Kunden in der Tabelle in die Textfelder
 	 */
 	private void customerTableListSelectionChanged(){
-		int customerid = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(0, panelCustomers.getTableCustomers().getSelectedRow()));
+		int customerid = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
 		Kunde kunde = fachkonzept.getKundeByID(customerid);
 		panelCustomers.getTxtCustomerNo().setText(String.valueOf(kunde.getKunden_nr()));
 		panelCustomers.getTxtTitle().setText(kunde.getAnrede());
@@ -249,7 +249,7 @@ public class GUI extends JFrame {
 	 */
 	private void lendingTableListSelectionChanged(){
 		//TODO: Kann nicht auf einzelnes Lending zugreifen
-		int lendingid = Integer.valueOf((String) panelLending.getTableLending().getValueAt(0, panelLending.getTableLending().getSelectedRow()));
+		int lendingid = Integer.valueOf((String) panelLending.getTableLending().getValueAt(panelLending.getTableLending().getSelectedRow(), 0));
 		//Verleih verleih = fachkonzept.getVerleihById(lendingid);
 	}
 }
