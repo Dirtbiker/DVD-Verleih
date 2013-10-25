@@ -101,6 +101,8 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				GUI.this.fachkonzept.createDVD(new DVD());
+				//TODO DVD mit passender ID in Liste einfügen
 				DefaultTableModel model = (DefaultTableModel)panelDvd.getTableDvd().getModel();
 				model.addRow(new String[]{"","","",""});
 			}
