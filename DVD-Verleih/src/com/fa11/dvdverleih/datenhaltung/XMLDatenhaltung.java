@@ -25,8 +25,8 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	private static final String XML_PATH = "./DVDVerleihStore.xml";
 	private DVDVerleihStore store;
 	
-	public XMLDatenhaltung() throws FileNotFoundException, JAXBException {
-		getBookstore();
+	public XMLDatenhaltung() {
+//		getBookstore();
 	}
 	
 	@Override
