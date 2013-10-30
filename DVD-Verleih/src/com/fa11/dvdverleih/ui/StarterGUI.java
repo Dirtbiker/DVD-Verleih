@@ -131,25 +131,9 @@ public class StarterGUI extends JFrame {
 					}
 					else if (cmbData.getSelectedIndex() == 1){
 						JFrame gui;
-						try {
-							gui = new GUI(new Fachkonzept(new SQLiteDatenhaltung()));
-							gui.setVisible(true);
-							setVisible(false);
-						} catch (SQLException e) {
-							JOptionPane.showMessageDialog(null,
-									"Es ist ein SQL-Fehler aufgetreten:\n\n" + e.toString(),
-									"SQL-Fehler",
-									JOptionPane.ERROR_MESSAGE,
-									null);
-							e.printStackTrace();
-						} catch (ClassNotFoundException e) {
-							JOptionPane.showMessageDialog(null,
-									"Der JDBC Datenbanktreiber für SQLite wurde nicht gefunden!\n\n" + e.toString(),
-									"JDBC-Fehler",
-									JOptionPane.ERROR_MESSAGE,
-									null);
-							e.printStackTrace();
-						}
+						gui = new GUI(new Fachkonzept(new SQLiteDatenhaltung()));
+						gui.setVisible(true);
+						setVisible(false);
 					}
 				}
 				// TUI
