@@ -15,9 +15,7 @@ public class DVD {
 	private String genre;
 	private int erscheinungsjahr;
 
-	public DVD() {
-		
-	}
+	public DVD() {	}
 
 	public DVD(int dvd_nr, String titel, String genre, int erscheinungsjahr) {
 		this.setDvd_nr(dvd_nr);
@@ -56,6 +54,20 @@ public class DVD {
 
 	public void setErscheinungsjahr(int erscheinungsjahr) {
 		this.erscheinungsjahr = erscheinungsjahr;
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof DVD) {
+			return (this.p_dvd_nr == ((DVD)object).p_dvd_nr);
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "DVD=[p_dvd_nr=" + this.p_dvd_nr + ",titel=" + this.titel 
+				+ ",genre=" + this.genre + ",erscheinungsjahr=" + this.erscheinungsjahr + "]";
 	}
 	
 }

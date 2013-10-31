@@ -3,6 +3,7 @@
  */
 package com.fa11.dvdverleih.datenhaltung.tables;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -18,13 +19,13 @@ public class DVDVerleihStore {
 
 	@XmlElementWrapper(name="kundenList")
 	@XmlElement(name="kunde")
-	private List<Kunde> kundenList;
+	private List<Kunde> kundenList = new ArrayList<Kunde>();
 	@XmlElementWrapper(name="dvdList")
 	@XmlElement(name="dvd")
-	private List<DVD> dvds;
+	private List<DVD> dvds = new ArrayList<DVD>();
 	@XmlElementWrapper(name="verleihList")
 	@XmlElement(name="verleih")
-	private List<Verleih> verleihungen;
+	private List<Verleih> verleihungen = new ArrayList<Verleih>();
 
 	public List<Kunde> getKundensList() {
 		return kundenList;

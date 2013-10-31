@@ -3,11 +3,6 @@
  */
 package com.fa11.dvdverleih.datenhaltung;
 
-import java.io.FileNotFoundException;
-
-import javax.xml.bind.JAXBException;
-
-
 /**
  * @author Paul Manthei
  *
@@ -17,7 +12,7 @@ public class DatenhaltungFactory {
 	public static final String XML_DATENHALTUNG = "xml";
 	public static final String SQLITE_DATENHALTUNG = "sqlite";
 	
-	public IDatenhaltung getDatenhaltung (String datenhaltung) throws FileNotFoundException, JAXBException {
+	public static IDatenhaltung getDatenhaltung (String datenhaltung) {
 		IDatenhaltung iDatenhaltung = null;
 		switch (datenhaltung) {
 		case XML_DATENHALTUNG:

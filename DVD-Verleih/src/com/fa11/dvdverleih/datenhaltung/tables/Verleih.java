@@ -69,4 +69,19 @@ public class Verleih {
 		this.rueckgabe = rueckgabe;
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof Verleih) {
+			return (this.p_leihvorgangs_nr == ((Verleih)object).p_leihvorgangs_nr);
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "DVD=[p_leihvorgangs_nr=" + this.p_leihvorgangs_nr + ",f_dvd_nr=" + this.f_dvd_nr 
+				+ ",f_kunden_nr=" + this.f_kunden_nr + ",ausleihe=" + this.ausleihe
+				+ ",rueckgabe=" + this.rueckgabe + "]";
+	}
+
 }

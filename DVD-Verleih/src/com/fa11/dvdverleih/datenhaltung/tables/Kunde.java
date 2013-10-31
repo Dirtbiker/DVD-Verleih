@@ -119,4 +119,21 @@ public class Kunde {
 		this.telefon_nummer = telefon_nummer;
 	}
 	
+	@Override
+	public boolean equals(Object object) {
+		if (object instanceof Kunde) {
+			return (this.p_kunden_nr == ((Kunde)object).p_kunden_nr);
+		}
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "DVD=[p_kunden_nr=" + this.p_kunden_nr + ",anrede=" + this.anrede 
+				+ ",vorname=" + this.vorname + ",nachname=" + this.nachname
+				+ ",geburtstag=" + this.geburtstag + ",plz=" + this.plz
+				+ ",ort=" + this.ort + ",strasse=" + this.strasse
+				+ ",hausnummer=" + this.hausnummer + ",telefon_nummer=" + this.telefon_nummer + "]";
+	}
+
 }
