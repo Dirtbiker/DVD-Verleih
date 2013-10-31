@@ -18,12 +18,16 @@ public class DVD {
 	public DVD() {	}
 
 	public DVD(int dvd_nr, String titel, String genre, int erscheinungsjahr) {
+		this(titel, genre, erscheinungsjahr);
 		this.setDvd_nr(dvd_nr);
+	}
+
+	public DVD(String titel, String genre, int erscheinungsjahr) {
 		this.setTitel(titel);
 		this.setGenre(genre);
 		this.setErscheinungsjahr(erscheinungsjahr);
 	}
-
+	
 	public int getDvd_nr() {
 		return p_dvd_nr;
 	}

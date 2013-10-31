@@ -22,12 +22,14 @@ public class Kunde {
 	private int hausnummer;
 	private String telefon_nummer;
 	
-	public Kunde() {
-		
-	}
+	public Kunde() {	}
 
 	public Kunde(int kunden_nr, String anrede, String vorname, String nachname, Date geburtstag, String plz, String ort, String strasse, int hausnummer, String telefon_nummer) {
+		this(anrede, vorname, nachname, geburtstag, plz, ort, strasse, hausnummer, telefon_nummer);
 		this.setKunden_nr(kunden_nr);
+	}
+	
+	public Kunde(String anrede, String vorname, String nachname, Date geburtstag, String plz, String ort, String strasse, int hausnummer, String telefon_nummer) {
 		this.setAnrede(anrede);
 		this.setVorname(vorname);
 		this.setNachname(nachname);

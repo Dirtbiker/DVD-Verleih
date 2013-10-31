@@ -17,12 +17,14 @@ public class Verleih {
 	private Date ausleihe;
 	private Date rueckgabe;
 	
-	public Verleih() {
-		
-	}
+	public Verleih() {	}
 
 	public Verleih(int leihvorgangs_nr, int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
+		this(dvd_nr, kunden_nr, ausleihe, rueckgabe);
 		this.setLeihvorgangs_nr(leihvorgangs_nr);
+	}
+
+	public Verleih(int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
 		this.setDvd_nr(dvd_nr);
 		this.setKunden_nr(kunden_nr);
 		this.setAusleihe(ausleihe);
