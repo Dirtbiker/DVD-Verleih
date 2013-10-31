@@ -9,17 +9,14 @@ package com.fa11.dvdverleih.datenhaltung;
  */
 public class DatenhaltungFactory {
 
-	public static final String XML_DATENHALTUNG = "xml";
-	public static final String SQLITE_DATENHALTUNG = "sqlite";
-	
-	public static IDatenhaltung getDatenhaltung (String datenhaltung) {
+	public static IDatenhaltung getDatenhaltung (DatenhaltungType datenhaltungType) {
 		IDatenhaltung iDatenhaltung = null;
-		switch (datenhaltung) {
-		case XML_DATENHALTUNG:
+		switch (datenhaltungType) {
+		case xml:
 			iDatenhaltung = new XMLDatenhaltung();
 			break;
 		
-		case SQLITE_DATENHALTUNG:
+		case sqlite:
 			iDatenhaltung = new SQLiteDatenhaltung();
 			break;
 			
