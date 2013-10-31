@@ -10,8 +10,11 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
+import com.fa11.dvdverleih.datenhaltung.tables.DVDFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
+import com.fa11.dvdverleih.datenhaltung.tables.KundeFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.VerleihFields;
 
 /**
  * @author Paul Manthei
@@ -24,17 +27,17 @@ public interface IDatenhaltung {
 	
 	public List<Kunde> getKundenList() throws SQLException, ClassNotFoundException;
 	public List<Kunde> addKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
-	public List<Kunde> updateKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
+	public List<Kunde> updateKunde(Kunde kunde, List<KundeFields> fields) throws ClassNotFoundException, SQLException;
 	public List<Kunde> deleteKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
 	
 	public List<DVD> getDVDList() throws SQLException, ClassNotFoundException;
 	public List<DVD> addDVD(DVD dvd) throws ClassNotFoundException, SQLException;
-	public List<DVD> updateDVD(DVD dvd) throws ClassNotFoundException, SQLException;
+	public List<DVD> updateDVD(DVD dvd, List<DVDFields> fields) throws ClassNotFoundException, SQLException;
 	public List<DVD> deleteDVD(DVD dvd) throws ClassNotFoundException, SQLException;
 	
 	public List<Verleih> getVerleihList() throws SQLException, ClassNotFoundException;
 	public List<Verleih> addVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
-	public List<Verleih> updateVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
+	public List<Verleih> updateVerleih(Verleih verleih, List<VerleihFields> fields) throws ClassNotFoundException, SQLException;
 	public List<Verleih> deleteVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
 	
 }

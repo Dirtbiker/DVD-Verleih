@@ -14,9 +14,12 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
+import com.fa11.dvdverleih.datenhaltung.tables.DVDFields;
 import com.fa11.dvdverleih.datenhaltung.tables.DVDVerleihStore;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
+import com.fa11.dvdverleih.datenhaltung.tables.KundeFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.VerleihFields;
 
 /**
  * @author Paul Manthei
@@ -63,11 +66,11 @@ public class XMLDatenhaltung implements IDatenhaltung {
 		List<Kunde> kundenList = getKundenList();
 		kundenList.add(kunde);
 		store.setKundenList(kundenList);
-		return getKundenList();
+		return kundenList;
 	}
 
 	@Override
-	public List<Kunde> updateKunde(Kunde kunde) {
+	public List<Kunde> updateKunde(Kunde kunde, List<KundeFields> fields) {
 		List<Kunde> kundenList = getKundenList();
 		int index = 0;
 		for (Kunde kunde2 : kundenList) {
@@ -77,7 +80,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 			index++;
 		}
 		store.setKundenList(kundenList);
-		return getKundenList();
+		return kundenList;
 	}
 
 	@Override
@@ -85,19 +88,19 @@ public class XMLDatenhaltung implements IDatenhaltung {
 		List<Kunde> kundenList = getKundenList();
 		kundenList.remove(kunde);
 		store.setKundenList(kundenList);
-		return getKundenList();
+		return kundenList;
 	}
 
 	@Override
 	public List<DVD> addDVD(DVD dvd) {
-		List<DVD> dvds = getDVDList();
-		dvds.add(dvd);
-		store.setDvdList(dvds);
-		return getDVDList();
+		List<DVD> dvdList = getDVDList();
+		dvdList.add(dvd);
+		store.setDvdList(dvdList);
+		return dvdList;
 	}
 
 	@Override
-	public List<DVD> updateDVD(DVD dvd) {
+	public List<DVD> updateDVD(DVD dvd, List<DVDFields> fields) {
 		List<DVD> dvdList = getDVDList();
 		int index = 0;
 		for (DVD dvd2 : dvdList) {
@@ -106,27 +109,27 @@ public class XMLDatenhaltung implements IDatenhaltung {
 			}
 		}
 		store.setDvdList(dvdList);
-		return getDVDList();
+		return dvdList;
 	}
 
 	@Override
 	public List<DVD> deleteDVD(DVD dvd) {
-		List<DVD> dvds = getDVDList();
-		dvds.remove(dvd);
-		store.setDvdList(dvds);
-		return getDVDList();
+		List<DVD> dvdList = getDVDList();
+		dvdList.remove(dvd);
+		store.setDvdList(dvdList);
+		return dvdList;
 	}
 
 	@Override
 	public List<Verleih> addVerleih(Verleih verleih) {
-		List<Verleih> verleihs = getVerleihList();
-		verleihs.add(verleih);
-		store.setVerleihList(verleihs);
-		return getVerleihList();
+		List<Verleih> verleihList = getVerleihList();
+		verleihList.add(verleih);
+		store.setVerleihList(verleihList);
+		return verleihList;
 	}
 
 	@Override
-	public List<Verleih> updateVerleih(Verleih verleih) {
+	public List<Verleih> updateVerleih(Verleih verleih, List<VerleihFields> fields) {
 		List<Verleih> verleihList = getVerleihList();
 		int index = 0;
 		for (Verleih verleih2 : verleihList) {
@@ -135,15 +138,15 @@ public class XMLDatenhaltung implements IDatenhaltung {
 			}
 		}
 		store.setVerleihList(verleihList);
-		return getVerleihList();
+		return verleihList;
 	}
 
 	@Override
 	public List<Verleih> deleteVerleih(Verleih verleih) {
-		List<Verleih> verleihs = getVerleihList();
-		verleihs.remove(verleih);
-		store.setVerleihList(verleihs);
-		return getVerleihList();
+		List<Verleih> verleihList = getVerleihList();
+		verleihList.remove(verleih);
+		store.setVerleihList(verleihList);
+		return verleihList;
 	}
 	
 }
