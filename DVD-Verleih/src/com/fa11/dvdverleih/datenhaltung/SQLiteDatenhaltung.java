@@ -90,7 +90,7 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	@Override
 	public List<Kunde> updateKunde(Kunde kunde) throws SQLException {
 		statement.executeUpdate("UPDATE " + Table.T_KUNDE + 
-				"SET "	+ KundeFields.anrede + "='" + kunde.getAnrede() + "',"
+				" SET "	+ KundeFields.anrede + "='" + kunde.getAnrede() + "',"
 						+ KundeFields.vorname + "='" + kunde.getVorname() + "',"
 						+ KundeFields.nachname + "='" + kunde.getNachname() + "',"
 						+ KundeFields.geburtstag + "='" + kunde.getGeburtstag() + "',"
@@ -139,8 +139,8 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	@Override
 	public List<DVD> updateDVD(DVD dvd) throws SQLException {
 		statement.executeUpdate("UPDATE " + Table.T_DVD + 
-				"SET "	+ DVDFields.titel + "='" + dvd.getTitel() + "',"
-						+ DVDFields.genre + "='" + dvd.getGenre() + "',"
+				" SET "	+ DVDFields.titel + "='" + dvd.getTitel() + "', "
+						+ DVDFields.genre + "='" + dvd.getGenre() + "', "
 						+ DVDFields.erscheinungsjahr + "=" + dvd.getErscheinungsjahr() + 
 				" WHERE " + DVDFields.p_dvd_nr + "=" + dvd.getDvd_nr() + ";");
 		return getDVDList();
@@ -185,7 +185,7 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	@Override
 	public List<Ausleihe> updateAusleihe(Ausleihe ausleihe) throws SQLException {
 		statement.executeUpdate("UPDATE " + Table.T_AUSLEIHE + 
-				"SET "	+ AusleiheFields.f_dvd_nr + "=" + ausleihe.getDvd_nr() + ","
+				" SET "	+ AusleiheFields.f_dvd_nr + "=" + ausleihe.getDvd_nr() + ","
 						+ AusleiheFields.f_kunden_nr + "=" + ausleihe.getKunden_nr() + ","
 						+ AusleiheFields.ausleihe + "='" + ausleihe.getAusleihe() + ","
 						+ AusleiheFields.rueckgabe + "='" + ausleihe.getRueckgabe() + "'" + 
