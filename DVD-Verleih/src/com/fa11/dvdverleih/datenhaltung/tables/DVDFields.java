@@ -9,6 +9,17 @@ package com.fa11.dvdverleih.datenhaltung.tables;
  */
 public enum DVDFields {
 
-	p_dvd_nr, titel, genre, erscheinungsjahr
+	p_dvd_nr(TableDatatype.INTEGER),
+	titel(TableDatatype.VARCHAR),
+	genre(TableDatatype.VARCHAR),
+	erscheinungsjahr(TableDatatype.INTEGER);
+	
+	private TableDatatype datatype;
+	
+	private DVDFields(TableDatatype datatype) {
+		this.datatype = datatype;
+	}
+	
+	public TableDatatype datatype() { return this.datatype; }
 	
 }

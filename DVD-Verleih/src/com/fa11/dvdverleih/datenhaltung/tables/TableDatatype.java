@@ -7,10 +7,10 @@ package com.fa11.dvdverleih.datenhaltung.tables;
  * @author paul2
  *
  */
-public enum Table {
+public enum TableDatatype {
 
-	T_KUNDE,
-	T_DVD,
-	T_AUSLEIHE;
+	INTEGER,
+	VARCHAR,
+	DATETIME;
 	
 }
