@@ -11,12 +11,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.DVDFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
 import com.fa11.dvdverleih.datenhaltung.tables.KundeFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Table;
-import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.VerleihFields;
 
 /**
@@ -65,25 +65,18 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	
 	@Override
 	public List<Kunde> addKunde(Kunde kunde) throws SQLException {
-		statement.executeUpdate("INSERT INTO " + Table.T_KUNDE.name()
-								+ " ("	+ KundeFields.anrede + ", " 
-										+ KundeFields.vorname + ", " 
-										+ KundeFields.nachname + ", " 
-										+ KundeFields.geburtstag + ", " 
-										+ KundeFields.plz + ", " 
-										+ KundeFields.ort + ", " 
-										+ KundeFields.strasse + ", " 
-										+ KundeFields.hausnr + ", " 
-										+ KundeFields.telefonnr + ")"
-								+ " VALUES ("	+ "'" + kunde.getAnrede() + "', "
-												+ "'" + kunde.getVorname() + "', "
-												+ "'" + kunde.getNachname() + "', "
-												+ "'" + kunde.getGeburtstag() + "', "
-												+ "'" + kunde.getPlz() + "', "
-												+ "'" + kunde.getOrt() + "', "
-												+ "'" + kunde.getStrasse() + "', "
-													  + kunde.getHausnr() + ", "
-												+ "'" + kunde.getTelefonnr() + "');");
+		ResultSet resultSet = getResultSetFromTable(Table.T_KUNDE);
+		resultSet.moveToInsertRow();
+		resultSet.updateString(KundeFields.anrede.name(), kunde.getAnrede());
+		resultSet.updateString(KundeFields.vorname.name(), kunde.getVorname());
+		resultSet.updateString(KundeFields.nachname.name(), kunde.getNachname());
+		resultSet.updateDate(KundeFields.geburtstag.name(), kunde.getGeburtstag());
+		resultSet.updateString(KundeFields.plz.name(), kunde.getPlz());
+		resultSet.updateString(KundeFields.ort.name(), kunde.getOrt());
+		resultSet.updateString(KundeFields.strasse.name(), kunde.getStrasse());
+		resultSet.updateInt(KundeFields.hausnr.name(), kunde.getHausnr());
+		resultSet.updateString(KundeFields.telefonnr.name(), kunde.getTelefonnr());
+		resultSet.insertRow();
 		return getKundenList();
 	}
 
@@ -127,13 +120,12 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 
 	@Override
 	public List<DVD> addDVD(DVD dvd) throws SQLException {
-		statement.executeUpdate("INSERT INTO " + Table.T_DVD.name()
-				+ " (" 	+ DVDFields.titel + ", " 
-						+ DVDFields.genre + ", " 
-						+ DVDFields.erscheinungsjahr + ")"
-				+ " VALUES ("	+ "'" + dvd.getTitel() + "', "
-								+ "'" + dvd.getGenre() + "', "
-								+ 		dvd.getErscheinungsjahr() + ");");
+		ResultSet resultSet = getResultSetFromTable(Table.T_DVD);
+		resultSet.moveToInsertRow();
+		resultSet.updateString(DVDFields.titel.name(), dvd.getTitel());
+		resultSet.updateString(DVDFields.genre.name(), dvd.getGenre());
+		resultSet.updateInt(DVDFields.erscheinungsjahr.name(), dvd.getErscheinungsjahr());
+		resultSet.insertRow();
 		return getDVDList();
 	}
 
@@ -172,15 +164,13 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 
 	@Override
 	public List<Ausleihe> addVerleih(Ausleihe verleih) throws SQLException {
-		statement.executeUpdate("INSERT INTO " + Table.T_AUSLEIHE
-				+ " ("	+ VerleihFields.f_dvd_nr + ", " 
-						+ VerleihFields.f_kunden_nr + ", " 
-						+ VerleihFields.ausleihe + ", " 
-						+ VerleihFields.rueckgabe + ")"
-				+ " VALUES ("	+ "'" + verleih.getDvd_nr() + "', "
-								+ "'" + verleih.getKunden_nr() + "', "
-								+ "'" + verleih.getAusleihe() + "', "
-								+ "'" + verleih.getRueckgabe() + "');");
+		ResultSet resultSet = getResultSetFromTable(Table.T_AUSLEIHE);
+		resultSet.moveToInsertRow();
+		resultSet.updateInt(VerleihFields.f_dvd_nr.name(), verleih.getDvd_nr());
+		resultSet.updateInt(VerleihFields.f_kunden_nr.name(), verleih.getKunden_nr());
+		resultSet.updateDate(VerleihFields.ausleihe.name(), verleih.getAusleihe());
+		resultSet.updateDate(VerleihFields.rueckgabe.name(), verleih.getRueckgabe());
+		resultSet.insertRow();
 		return getVerleihList();
 	}
 
