@@ -16,7 +16,7 @@ import javax.xml.bind.Unmarshaller;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.DVDVerleihStore;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
 /**
  * @author Paul Manthei
@@ -54,7 +54,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 	
 	@Override
-	public List<Verleih> getVerleihList() {
+	public List<Ausleihe> getVerleihList() {
 		return store.getVerleihsList();
 	}
 
@@ -118,18 +118,18 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> addVerleih(Verleih verleih) {
-		List<Verleih> verleihList = getVerleihList();
+	public List<Ausleihe> addVerleih(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getVerleihList();
 		verleihList.add(verleih);
 		store.setVerleihList(verleihList);
 		return verleihList;
 	}
 
 	@Override
-	public List<Verleih> updateVerleih(Verleih verleih) {
-		List<Verleih> verleihList = getVerleihList();
+	public List<Ausleihe> updateVerleih(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getVerleihList();
 		int index = 0;
-		for (Verleih verleih2 : verleihList) {
+		for (Ausleihe verleih2 : verleihList) {
 			if (verleih2.equals(verleih)) {
 				verleihList.set(index, verleih2);
 			}
@@ -139,8 +139,8 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> deleteVerleih(Verleih verleih) {
-		List<Verleih> verleihList = getVerleihList();
+	public List<Ausleihe> deleteVerleih(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getVerleihList();
 		verleihList.remove(verleih);
 		store.setVerleihList(verleihList);
 		return verleihList;

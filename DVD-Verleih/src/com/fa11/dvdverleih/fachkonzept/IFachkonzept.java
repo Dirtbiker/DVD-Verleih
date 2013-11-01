@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
 public interface IFachkonzept {
 	
@@ -26,9 +26,9 @@ public interface IFachkonzept {
 	public void deleteDVD(int dvdNummer);
 	public void createDVD(DVD dvdDaten);
 
-	public List<Verleih> getAllVerleihe();
-	public List<Verleih> getKundenVerleih(int kundenNummer);
-	public void updateVerleih(Verleih updateVerleih);
-	public void createVerleih(Verleih neuerVerleih);	
+	public List<Ausleihe> getAllVerleihe();
+	public List<Ausleihe> getKundenVerleih(int kundenNummer);
+	public void updateVerleih(Ausleihe updateVerleih);
+	public void createVerleih(Ausleihe neuerVerleih);	
 	
 }

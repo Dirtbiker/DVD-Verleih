@@ -16,7 +16,7 @@ import com.fa11.dvdverleih.datenhaltung.tables.DVDFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
 import com.fa11.dvdverleih.datenhaltung.tables.KundeFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Table;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.VerleihFields;
 
 /**
@@ -87,8 +87,8 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 												+ "'" + kunde.getPlz() + "', "
 												+ "'" + kunde.getOrt() + "', "
 												+ "'" + kunde.getStrasse() + "', "
-													  + kunde.getHausnummer() + ", "
-												+ "'" + kunde.getTelefon_nummer() + "');");
+													  + kunde.getHausnr() + ", "
+												+ "'" + kunde.getTelefonnr() + "');");
 		return getKundenList();
 	}
 
@@ -102,8 +102,8 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 		kundenResultSet.updateString(KundeFields.plz.name(), kunde.getPlz());
 		kundenResultSet.updateString(KundeFields.ort.name(), kunde.getOrt());
 		kundenResultSet.updateString(KundeFields.strasse.name(), kunde.getStrasse());
-		kundenResultSet.updateInt(KundeFields.hausnr.name(), kunde.getHausnummer());
-		kundenResultSet.updateString(KundeFields.telefonnr.name(), kunde.getTelefon_nummer());
+		kundenResultSet.updateInt(KundeFields.hausnr.name(), kunde.getHausnr());
+		kundenResultSet.updateString(KundeFields.telefonnr.name(), kunde.getTelefonnr());
 		kundenResultSet.updateRow();
 		return getKundenList();
 	}
@@ -158,10 +158,10 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> getVerleihList() throws SQLException {
-		List<Verleih> verleihList = new ArrayList<Verleih>();
+	public List<Ausleihe> getVerleihList() throws SQLException {
+		List<Ausleihe> verleihList = new ArrayList<Ausleihe>();
 		while (ausleiheResultSet.next()) {
-			Verleih dvd = new Verleih(	ausleiheResultSet.getInt(VerleihFields.p_leihvorgangs_nr.name()), 
+			Ausleihe dvd = new Ausleihe(	ausleiheResultSet.getInt(VerleihFields.p_leihvorgangs_nr.name()), 
 					ausleiheResultSet.getInt(VerleihFields.f_dvd_nr.name()), 
 					ausleiheResultSet.getInt(VerleihFields.f_kunden_nr.name()), 
 					ausleiheResultSet.getDate(VerleihFields.ausleihe.name()),
@@ -172,7 +172,7 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> addVerleih(Verleih verleih) throws SQLException {
+	public List<Ausleihe> addVerleih(Ausleihe verleih) throws SQLException {
 		statement.executeUpdate("INSERT INTO " + Table.T_AUSLEIHE
 				+ " ("	+ VerleihFields.f_dvd_nr + ", " 
 						+ VerleihFields.f_kunden_nr + ", " 
@@ -186,7 +186,7 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> updateVerleih(Verleih verleih) throws SQLException {
+	public List<Ausleihe> updateVerleih(Ausleihe verleih) throws SQLException {
 		ausleiheResultSet = statement.executeQuery("SELECT * FROM " + Table.T_AUSLEIHE 
 				+ " WHERE " + VerleihFields.p_leihvorgangs_nr + " = " + verleih.getLeihvorgangs_nr());
 		ausleiheResultSet.updateInt(VerleihFields.f_dvd_nr.name(), verleih.getDvd_nr());
@@ -198,7 +198,7 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> deleteVerleih(Verleih verleih) throws SQLException {
+	public List<Ausleihe> deleteVerleih(Ausleihe verleih) throws SQLException {
 		statement.executeUpdate("DELETE from " + Table.T_AUSLEIHE 
 								+ " WHERE " + VerleihFields.p_leihvorgangs_nr + " = " + verleih.getLeihvorgangs_nr());
 		return getVerleihList();

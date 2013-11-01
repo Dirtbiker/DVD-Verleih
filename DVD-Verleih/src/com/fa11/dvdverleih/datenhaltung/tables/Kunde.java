@@ -19,8 +19,8 @@ public class Kunde {
 	private String plz;
 	private String ort;
 	private String strasse;
-	private int hausnummer;
-	private String telefon_nummer;
+	private int hausnr;
+	private String telefonnr;
 	
 	public Kunde() {	}
 
@@ -37,8 +37,8 @@ public class Kunde {
 		this.setPlz(plz);
 		this.setOrt(ort);
 		this.setStrasse(strasse);
-		this.setHausnummer(hausnummer);
-		this.setTelefon_nummer(telefon_nummer);
+		this.setHausnr(hausnummer);
+		this.setTelefonnr(telefon_nummer);
 	}
 	
 	public int getKunden_nr() {
@@ -105,20 +105,20 @@ public class Kunde {
 		this.strasse = strasse;
 	}
 
-	public int getHausnummer() {
-		return hausnummer;
+	public int getHausnr() {
+		return hausnr;
 	}
 
-	public void setHausnummer(int hausnummer) {
-		this.hausnummer = hausnummer;
+	public void setHausnr(int hausnr) {
+		this.hausnr = hausnr;
 	}
 
-	public String getTelefon_nummer() {
-		return telefon_nummer;
+	public String getTelefonnr() {
+		return telefonnr;
 	}
 
-	public void setTelefon_nummer(String telefon_nummer) {
-		this.telefon_nummer = telefon_nummer;
+	public void setTelefonnr(String telefonnr) {
+		this.telefonnr = telefonnr;
 	}
 	
 	@Override
@@ -135,7 +135,7 @@ public class Kunde {
 				+ ",vorname=" + this.vorname + ",nachname=" + this.nachname
 				+ ",geburtstag=" + this.geburtstag + ",plz=" + this.plz
 				+ ",ort=" + this.ort + ",strasse=" + this.strasse
-				+ ",hausnummer=" + this.hausnummer + ",telefon_nummer=" + this.telefon_nummer + "]";
+				+ ",hausnummer=" + this.hausnr + ",telefon_nummer=" + this.telefonnr + "]";
 	}
 
 }

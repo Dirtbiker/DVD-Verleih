@@ -6,7 +6,7 @@ import java.util.Date;
 import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
 
@@ -128,7 +128,7 @@ public class TUI {
 				System.out.println(kunde.getKunden_nr() + " "
 						+ kunde.getAnrede() + " " + kunde.getVorname() + " "
 						+ kunde.getNachname() + " " + kunde.getStrasse() + " "
-						+ kunde.getHausnummer() + " " + kunde.getPlz() + " "
+						+ kunde.getHausnr() + " " + kunde.getPlz() + " "
 						+ kunde.getOrt());
 			}
 		} else {
@@ -150,10 +150,10 @@ public class TUI {
 			System.out.println("Vorname: " + kunde.getVorname());
 			System.out.println("Nachname: " + kunde.getNachname());
 			System.out.println("Straﬂe: " + kunde.getStrasse() + " "
-					+ kunde.getHausnummer());
+					+ kunde.getHausnr());
 			System.out.println("PLZ: " + kunde.getPlz() + " " + "Ort: "
 					+ kunde.getOrt());
-			System.out.println("Telefon: " + kunde.getTelefon_nummer());
+			System.out.println("Telefon: " + kunde.getTelefonnr());
 			System.out.println("Geburtstag: " + kunde.getGeburtstag());
 		} else {
 			System.out.println("Kunde nicht vorhanden!");
@@ -278,7 +278,7 @@ public class TUI {
 	private void alleLeihvorgaengeAnzeigen() {
 		System.out.println("Leihvorgang-‹bersicht\n");
 		try {
-			for (Verleih verleih : fachkonzept.getAllVerleihe()) {
+			for (Ausleihe verleih : fachkonzept.getAllVerleihe()) {
 				Kunde kunde = fachkonzept.getKundeByID(verleih.getKunden_nr());
 				DVD dvd = fachkonzept.getDVDByID(verleih.getDvd_nr());
 				// Nr Kunde DVD Ausleihe Rueckgabe
@@ -301,7 +301,7 @@ public class TUI {
 		System.out.print("Kundennummer: ");
 		int temp = Helper.readInt();
 		try {
-			for (Verleih verleih : fachkonzept.getKundenVerleih(temp)) {
+			for (Ausleihe verleih : fachkonzept.getKundenVerleih(temp)) {
 				Kunde kunde = fachkonzept.getKundeByID(verleih.getKunden_nr());
 				DVD dvd = fachkonzept.getDVDByID(verleih.getDvd_nr());
 				// Nr Kunde DVD Ausleihe Rueckgabe

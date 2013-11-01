@@ -11,7 +11,7 @@ import javax.xml.bind.JAXBException;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
 /**
  * @author Paul Manthei
@@ -32,9 +32,9 @@ public interface IDatenhaltung {
 	public List<DVD> updateDVD(DVD dvd) throws ClassNotFoundException, SQLException;
 	public List<DVD> deleteDVD(DVD dvd) throws ClassNotFoundException, SQLException;
 	
-	public List<Verleih> getVerleihList() throws SQLException, ClassNotFoundException;
-	public List<Verleih> addVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
-	public List<Verleih> updateVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
-	public List<Verleih> deleteVerleih(Verleih verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> getVerleihList() throws SQLException, ClassNotFoundException;
+	public List<Ausleihe> addVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> updateVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> deleteVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
 	
 }

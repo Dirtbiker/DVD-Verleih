@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
 import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
 
@@ -181,7 +181,7 @@ public class GUI extends JFrame {
 						kunde.getAnrede(),
 						kunde.getNachname(),
 						kunde.getVorname(),
-						kunde.getTelefon_nummer()});
+						kunde.getTelefonnr()});
 			}
 		}
 	}
@@ -190,13 +190,13 @@ public class GUI extends JFrame {
 	 * Aktualisiert die Einträge in der Leih-Tabelle
 	 */
 	private void updateLendingTable() {
-		List<Verleih> verleihlist = fachkonzept.getAllVerleihe();
+		List<Ausleihe> verleihlist = fachkonzept.getAllVerleihe();
 		DefaultTableModel model = (DefaultTableModel) panelCustomers.getTableCustomers().getModel();
 		// Tabelle leeren
 		clearTablemodel(model);
 		// Tabelle füllen
 		if(verleihlist != null) {
-			for (Verleih verleih : verleihlist) {
+			for (Ausleihe verleih : verleihlist) {
 				model.addRow(new String[]{
 						String.valueOf(verleih.getLeihvorgangs_nr()),
 						fachkonzept.getDVDByID(verleih.getDvd_nr()).getTitel(),
@@ -243,7 +243,7 @@ public class GUI extends JFrame {
 		panelCustomers.getTxtZipCode().setText(kunde.getPlz());
 		panelCustomers.getTxtCity().setText(kunde.getOrt());
 		panelCustomers.getTxtStreet().setText(kunde.getStrasse());
-		panelCustomers.getTxtPhone().setText(kunde.getTelefon_nummer());
+		panelCustomers.getTxtPhone().setText(kunde.getTelefonnr());
 	}
 	
 	/**

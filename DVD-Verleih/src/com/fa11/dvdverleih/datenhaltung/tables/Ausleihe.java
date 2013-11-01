@@ -9,7 +9,7 @@ import java.sql.Date;
  * @author Paul Manthei
  *
  */
-public class Verleih {
+public class Ausleihe {
 
 	private int p_leihvorgangs_nr;
 	private int f_dvd_nr;
@@ -17,14 +17,14 @@ public class Verleih {
 	private Date ausleihe;
 	private Date rueckgabe;
 	
-	public Verleih() {	}
+	public Ausleihe() {	}
 
-	public Verleih(int leihvorgangs_nr, int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
+	public Ausleihe(int leihvorgangs_nr, int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
 		this(dvd_nr, kunden_nr, ausleihe, rueckgabe);
 		this.setLeihvorgangs_nr(leihvorgangs_nr);
 	}
 
-	public Verleih(int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
+	public Ausleihe(int dvd_nr, int kunden_nr, Date ausleihe, Date rueckgabe) {
 		this.setDvd_nr(dvd_nr);
 		this.setKunden_nr(kunden_nr);
 		this.setAusleihe(ausleihe);
@@ -73,8 +73,8 @@ public class Verleih {
 	
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof Verleih) {
-			return (this.p_leihvorgangs_nr == ((Verleih)object).p_leihvorgangs_nr);
+		if (object instanceof Ausleihe) {
+			return (this.p_leihvorgangs_nr == ((Ausleihe)object).p_leihvorgangs_nr);
 		}
 		return false;
 	}

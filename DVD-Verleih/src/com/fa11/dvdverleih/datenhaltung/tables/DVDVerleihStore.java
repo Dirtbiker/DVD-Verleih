@@ -25,7 +25,7 @@ public class DVDVerleihStore {
 	private List<DVD> dvds = new ArrayList<DVD>();
 	@XmlElementWrapper(name="verleihList")
 	@XmlElement(name="verleih")
-	private List<Verleih> verleihungen = new ArrayList<Verleih>();
+	private List<Ausleihe> verleihungen = new ArrayList<Ausleihe>();
 
 	public List<Kunde> getKundensList() {
 		return kundenList;
@@ -39,10 +39,10 @@ public class DVDVerleihStore {
 	public void setDvdList(List<DVD> dvds) {
 		this.dvds = dvds;
 	}
-	public List<Verleih> getVerleihsList() {
+	public List<Ausleihe> getVerleihsList() {
 		return verleihungen;
 	}
-	public void setVerleihList(List<Verleih> verleihungen) {
+	public void setVerleihList(List<Ausleihe> verleihungen) {
 		this.verleihungen = verleihungen;
 	}
 	
