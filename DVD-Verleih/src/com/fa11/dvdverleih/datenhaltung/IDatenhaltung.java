@@ -9,9 +9,9 @@ import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
 /**
  * @author Paul Manthei
@@ -19,22 +19,19 @@ import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
  */
 public interface IDatenhaltung {
 
-	public void initDatenhaltung() throws SQLException, JAXBException, ClassNotFoundException, FileNotFoundException;
-	public void close() throws SQLException, JAXBException;
+	public List<Kunde> getKundenList() throws SQLException, ClassNotFoundException, JAXBException, FileNotFoundException;
+	public List<Kunde> addKunde(Kunde kunde) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<Kunde> updateKunde(Kunde kunde) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<Kunde> deleteKunde(Kunde kunde) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
 	
-	public List<Kunde> getKundenList() throws SQLException, ClassNotFoundException;
-	public List<Kunde> addKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
-	public List<Kunde> updateKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
-	public List<Kunde> deleteKunde(Kunde kunde) throws ClassNotFoundException, SQLException;
+	public List<DVD> getDVDList() throws SQLException, ClassNotFoundException, JAXBException, FileNotFoundException;
+	public List<DVD> addDVD(DVD dvd) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<DVD> updateDVD(DVD dvd) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<DVD> deleteDVD(DVD dvd) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
 	
-	public List<DVD> getDVDList() throws SQLException, ClassNotFoundException;
-	public List<DVD> addDVD(DVD dvd) throws ClassNotFoundException, SQLException;
-	public List<DVD> updateDVD(DVD dvd) throws ClassNotFoundException, SQLException;
-	public List<DVD> deleteDVD(DVD dvd) throws ClassNotFoundException, SQLException;
-	
-	public List<Ausleihe> getAusleiheList() throws SQLException, ClassNotFoundException;
-	public List<Ausleihe> addAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
-	public List<Ausleihe> updateAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
-	public List<Ausleihe> deleteAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> getAusleiheList() throws SQLException, ClassNotFoundException, JAXBException, FileNotFoundException;
+	public List<Ausleihe> addAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<Ausleihe> updateAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
+	public List<Ausleihe> deleteAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException, JAXBException, FileNotFoundException;
 	
 }
