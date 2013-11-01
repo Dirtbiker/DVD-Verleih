@@ -3,7 +3,7 @@
  */
 package com.fa11.dvdverleih.datenhaltung.tables;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author Paul Manthei

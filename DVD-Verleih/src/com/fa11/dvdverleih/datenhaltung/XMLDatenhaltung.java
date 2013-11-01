@@ -14,12 +14,9 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
-import com.fa11.dvdverleih.datenhaltung.tables.DVDFields;
 import com.fa11.dvdverleih.datenhaltung.tables.DVDVerleihStore;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.KundeFields;
 import com.fa11.dvdverleih.datenhaltung.tables.Verleih;
-import com.fa11.dvdverleih.datenhaltung.tables.VerleihFields;
 
 /**
  * @author Paul Manthei
@@ -70,7 +67,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Kunde> updateKunde(Kunde kunde, List<KundeFields> fields) {
+	public List<Kunde> updateKunde(Kunde kunde) {
 		List<Kunde> kundenList = getKundenList();
 		int index = 0;
 		for (Kunde kunde2 : kundenList) {
@@ -100,7 +97,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<DVD> updateDVD(DVD dvd, List<DVDFields> fields) {
+	public List<DVD> updateDVD(DVD dvd) {
 		List<DVD> dvdList = getDVDList();
 		int index = 0;
 		for (DVD dvd2 : dvdList) {
@@ -129,7 +126,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Verleih> updateVerleih(Verleih verleih, List<VerleihFields> fields) {
+	public List<Verleih> updateVerleih(Verleih verleih) {
 		List<Verleih> verleihList = getVerleihList();
 		int index = 0;
 		for (Verleih verleih2 : verleihList) {

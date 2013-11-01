@@ -13,8 +13,8 @@ public enum VerleihFields {
 	p_leihvorgangs_nr(TableDatatype.INTEGER),
 	f_dvd_nr(TableDatatype.INTEGER),
 	f_kunden_nr(TableDatatype.INTEGER),
-	ausleihe(TableDatatype.INTEGER),
-	rueckgabe(TableDatatype.INTEGER);
+	ausleihe(TableDatatype.DATETIME),
+	rueckgabe(TableDatatype.DATETIME);
 	
 	private TableDatatype datatype;
 	
