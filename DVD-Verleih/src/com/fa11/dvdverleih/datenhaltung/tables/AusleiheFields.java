@@ -8,7 +8,7 @@ package com.fa11.dvdverleih.datenhaltung.tables;
  * @author Paul Manthei
  *
  */
-public enum VerleihFields {
+public enum AusleiheFields {
 
 	p_leihvorgangs_nr(TableDatatype.INTEGER),
 	f_dvd_nr(TableDatatype.INTEGER),
@@ -18,7 +18,7 @@ public enum VerleihFields {
 	
 	private TableDatatype datatype;
 	
-	private VerleihFields(TableDatatype datatype) {
+	private AusleiheFields(TableDatatype datatype) {
 		this.datatype = datatype;
 	}
 	

@@ -54,7 +54,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 	
 	@Override
-	public List<Ausleihe> getVerleihList() {
+	public List<Ausleihe> getAusleiheList() {
 		return store.getVerleihsList();
 	}
 
@@ -118,16 +118,16 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Ausleihe> addVerleih(Ausleihe verleih) {
-		List<Ausleihe> verleihList = getVerleihList();
+	public List<Ausleihe> addAusleihe(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getAusleiheList();
 		verleihList.add(verleih);
 		store.setVerleihList(verleihList);
 		return verleihList;
 	}
 
 	@Override
-	public List<Ausleihe> updateVerleih(Ausleihe verleih) {
-		List<Ausleihe> verleihList = getVerleihList();
+	public List<Ausleihe> updateAusleihe(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getAusleiheList();
 		int index = 0;
 		for (Ausleihe verleih2 : verleihList) {
 			if (verleih2.equals(verleih)) {
@@ -139,8 +139,8 @@ public class XMLDatenhaltung implements IDatenhaltung {
 	}
 
 	@Override
-	public List<Ausleihe> deleteVerleih(Ausleihe verleih) {
-		List<Ausleihe> verleihList = getVerleihList();
+	public List<Ausleihe> deleteAusleihe(Ausleihe verleih) {
+		List<Ausleihe> verleihList = getAusleiheList();
 		verleihList.remove(verleih);
 		store.setVerleihList(verleihList);
 		return verleihList;

@@ -32,9 +32,9 @@ public interface IDatenhaltung {
 	public List<DVD> updateDVD(DVD dvd) throws ClassNotFoundException, SQLException;
 	public List<DVD> deleteDVD(DVD dvd) throws ClassNotFoundException, SQLException;
 	
-	public List<Ausleihe> getVerleihList() throws SQLException, ClassNotFoundException;
-	public List<Ausleihe> addVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
-	public List<Ausleihe> updateVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
-	public List<Ausleihe> deleteVerleih(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> getAusleiheList() throws SQLException, ClassNotFoundException;
+	public List<Ausleihe> addAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> updateAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
+	public List<Ausleihe> deleteAusleihe(Ausleihe verleih) throws ClassNotFoundException, SQLException;
 	
 }
