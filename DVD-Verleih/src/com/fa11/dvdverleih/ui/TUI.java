@@ -20,7 +20,7 @@ public class TUI {
 	private IFachkonzept fachkonzept;
 
 	public static void main(String[] args) {
-		TUI tui = new TUI(new Fachkonzept(new XMLDatenhaltung()));
+		new TUI(new Fachkonzept(new XMLDatenhaltung()));
 	}
 
 	public TUI(IFachkonzept fachkonzept) {
@@ -165,7 +165,7 @@ public class TUI {
 		String anrede;
 		String vorname;
 		String nachname;
-		Date geburtstag;
+		Date geburtstag = null;
 		String plz;
 		String ort;
 		String strasse;
@@ -199,8 +199,7 @@ public class TUI {
 		} while (!korrekt);
 		System.out.print("Telefonnummer: ");
 		telefon_nummer = Helper.readString();
-		// fachkonzept.createKunde(new Kunde(anrede, vorname, nachname,
-		// geburtstag, plz, ort, strasse, hausnummer, telefon_nummer));
+		fachkonzept.createKunde(new Kunde(anrede, vorname, nachname, new java.sql.Date(geburtstag.getTime()), plz, ort, strasse, hausnummer, telefon_nummer));
 		System.out.println("\nKunde wurde hinzugefügt!");
 		Helper.warteAufTaste();
 	}
@@ -249,7 +248,7 @@ public class TUI {
 		genre = Helper.readString();
 		System.out.print("Jahr: ");
 		erscheinungsjahr = Helper.readInt();
-		fachkonzept.createDVD(new DVD(0, titel, genre, erscheinungsjahr));
+		fachkonzept.createDVD(new DVD(titel, genre, erscheinungsjahr));
 		System.out.println("DVD wurde hinzugefügt!");
 		Helper.warteAufTaste();
 	}
@@ -320,7 +319,43 @@ public class TUI {
 	}
 
 	private void neuerLeihvorgang() {
-//		fachkonzept.createVerleih(new Verleih(leihvorgangs_nr, dvd_nr, kunden_nr, ausleihe, rueckgabe));
+		int dvd_nr;
+		int kunden_nr;
+		Date ausleihe = null;
+		Date rueckgabe = null;
+		SimpleDateFormat sdfGeburtstag = new SimpleDateFormat("dd.MM.yyyy");
+		boolean korrekt;
+		
+		System.out.println("Leihvorgang hinzufügen\n");
+		System.out.print("DVD-Nr.: ");
+		dvd_nr = Helper.readInt();
+		System.out.print("Kunden-Nr.: ");
+		kunden_nr = Helper.readInt();
+
+		
+		do {
+			korrekt = true;
+			System.out.print("Ausleihe (DD.MM.YYYY): ");
+			try {
+				ausleihe = sdfGeburtstag.parse(Helper.readString());
+			} catch (ParseException e) {
+				korrekt = false;
+			}
+		} while (!korrekt);
+		
+		do {
+			korrekt = true;
+			System.out.print("Rückgabe (DD.MM.YYYY): ");
+			try {
+				rueckgabe = sdfGeburtstag.parse(Helper.readString());
+			} catch (ParseException e) {
+				korrekt = false;
+			}
+		} while (!korrekt);
+		
+		fachkonzept.createVerleih(new Ausleihe(dvd_nr, kunden_nr, new java.sql.Date(ausleihe.getTime()), new java.sql.Date(rueckgabe.getTime())));
+		System.out.println("Ausleihe wurde hinzugefügt!");
+		Helper.warteAufTaste();
 	}
 
 }
