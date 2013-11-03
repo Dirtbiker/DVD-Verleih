@@ -1,24 +1,32 @@
 package com.fa11.dvdverleih.ui;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.Font;
+
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.sql.SQLException;
 import javax.swing.UIManager;
-import com.fa11.dvdverleih.datenhaltung.SQLiteDatenhaltung;
-import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
+
+import com.fa11.dvdverleih.datenhaltung.DatenhaltungFactory;
+import com.fa11.dvdverleih.datenhaltung.DatenhaltungType;
 import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 
 public class StarterGUI extends JFrame {
@@ -28,8 +36,8 @@ public class StarterGUI extends JFrame {
 	private JLabel lblBitteTreffenSie;
 	private JLabel lblOberflche;
 	private JLabel lblDatenhaltung;
-	private JComboBox cmbUserInterface;
-	private JComboBox cmbData;
+	private JComboBox<String> cmbUserInterface;
+	private JComboBox<String> cmbData;
 	private JButton btnStarten;
 
 	/**
@@ -98,8 +106,8 @@ public class StarterGUI extends JFrame {
 		gbc_lblDatenhaltung.gridy = 1;
 		this.contentPane.add(this.lblDatenhaltung, gbc_lblDatenhaltung);
 
-		this.cmbUserInterface = new JComboBox();
-		this.cmbUserInterface.setModel(new DefaultComboBoxModel(
+		this.cmbUserInterface = new JComboBox<String>();
+		this.cmbUserInterface.setModel(new DefaultComboBoxModel<String>(
 				new String[] { "GUI", "TUI" }));
 		GridBagConstraints gbc_cmbUserInterface = new GridBagConstraints();
 		gbc_cmbUserInterface.insets = new Insets(0, 0, 5, 5);
@@ -108,8 +116,8 @@ public class StarterGUI extends JFrame {
 		gbc_cmbUserInterface.gridy = 2;
 		this.contentPane.add(this.cmbUserInterface, gbc_cmbUserInterface);
 
-		this.cmbData = new JComboBox();
-		this.cmbData.setModel(new DefaultComboBoxModel(new String[] {
+		this.cmbData = new JComboBox<String>();
+		this.cmbData.setModel(new DefaultComboBoxModel<String>(new String[] {
 				"XML", "SQLite" }));
 		GridBagConstraints gbc_cmbData = new GridBagConstraints();
 		gbc_cmbData.insets = new Insets(0, 0, 5, 0);
@@ -125,13 +133,12 @@ public class StarterGUI extends JFrame {
 				// GUI
 				if(cmbUserInterface.getSelectedIndex() == 0){
 					if(cmbData.getSelectedIndex() == 0){
-						JFrame gui = new GUI(new Fachkonzept(new XMLDatenhaltung()));
+						JFrame gui = new GUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.xml)));
 						gui.setVisible(true);
 						setVisible(false);
 					}
 					else if (cmbData.getSelectedIndex() == 1){
-						JFrame gui;
-						gui = new GUI(new Fachkonzept(new SQLiteDatenhaltung()));
+						JFrame gui = new GUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.sqlite)));
 						gui.setVisible(true);
 						setVisible(false);
 					}
