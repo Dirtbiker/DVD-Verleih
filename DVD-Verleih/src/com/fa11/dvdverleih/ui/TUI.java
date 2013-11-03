@@ -60,6 +60,7 @@ public class TUI {
 				switch (auswahl) {
 				case 'a':
 					alleKundenAnzeigen();
+					break;
 				case 'b':
 					kundeAnzeigen();
 					break;
