@@ -145,10 +145,17 @@ public class StarterGUI extends JFrame {
 				}
 				// TUI
 				else if (cmbUserInterface.getSelectedIndex() == 1){
-					JOptionPane.showMessageDialog(null, "Hier wird noch gearbeitet!",
-							"Eine schöne Fehlermeldung",
-							JOptionPane.INFORMATION_MESSAGE,
-							null);
+//					JOptionPane.showMessageDialog(null, "Hier wird noch gearbeitet!",
+//							"Eine schöne Fehlermeldung",
+//							JOptionPane.INFORMATION_MESSAGE,
+//							null);
+					
+					if(cmbData.getSelectedIndex() == 0){
+						new TUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.xml)));
+					}
+					else if (cmbData.getSelectedIndex() == 1){
+						new TUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.sqlite)));
+					}
 				}
 			}
 		});
