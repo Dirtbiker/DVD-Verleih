@@ -8,9 +8,9 @@ package com.fa11.dvdverleih.fachkonzept;
 
 import java.util.List;
 
+import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
 public interface IFachkonzept {
 	
