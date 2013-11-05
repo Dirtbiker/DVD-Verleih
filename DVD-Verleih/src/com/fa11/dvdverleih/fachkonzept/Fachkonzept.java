@@ -95,8 +95,14 @@ public class Fachkonzept implements IFachkonzept {
 	public void createKunde(Kunde kundenDaten) {
 		
 		if(this.datenhaltung instanceof XMLDatenhaltung) {
-			int id = this.kundenList.size() + 1;
-			kundenDaten.setKunden_nr(id);
+			int neueKundenID = 0;
+			for(Kunde kunde : this.kundenList) {
+				if(kunde.getKunden_nr() > neueKundenID) {
+					neueKundenID = kunde.getKunden_nr();
+				}
+			}
+			neueKundenID++;
+			kundenDaten.setKunden_nr(neueKundenID);
 		}
 		
 		try {
@@ -159,8 +165,14 @@ public class Fachkonzept implements IFachkonzept {
 	public void createDVD(DVD dvdDaten) {
 		
 		if(this.datenhaltung instanceof XMLDatenhaltung) {
-			int id = this.DVDList.size() + 1;
-			dvdDaten.setDvd_nr(id);
+			int neueDVDID = 0;
+			for(DVD dvd : this.DVDList) {
+				if(dvd.getDvd_nr() > neueDVDID) {
+					neueDVDID = dvd.getDvd_nr();
+				}
+			}
+			neueDVDID++;
+			dvdDaten.setDvd_nr(neueDVDID);
 		}
 		
 		try {
@@ -193,10 +205,16 @@ public class Fachkonzept implements IFachkonzept {
 
 	@Override
 	public void createVerleih(Ausleihe neuerVerleih) {
-		
+
 		if(this.datenhaltung instanceof XMLDatenhaltung) {
-			int id = this.verleiheList.size() + 1;
-			neuerVerleih.setLeihvorgangs_nr(id);
+			int neueAusleihID = 0;
+			for(Ausleihe ausleihe : this.verleiheList) {
+				if(ausleihe.getLeihvorgangs_nr() > neueAusleihID) {
+					neueAusleihID = ausleihe.getLeihvorgangs_nr();
+				}
+			}
+			neueAusleihID++;
+			neuerVerleih.setLeihvorgangs_nr(neueAusleihID);
 		}
 		
 		try {
