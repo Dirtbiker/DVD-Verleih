@@ -135,6 +135,7 @@ public class PanelLending extends JPanel {
 		this.panelLendingControls.add(this.txtDvdNo, gbc_txtDvdNo);
 		
 		this.txtDvdTitle = new JTextField();
+		this.txtDvdTitle.setEnabled(false);
 		this.txtDvdTitle.setColumns(10);
 		GridBagConstraints gbc_txtDvdTitle = new GridBagConstraints();
 		gbc_txtDvdTitle.fill = GridBagConstraints.HORIZONTAL;
