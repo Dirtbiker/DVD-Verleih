@@ -6,10 +6,12 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.NumericShaper;
 import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
@@ -85,41 +87,31 @@ public class GUI extends JFrame {
 		this.contentPane.add(this.tabbedPane, BorderLayout.CENTER);
 
 		this.panelLending = new PanelLending();
-		this.panelLending.setBtnCheckActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				DefaultTableModel model = (DefaultTableModel)panelLending.getTableLending().getModel();
-				model.addRow(new String[]{"1", panelLending.getTxtDvdTitle().getText(), "19.12.1900", "25.06.1958"});
-			}
-		});
+//		this.panelLending.setBtnCheckActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				DefaultTableModel model = (DefaultTableModel)panelLending.getTableLending().getModel();
+//				model.addRow(new String[]{"1", panelLending.getTxtDvdTitle().getText(), "19.12.1900", "25.06.1958"});
+//			}
+//		});
 		this.tabbedPane.addTab("DVD-Leihe", null, this.panelLending, null);
 
 		this.panelDvd = new PanelDvd();
-		this.panelDvd.setBtnNewActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				GUI.this.fachkonzept.createDVD(new DVD());
-				//TODO DVD mit passender ID in Liste einfügen
-				DefaultTableModel model = (DefaultTableModel)panelDvd.getTableDvd().getModel();
-				model.addRow(new String[]{"","","",""});
-			}
-		});
 		this.tabbedPane.addTab("DVD-Verwaltung", null, this.panelDvd, null);
 		
 		this.panelCustomers = new PanelCustomers();
 		this.tabbedPane.addTab("Kunden-Verwaltung", null, this.panelCustomers, null);
 		
 		// ListSelectionChangedListenerHinzufügen
-		panelDvd.setTableDvdListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				dvdTableListSelectionChanged();
-			}
-		});
+//		panelDvd.setTableDvdListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				dvdTableListSelectionChanged();
+//			}
+//		});
 		panelCustomers.setTableCustomersListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -137,6 +129,123 @@ public class GUI extends JFrame {
 		
 		// Button ActionListener hinzufügen
 		// TODO: Buttons ActionListener hinzufügen
+		
+		//Lending-Panel
+		this.panelLending.setBtnCheckActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					int kdNr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
+					Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdNr);
+					if(kunde != null){
+						GUI.this.panelLending.getTxtFirstName().setText(kunde.getVorname());
+						GUI.this.panelLending.getTxtLastName().setText(kunde.getNachname());
+					} else {
+						JOptionPane.showMessageDialog(GUI.this, "Der Kunde mit der Kundennummer \"" + kdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(GUI.this, "Die Kundennummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+				
+				try {
+					int dvdNr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
+					DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdNr);
+					if(dvd != null){
+						GUI.this.panelLending.getTxtDvdTitle().setText(dvd.getTitel());
+					} else {
+						JOptionPane.showMessageDialog(GUI.this, "Der DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(GUI.this, "Die DVD-Nummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		//DVD-Panel
+//		this.panelDvd.setBtnNewActionListener(new ActionListener() {
+//			@Override
+//			public void actionPerformed(ActionEvent arg0) {
+//				GUI.this.fachkonzept.createDVD(new DVD());
+//				//TODO DVD mit passender ID in Liste einfügen
+//				DefaultTableModel model = (DefaultTableModel)panelDvd.getTableDvd().getModel();
+//				model.addRow(new String[]{"1","","",""});
+//			}
+//		});
+		
+		this.panelDvd.setBtnEditActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
+				DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
+				if(dvd != null){
+					EditDvdDialog editDvdDialog = new EditDvdDialog(dvd);
+				}
+				
+			}
+		});
+		
+		this.panelDvd.setBtnDeleteActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
+				DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
+				if(dvd != null){
+					GUI.this.fachkonzept.deleteDVD(dvdid);
+					JOptionPane.showMessageDialog(GUI.this, "Die DVD \"" + dvd.getTitel() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+					updateDvdTable();
+				}
+				
+			}
+		});
+		
+		this.panelDvd.setBtnSaveActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String dvdTitel = GUI.this.panelDvd.getTxtDvdTitle().getText();
+				String dvdGenre = GUI.this.panelDvd.getTxtDvdGenre().getText();
+				try {
+					int dvdYear = Integer.valueOf(GUI.this.panelDvd.getTxtDvdYear().getText());
+					if(!dvdTitel.equals("")){
+						if(!dvdGenre.equals("")){
+							DVD dvd = new DVD(dvdTitel, dvdGenre, dvdYear);
+							GUI.this.fachkonzept.createDVD(dvd);
+							JOptionPane.showMessageDialog(GUI.this, "DVD wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+							GUI.this.panelDvd.getTxtDvdTitle().setText("");
+							GUI.this.panelDvd.getTxtDvdGenre().setText("");
+							GUI.this.panelDvd.getTxtDvdYear().setText("");
+							updateDvdTable();
+						} else {
+							JOptionPane.showMessageDialog(GUI.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(GUI.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
+					
+				} catch (NumberFormatException nfe) {
+					JOptionPane.showMessageDialog(GUI.this, "Das Jahr darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+				
+			}
+		});
+		
+		this.panelDvd.setBtnResetActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				GUI.this.panelDvd.getTxtDvdTitle().setText("");
+				GUI.this.panelDvd.getTxtDvdGenre().setText("");
+				GUI.this.panelDvd.getTxtDvdYear().setText("");
+				
+				GUI.this.panelDvd.getTableDvd().getSelectionModel().clearSelection();
+				
+				GUI.this.panelDvd.getBtnDelete().setEnabled(false);
+				GUI.this.panelDvd.getBtnEdit().setEnabled(false);
+			}
+		});
 		
 		// Tabellen befüllen
 		updateLendingTable();
@@ -213,9 +322,10 @@ public class GUI extends JFrame {
 	 */
 	private void clearTablemodel(DefaultTableModel model){
 		// Tabelle leeren
-		for (int i = 0; i < model.getRowCount(); i++) {
-			model.removeRow(i);
-		}
+//		for (int i = 0; i < model.getRowCount(); i++) {
+//			model.removeRow(i);
+//		}
+		model.setRowCount(0);
 	}
 
 	/**
