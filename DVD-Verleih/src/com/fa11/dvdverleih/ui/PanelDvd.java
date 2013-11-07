@@ -1,16 +1,21 @@
 package com.fa11.dvdverleih.ui;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -35,12 +40,14 @@ public class PanelDvd extends JPanel {
 	private JLabel lblDvdGenreDesc;
 	private JLabel lblDvdYearDesc;
 	private JPanel panelDvdButtons;
-	private JButton btnNew;
 	private JButton btnSave;
 	private JPanel panelDvdPanel;
 	private JScrollPane scrollPaneDvdTable;
 	private JTable tableDvd;
+	private JButton btnReset;
+	private JPanel panelDvdEditControls;
 	private JButton btnDelete;
+	private JButton btnEdit;
 	
 	/**
 	 * PanelDvd erstellen
@@ -48,9 +55,9 @@ public class PanelDvd extends JPanel {
 	public PanelDvd() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{1.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		this.panelDvdControls = new JPanel();
@@ -146,35 +153,29 @@ public class PanelDvd extends JPanel {
 		gbc_panelDvdButtons.gridy = 2;
 		this.panelDvdControls.add(this.panelDvdButtons, gbc_panelDvdButtons);
 		GridBagLayout gbl_panelDvdButtons = new GridBagLayout();
-		gbl_panelDvdButtons.columnWidths = new int[]{0, 0, 0, 0};
+		gbl_panelDvdButtons.columnWidths = new int[]{0, 0, 0};
 		gbl_panelDvdButtons.rowHeights = new int[]{0, 0};
-		gbl_panelDvdButtons.columnWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelDvdButtons.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gbl_panelDvdButtons.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		this.panelDvdButtons.setLayout(gbl_panelDvdButtons);
 		
-		this.btnNew = new JButton("Neu");
-		GridBagConstraints gbc_btnNew = new GridBagConstraints();
-		gbc_btnNew.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNew.gridx = 0;
-		gbc_btnNew.gridy = 0;
-		this.panelDvdButtons.add(this.btnNew, gbc_btnNew);
-		
-		this.btnDelete = new JButton("L\u00F6schen");
-		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
-		gbc_btnDelete.gridx = 1;
-		gbc_btnDelete.gridy = 0;
-		this.panelDvdButtons.add(this.btnDelete, gbc_btnDelete);
+		this.btnReset = new JButton("Zur\u00FCcksetzen");
+		GridBagConstraints gbc_btnReset = new GridBagConstraints();
+		gbc_btnReset.insets = new Insets(0, 0, 0, 5);
+		gbc_btnReset.gridx = 0;
+		gbc_btnReset.gridy = 0;
+		this.panelDvdButtons.add(this.btnReset, gbc_btnReset);
 		
 		this.btnSave = new JButton("Speichern");
 		GridBagConstraints gbc_btnSave = new GridBagConstraints();
-		gbc_btnSave.gridx = 2;
+		gbc_btnSave.gridx = 1;
 		gbc_btnSave.gridy = 0;
 		this.panelDvdButtons.add(this.btnSave, gbc_btnSave);
 		
 		this.panelDvdPanel = new JPanel();
 		this.panelDvdPanel.setBorder(new TitledBorder(null, "Vorhandene DVDs", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		GridBagConstraints gbc_panelDvdPanel = new GridBagConstraints();
+		gbc_panelDvdPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_panelDvdPanel.fill = GridBagConstraints.BOTH;
 		gbc_panelDvdPanel.gridx = 0;
 		gbc_panelDvdPanel.gridy = 1;
@@ -241,6 +242,44 @@ public class PanelDvd extends JPanel {
 //					}
 //				});
 		this.scrollPaneDvdTable.setViewportView(this.tableDvd);
+		
+		this.panelDvdEditControls = new JPanel();
+		GridBagConstraints gbc_panelDvdEditControls = new GridBagConstraints();
+		gbc_panelDvdEditControls.anchor = GridBagConstraints.EAST;
+		gbc_panelDvdEditControls.fill = GridBagConstraints.VERTICAL;
+		gbc_panelDvdEditControls.gridx = 0;
+		gbc_panelDvdEditControls.gridy = 2;
+		add(this.panelDvdEditControls, gbc_panelDvdEditControls);
+		GridBagLayout gbl_panelDvdEditControls = new GridBagLayout();
+		gbl_panelDvdEditControls.columnWidths = new int[]{0, 0, 0};
+		gbl_panelDvdEditControls.rowHeights = new int[]{0, 0};
+		gbl_panelDvdEditControls.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
+		gbl_panelDvdEditControls.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		this.panelDvdEditControls.setLayout(gbl_panelDvdEditControls);
+		
+		this.btnDelete = new JButton("L\u00F6schen");
+		this.btnDelete.setEnabled(false);
+		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
+		gbc_btnDelete.gridx = 0;
+		gbc_btnDelete.gridy = 0;
+		this.panelDvdEditControls.add(this.btnDelete, gbc_btnDelete);
+		
+		this.btnEdit = new JButton("Bearbeiten");
+		this.btnEdit.setEnabled(false);
+		GridBagConstraints gbc_btnEdit = new GridBagConstraints();
+		gbc_btnEdit.gridx = 1;
+		gbc_btnEdit.gridy = 0;
+		this.panelDvdEditControls.add(this.btnEdit, gbc_btnEdit);
+		
+		tableDvd.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				btnDelete.setEnabled(true);
+				btnEdit.setEnabled(true);
+			}
+		});
 	}
 	
 	public void setTableDvdListSelectionListener(ListSelectionListener listener){
@@ -267,16 +306,36 @@ public class PanelDvd extends JPanel {
 		return tableDvd;
 	}
 	
-	public void setBtnNewActionListener(ActionListener listener){
-		btnNew.addActionListener(listener);
+	public JButton getBtnSave() {
+		return btnSave;
 	}
-	
+
+	public JButton getBtnReset() {
+		return btnReset;
+	}
+
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	public JButton getBtnEdit() {
+		return btnEdit;
+	}
+
 	public void setBtnSaveActionListener(ActionListener listener){
 		btnSave.addActionListener(listener);
 	}
 	
 	public void setBtnDeleteActionListener(ActionListener listener){
 		btnDelete.addActionListener(listener);
+	}
+	
+	public void setBtnEditActionListener(ActionListener listener){
+		btnEdit.addActionListener(listener);
+	}
+	
+	public void setBtnResetActionListener(ActionListener listener){
+		btnReset.addActionListener(listener);
 	}
 	
 }
