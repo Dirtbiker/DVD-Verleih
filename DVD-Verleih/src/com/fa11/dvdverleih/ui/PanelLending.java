@@ -1,11 +1,15 @@
 package com.fa11.dvdverleih.ui;
 
 import javax.swing.JPanel;
+
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
+
 import javax.swing.JTextField;
+
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
@@ -220,14 +224,8 @@ public class PanelLending extends JPanel {
 		gbc_scrollPaneLendingTable.gridy = 0;
 		this.panelLendingTable.add(this.scrollPaneLendingTable, gbc_scrollPaneLendingTable);
 		
-		tableLending = new JTable();
-		tableLending.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Leih-Nr.", "DVD-Titel", "Ausleihe", "R\u00FCckgabe"
-			}
-		));
+		tableLending = new DVDVerleihTable(new String[] {"Leih-Nr.", "DVD-Titel", "Ausleihe", "R\u00FCckgabe"}, 0);;
+
 		this.tableLending.getColumnModel().getColumn(0).setResizable(false);
 		this.tableLending.getColumnModel().getColumn(0).setPreferredWidth(80);
 		this.tableLending.getColumnModel().getColumn(0).setMinWidth(80);

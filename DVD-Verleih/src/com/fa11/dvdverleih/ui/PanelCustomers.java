@@ -262,15 +262,8 @@ public class PanelCustomers extends JPanel {
 		gbc_scrollPaneCustomersTable.gridy = 0;
 		this.panelCustomersTable.add(this.scrollPaneCustomersTable, gbc_scrollPaneCustomersTable);
 		
-		tableCustomers = new JTable();
+		tableCustomers = new DVDVerleihTable(new String[] {"Kd.-Nr.", "Nachname", "Vorname", "Telefon"}, 0);
 		this.tableCustomers.setAutoResizeMode(JTable.AUTO_RESIZE_NEXT_COLUMN);
-		tableCustomers.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Kd.-Nr.", "Nachname", "Vorname", "Telefon"
-			}
-		));
 		
 		 // Der TableRowSorter wird die Daten des Models sortieren
         TableRowSorter<TableModel> tableCustomersSorter = new TableRowSorter<TableModel>();

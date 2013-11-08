@@ -194,14 +194,8 @@ public class PanelDvd extends JPanel {
 		gbc_scrollPaneDvdTable.gridy = 0;
 		this.panelDvdPanel.add(this.scrollPaneDvdTable, gbc_scrollPaneDvdTable);
 		
-		this.tableDvd = new JTable();
-		this.tableDvd.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"DVD-Nr.", "Titel", "Genre", "Jahr"
-			}
-		));
+		this.tableDvd = new DVDVerleihTable(new String[] {"DVD-Nr.", "Titel", "Genre", "Jahr"}, 0);
+
 		this.tableDvd.getColumnModel().getColumn(0).setResizable(false);
 		this.tableDvd.getColumnModel().getColumn(0).setPreferredWidth(80);
 		this.tableDvd.getColumnModel().getColumn(0).setMinWidth(80);
