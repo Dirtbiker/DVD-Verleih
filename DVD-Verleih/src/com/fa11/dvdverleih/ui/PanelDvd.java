@@ -31,11 +31,9 @@ public class PanelDvd extends JPanel {
 	
 	private static final long serialVersionUID = -8289759117740520155L;
 	private JPanel panelDvdControls;
-	private JTextField txtDvdNo;
 	private JTextField txtDvdTitle;
 	private JTextField txtDvdGenre;
 	private JTextField txtDvdYear;
-	private JLabel lblDvdNoDesc;
 	private JLabel lblDvdTitleDesc;
 	private JLabel lblDvdGenreDesc;
 	private JLabel lblDvdYearDesc;
@@ -75,22 +73,12 @@ public class PanelDvd extends JPanel {
 		gbl_panelDvdControls.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelDvdControls.setLayout(gbl_panelDvdControls);
 		
-		this.txtDvdNo = new JTextField();
-		this.txtDvdNo.setEditable(false);
-		this.txtDvdNo.setColumns(10);
-		GridBagConstraints gbc_txtDvdNo = new GridBagConstraints();
-		gbc_txtDvdNo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDvdNo.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDvdNo.gridx = 0;
-		gbc_txtDvdNo.gridy = 0;
-		this.panelDvdControls.add(this.txtDvdNo, gbc_txtDvdNo);
-		
 		this.txtDvdTitle = new JTextField();
 		this.txtDvdTitle.setColumns(10);
 		GridBagConstraints gbc_txtDvdTitle = new GridBagConstraints();
 		gbc_txtDvdTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtDvdTitle.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDvdTitle.gridx = 1;
+		gbc_txtDvdTitle.gridx = 0;
 		gbc_txtDvdTitle.gridy = 0;
 		this.panelDvdControls.add(this.txtDvdTitle, gbc_txtDvdTitle);
 		
@@ -99,7 +87,7 @@ public class PanelDvd extends JPanel {
 		GridBagConstraints gbc_txtDvdGenre = new GridBagConstraints();
 		gbc_txtDvdGenre.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtDvdGenre.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDvdGenre.gridx = 2;
+		gbc_txtDvdGenre.gridx = 1;
 		gbc_txtDvdGenre.gridy = 0;
 		this.panelDvdControls.add(this.txtDvdGenre, gbc_txtDvdGenre);
 		
@@ -107,24 +95,16 @@ public class PanelDvd extends JPanel {
 		this.txtDvdYear.setColumns(10);
 		GridBagConstraints gbc_txtDvdYear = new GridBagConstraints();
 		gbc_txtDvdYear.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDvdYear.insets = new Insets(0, 0, 5, 0);
-		gbc_txtDvdYear.gridx = 3;
+		gbc_txtDvdYear.insets = new Insets(0, 0, 5, 5);
+		gbc_txtDvdYear.gridx = 2;
 		gbc_txtDvdYear.gridy = 0;
 		this.panelDvdControls.add(this.txtDvdYear, gbc_txtDvdYear);
-		
-		this.lblDvdNoDesc = new JLabel("DVD-Nummer");
-		GridBagConstraints gbc_lblDvdNoDesc = new GridBagConstraints();
-		gbc_lblDvdNoDesc.anchor = GridBagConstraints.WEST;
-		gbc_lblDvdNoDesc.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDvdNoDesc.gridx = 0;
-		gbc_lblDvdNoDesc.gridy = 1;
-		this.panelDvdControls.add(this.lblDvdNoDesc, gbc_lblDvdNoDesc);
 		
 		this.lblDvdTitleDesc = new JLabel("DVD Titel");
 		GridBagConstraints gbc_lblDvdTitleDesc = new GridBagConstraints();
 		gbc_lblDvdTitleDesc.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDvdTitleDesc.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDvdTitleDesc.gridx = 1;
+		gbc_lblDvdTitleDesc.gridx = 0;
 		gbc_lblDvdTitleDesc.gridy = 1;
 		this.panelDvdControls.add(this.lblDvdTitleDesc, gbc_lblDvdTitleDesc);
 		
@@ -132,24 +112,23 @@ public class PanelDvd extends JPanel {
 		GridBagConstraints gbc_lblDvdGenreDesc = new GridBagConstraints();
 		gbc_lblDvdGenreDesc.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblDvdGenreDesc.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDvdGenreDesc.gridx = 2;
+		gbc_lblDvdGenreDesc.gridx = 1;
 		gbc_lblDvdGenreDesc.gridy = 1;
 		this.panelDvdControls.add(this.lblDvdGenreDesc, gbc_lblDvdGenreDesc);
 		
 		this.lblDvdYearDesc = new JLabel("Erscheinungsjahr");
 		GridBagConstraints gbc_lblDvdYearDesc = new GridBagConstraints();
 		gbc_lblDvdYearDesc.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lblDvdYearDesc.insets = new Insets(0, 0, 5, 0);
-		gbc_lblDvdYearDesc.gridx = 3;
+		gbc_lblDvdYearDesc.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDvdYearDesc.gridx = 2;
 		gbc_lblDvdYearDesc.gridy = 1;
 		this.panelDvdControls.add(this.lblDvdYearDesc, gbc_lblDvdYearDesc);
 		
 		this.panelDvdButtons = new JPanel();
 		GridBagConstraints gbc_panelDvdButtons = new GridBagConstraints();
-		gbc_panelDvdButtons.insets = new Insets(0, 0, 0, 5);
 		gbc_panelDvdButtons.anchor = GridBagConstraints.EAST;
 		gbc_panelDvdButtons.gridwidth = 2;
-		gbc_panelDvdButtons.gridx = 2;
+		gbc_panelDvdButtons.gridx = 1;
 		gbc_panelDvdButtons.gridy = 2;
 		this.panelDvdControls.add(this.panelDvdButtons, gbc_panelDvdButtons);
 		GridBagLayout gbl_panelDvdButtons = new GridBagLayout();
@@ -278,10 +257,6 @@ public class PanelDvd extends JPanel {
 	
 	public void setTableDvdListSelectionListener(ListSelectionListener listener){
 		tableDvd.getSelectionModel().addListSelectionListener(listener);
-	}
-
-	public JTextField getTxtDvdNo() {
-		return txtDvdNo;
 	}
 
 	public JTextField getTxtDvdTitle() {
