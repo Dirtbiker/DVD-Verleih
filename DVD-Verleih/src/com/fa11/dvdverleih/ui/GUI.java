@@ -180,7 +180,13 @@ public class GUI extends JFrame {
 				int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
 				DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
 				if(dvd != null){
-					EditDvdDialog editDvdDialog = new EditDvdDialog(dvd);
+					int dvd_nr = dvd.getDvd_nr();
+					EditDvdDialog editDvdDialog = new EditDvdDialog(GUI.this, dvd);
+					editDvdDialog.setVisible(true);
+					if(editDvdDialog.getDialogResult() == EditDvdDialog.OK){
+						updateDvdTable();
+					}
+					
 				}
 				
 			}
@@ -334,7 +340,7 @@ public class GUI extends JFrame {
 	private void dvdTableListSelectionChanged(){
 		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
 		DVD dvd = fachkonzept.getDVDByID(dvdid);
-		panelDvd.getTxtDvdNo().setText(String.valueOf(dvd.getDvd_nr()));
+		//panelDvd.getTxtDvdNo().setText(String.valueOf(dvd.getDvd_nr()));
 		panelDvd.getTxtDvdTitle().setText(dvd.getTitel());
 		panelDvd.getTxtDvdGenre().setText(dvd.getGenre());
 		panelDvd.getTxtDvdYear().setText(String.valueOf(dvd.getErscheinungsjahr()));
