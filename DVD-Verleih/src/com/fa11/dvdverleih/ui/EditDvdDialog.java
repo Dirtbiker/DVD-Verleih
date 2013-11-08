@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -118,12 +119,25 @@ public class EditDvdDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						EditDvdDialog.this.dvd.setTitel(EditDvdDialog.this.txtTitle.getText());
-						EditDvdDialog.this.dvd.setGenre(EditDvdDialog.this.txtGenre.getText());
-						EditDvdDialog.this.dvd.setErscheinungsjahr(Integer.valueOf(EditDvdDialog.this.txtYear.getText()));
-						EditDvdDialog.this.dialogResult = EditDvdDialog.OK;
-						EditDvdDialog.this.setVisible(false);
-						EditDvdDialog.this.dispose();
+						if(!EditDvdDialog.this.txtTitle.getText().equals("")){
+							if(!EditDvdDialog.this.txtGenre.getText().equals("")){
+								try {
+									EditDvdDialog.this.dvd.setTitel(EditDvdDialog.this.txtTitle.getText());
+									EditDvdDialog.this.dvd.setGenre(EditDvdDialog.this.txtGenre.getText());
+									EditDvdDialog.this.dvd.setErscheinungsjahr(Integer.valueOf(EditDvdDialog.this.txtYear.getText()));
+									EditDvdDialog.this.dialogResult = EditDvdDialog.OK;
+									EditDvdDialog.this.setVisible(false);
+									EditDvdDialog.this.dispose();
+								} catch (NumberFormatException e) {
+									JOptionPane.showMessageDialog(EditDvdDialog.this, "Das Jahr darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								}
+							} else {
+								JOptionPane.showMessageDialog(EditDvdDialog.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+							}
+						} else {
+							JOptionPane.showMessageDialog(EditDvdDialog.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						}
+						
 					}
 				});
 				okButton.setActionCommand("OK");
