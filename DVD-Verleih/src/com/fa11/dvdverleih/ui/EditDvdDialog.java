@@ -1,6 +1,7 @@
 package com.fa11.dvdverleih.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -9,42 +10,41 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
+
 import java.awt.GridBagLayout;
+
 import javax.swing.JLabel;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+
 import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class EditDvdDialog extends JDialog {
 
+	public final static int OK = 1;
+	public final static int ABORT = 0;
+	
+	private int dialogResult;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtTitle;
 	private JTextField txtGenre;
 	private JTextField txtYear;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			EditDvdDialog dialog = new EditDvdDialog(new DVD(1, "TITLE", "GENRE", 2013));
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private DVD dvd;
 
 	/**
 	 * Create the dialog.
 	 */
-	public EditDvdDialog(DVD dvd) {
+	public EditDvdDialog(Component owner, DVD dvd) {
+		this.dvd = dvd;
 		setModal(true);
 		setResizable(false);
 		setTitle("DVD bearbeiten");
 		setBounds(100, 100, 322, 148);
+		setLocationRelativeTo(owner);
 		getContentPane().setLayout(new BorderLayout());
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(this.contentPanel, BorderLayout.CENTER);
@@ -116,6 +116,16 @@ public class EditDvdDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("OK");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						EditDvdDialog.this.dvd.setTitel(EditDvdDialog.this.txtTitle.getText());
+						EditDvdDialog.this.dvd.setGenre(EditDvdDialog.this.txtGenre.getText());
+						EditDvdDialog.this.dvd.setErscheinungsjahr(Integer.valueOf(EditDvdDialog.this.txtYear.getText()));
+						EditDvdDialog.this.dialogResult = EditDvdDialog.OK;
+						EditDvdDialog.this.setVisible(false);
+						EditDvdDialog.this.dispose();
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -124,6 +134,8 @@ public class EditDvdDialog extends JDialog {
 				JButton cancelButton = new JButton("Abbrechen");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
+						EditDvdDialog.this.dialogResult = EditDvdDialog.ABORT;
+						EditDvdDialog.this.setVisible(false);
 						EditDvdDialog.this.dispose();
 					}
 				});
@@ -137,4 +149,12 @@ public class EditDvdDialog extends JDialog {
 		this.txtYear.setText(String.valueOf(dvd.getErscheinungsjahr()));
 	}
 
+	public DVD getDvdResult(){
+		return this.dvd;
+	}
+
+	public int getDialogResult() {
+		return dialogResult;
+	}
+	
 }
