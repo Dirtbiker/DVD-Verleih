@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.font.NumericShaper;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -112,20 +113,20 @@ public class GUI extends JFrame {
 //				dvdTableListSelectionChanged();
 //			}
 //		});
-		panelCustomers.setTableCustomersListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				customerTableListSelectionChanged();
-			}
-		});
-		panelLending.setTableLendingListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				lendingTableListSelectionChanged();
-			}
-		});
+//		panelCustomers.setTableCustomersListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				customerTableListSelectionChanged();
+//			}
+//		});
+//		panelLending.setTableLendingListSelectionListener(new ListSelectionListener() {
+//			
+//			@Override
+//			public void valueChanged(ListSelectionEvent arg0) {
+//				lendingTableListSelectionChanged();
+//			}
+//		});
 		
 		// Button ActionListener hinzufügen
 		// TODO: Buttons ActionListener hinzufügen
@@ -163,16 +164,6 @@ public class GUI extends JFrame {
 		});
 		
 		//DVD-Panel
-//		this.panelDvd.setBtnNewActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				GUI.this.fachkonzept.createDVD(new DVD());
-//				//TODO DVD mit passender ID in Liste einfügen
-//				DefaultTableModel model = (DefaultTableModel)panelDvd.getTableDvd().getModel();
-//				model.addRow(new String[]{"1","","",""});
-//			}
-//		});
-		
 		this.panelDvd.setBtnEditActionListener(new ActionListener() {
 			
 			@Override
@@ -188,7 +179,6 @@ public class GUI extends JFrame {
 					}
 					
 				}
-				
 			}
 		});
 		
@@ -203,7 +193,6 @@ public class GUI extends JFrame {
 					JOptionPane.showMessageDialog(GUI.this, "Die DVD \"" + dvd.getTitel() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
 					updateDvdTable();
 				}
-				
 			}
 		});
 		
@@ -253,6 +242,123 @@ public class GUI extends JFrame {
 			}
 		});
 		
+		//Kunden-Panel
+		this.panelCustomers.setBtnSaveActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try{
+				String anrede = GUI.this.panelCustomers.getTxtTitle().getText();
+				String vorname = GUI.this.panelCustomers.getTxtFirstName().getText();
+				String nachname = GUI.this.panelCustomers.getTxtLastName().getText();
+				String strasse = GUI.this.panelCustomers.getTxtStreet().getText();
+				String hausnr = GUI.this.panelCustomers.getTxtNo().getText();
+				String plz = GUI.this.panelCustomers.getTxtZipCode().getText();
+				String ort = GUI.this.panelCustomers.getTxtCity().getText();
+				String telefon = GUI.this.panelCustomers.getTxtPhone().getText();
+			
+				if(!anrede.equals("")){
+					if(!vorname.equals("")){
+						if(!nachname.equals("")){
+							if(!strasse.equals("")){
+								if(!hausnr.equals("")){
+									if(!plz.equals("")){
+										if(!ort.equals("")){
+											if(!telefon.equals("")){
+												Kunde kunde = new Kunde(anrede, vorname, nachname, new Date(), plz, ort, strasse, Integer.valueOf(hausnr), telefon);
+												
+												GUI.this.fachkonzept.createKunde(kunde);
+												JOptionPane.showMessageDialog(GUI.this, "Kunde wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+												GUI.this.panelCustomers.getTxtTitle().setText("");
+												GUI.this.panelCustomers.getTxtFirstName().setText("");
+												GUI.this.panelCustomers.getTxtLastName().setText("");
+												GUI.this.panelCustomers.getTxtStreet().setText("");
+												GUI.this.panelCustomers.getTxtNo().setText("");
+												GUI.this.panelCustomers.getTxtZipCode().setText("");
+												GUI.this.panelCustomers.getTxtCity().setText("");
+												GUI.this.panelCustomers.getTxtPhone().setText("");
+												updateKundenTable();
+											}else {
+												JOptionPane.showMessageDialog(GUI.this, "Die Telefonnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+											}
+										}else {
+											JOptionPane.showMessageDialog(GUI.this, "Der Ort darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+										}
+									}else {
+										JOptionPane.showMessageDialog(GUI.this, "Die Postleitzahl darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									}
+								}else {
+									JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								}
+							}else {
+								JOptionPane.showMessageDialog(GUI.this, "Die Straße darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(GUI.this, "Der Nachname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						}
+					} else {
+						JOptionPane.showMessageDialog(GUI.this, "Der Vorname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(GUI.this, "Die Anrede darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+			} catch (NumberFormatException nfe){
+				JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nur aus Ziffern bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+			} 
+		});
+		
+		this.panelCustomers.setBtnResetActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				GUI.this.panelCustomers.getTxtTitle().setText("");
+				GUI.this.panelCustomers.getTxtFirstName().setText("");
+				GUI.this.panelCustomers.getTxtLastName().setText("");
+				GUI.this.panelCustomers.getTxtStreet().setText("");
+				GUI.this.panelCustomers.getTxtNo().setText("");
+				GUI.this.panelCustomers.getTxtZipCode().setText("");
+				GUI.this.panelCustomers.getTxtCity().setText("");
+				GUI.this.panelCustomers.getTxtPhone().setText("");
+				
+				GUI.this.panelCustomers.getTableCustomers().getSelectionModel().clearSelection();
+				
+				GUI.this.panelCustomers.getBtnDelete().setEnabled(false);
+				GUI.this.panelCustomers.getBtnEdit().setEnabled(false);
+			}
+		});
+		
+		this.panelCustomers.setBtnDeleteActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
+				Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
+				if(kunde != null){
+					GUI.this.fachkonzept.deleteKunde(kdnr);
+					JOptionPane.showMessageDialog(GUI.this, "Der Kunde \"" + kunde.getVorname() + " " + kunde.getNachname() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+					updateKundenTable();
+				}
+			}
+		});
+		
+		this.panelCustomers.setBtnEditActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
+				Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
+				if(kunde != null){
+					EditCustomerDialog editCustomerDialog = new EditCustomerDialog(GUI.this, kunde);
+					editCustomerDialog.setVisible(true);
+					if(editCustomerDialog.getDialogResult() == EditCustomerDialog.OK){
+						updateKundenTable();
+					}
+					
+				}
+			}
+		});
+		
 		// Tabellen befüllen
 		updateLendingTable();
 		updateDvdTable();
@@ -293,7 +399,6 @@ public class GUI extends JFrame {
 			for (Kunde kunde : kundenlist) {
 				model.addRow(new String[]{
 						String.valueOf(kunde.getKunden_nr()),
-						kunde.getAnrede(),
 						kunde.getNachname(),
 						kunde.getVorname(),
 						kunde.getTelefonnr()});
@@ -352,7 +457,7 @@ public class GUI extends JFrame {
 	private void customerTableListSelectionChanged(){
 		int customerid = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
 		Kunde kunde = fachkonzept.getKundeByID(customerid);
-		panelCustomers.getTxtCustomerNo().setText(String.valueOf(kunde.getKunden_nr()));
+		//panelCustomers.getTxtCustomerNo().setText(String.valueOf(kunde.getKunden_nr()));
 		panelCustomers.getTxtTitle().setText(kunde.getAnrede());
 		panelCustomers.getTxtFirstName().setText(kunde.getVorname());
 		panelCustomers.getTxtLastName().setText(kunde.getNachname());
