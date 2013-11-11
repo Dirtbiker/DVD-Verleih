@@ -151,8 +151,9 @@ public class XMLDatenhaltung implements IDatenhaltung {
 		int index = 0;
 		for (Ausleihe verleih2 : verleihList) {
 			if (verleih2.equals(verleih)) {
-				verleihList.set(index, verleih2);
+				verleihList.set(index, verleih);
 			}
+			index++;
 		}
 		store.setVerleihList(verleihList);
 		close();
