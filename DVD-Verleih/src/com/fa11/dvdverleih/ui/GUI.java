@@ -34,7 +34,6 @@ import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
  * Grafische Benutzeroberfläche für den DVD-Verleih mit Swing
  * 
  * @author Timo Raschke
- * @version 1.0
  */
 public class GUI extends JFrame {
 
@@ -46,27 +45,6 @@ public class GUI extends JFrame {
 	private PanelDvd panelDvd;
 	private PanelCustomers panelCustomers;
 	private IFachkonzept fachkonzept;
-
-	/**
-	 * GUI Testweise starten
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GUI frame = new GUI(new Fachkonzept(new XMLDatenhaltung()));
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * GUI erstellen
@@ -90,15 +68,6 @@ public class GUI extends JFrame {
 		this.contentPane.add(this.tabbedPane, BorderLayout.CENTER);
 
 		this.panelLending = new PanelLending();
-//		this.panelLending.setBtnCheckActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent arg0) {
-//				// TODO Auto-generated method stub
-//				DefaultTableModel model = (DefaultTableModel)panelLending.getTableLending().getModel();
-//				model.addRow(new String[]{"1", panelLending.getTxtDvdTitle().getText(), "19.12.1900", "25.06.1958"});
-//			}
-//		});
 		this.tabbedPane.addTab("DVD-Leihe", null, this.panelLending, null);
 
 		this.panelDvd = new PanelDvd();
@@ -107,71 +76,12 @@ public class GUI extends JFrame {
 		this.panelCustomers = new PanelCustomers();
 		this.tabbedPane.addTab("Kunden-Verwaltung", null, this.panelCustomers, null);
 		
-		// ListSelectionChangedListenerHinzufügen
-//		panelDvd.setTableDvdListSelectionListener(new ListSelectionListener() {
-//			
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-//				dvdTableListSelectionChanged();
-//			}
-//		});
-//		panelCustomers.setTableCustomersListSelectionListener(new ListSelectionListener() {
-//			
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-//				customerTableListSelectionChanged();
-//			}
-//		});
-//		panelLending.setTableLendingListSelectionListener(new ListSelectionListener() {
-//			
-//			@Override
-//			public void valueChanged(ListSelectionEvent arg0) {
-//				lendingTableListSelectionChanged();
-//			}
-//		});
-		
-		// Button ActionListener hinzufügen
-		
 		//Lending-Panel
 		this.panelLending.setBtnCheckActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				boolean kundeOk = true;
-				boolean dvdOk = true;
-				GUI.this.panelLending.getBtnOk().setEnabled(false);
-				try {
-					int kdNr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
-					Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdNr);
-					if(kunde != null){
-						GUI.this.panelLending.getTxtFirstName().setText(kunde.getVorname());
-						GUI.this.panelLending.getTxtLastName().setText(kunde.getNachname());
-					} else {
-						JOptionPane.showMessageDialog(GUI.this, "Der Kunde mit der Kundennummer \"" + kdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
-						kundeOk = false;
-					}
-				} catch (NumberFormatException nfe) {
-					JOptionPane.showMessageDialog(GUI.this, "Die Kundennummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
-					kundeOk = false;
-				}
-				
-				try {
-					int dvdNr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
-					DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdNr);
-					if(dvd != null){
-						GUI.this.panelLending.getTxtDvdTitle().setText(dvd.getTitel());
-					} else {
-						JOptionPane.showMessageDialog(GUI.this, "Der DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
-						dvdOk = false;
-					}
-				} catch (NumberFormatException nfe) {
-					JOptionPane.showMessageDialog(GUI.this, "Die DVD-Nummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
-					dvdOk = false;
-				}
-				
-				if(kundeOk && dvdOk){
-					GUI.this.panelLending.getBtnOk().setEnabled(true);
-				}
+				checkLending();
 			}
 		});
 
@@ -179,17 +89,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				GUI.this.panelLending.getTxtCustomerNo().setText("");
-				GUI.this.panelLending.getTxtDvdNo().setText("");
-				GUI.this.panelLending.getTxtDvdTitle().setText("");
-				GUI.this.panelLending.getTxtFirstName().setText("");
-				GUI.this.panelLending.getTxtLastName().setText("");
-				
-				GUI.this.panelLending.getTableLending().getSelectionModel().clearSelection();
-				
-				GUI.this.panelLending.getBtnDelete().setEnabled(false);
-				GUI.this.panelLending.getBtnEdit().setEnabled(false);
-				GUI.this.panelLending.getBtnOk().setEnabled(false);
+				resetLending();
 			}
 		});
 		
@@ -197,31 +97,24 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int dvd_nr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
-				int kunden_nr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
-				
-				GUI.this.fachkonzept.createVerleih(new Ausleihe(dvd_nr, kunden_nr, new Date(), null));
-				JOptionPane.showMessageDialog(GUI.this, "Die Leihe wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-				updateLendingTable();
+				addLending();
 			}
 		});
+		
+		this.panelLending.setBtnEditActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				editLending();
+			}
+		});
+		
 		//DVD-Panel
 		this.panelDvd.setBtnEditActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
-				DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
-				if(dvd != null){
-					int dvd_nr = dvd.getDvd_nr();
-					EditDvdDialog editDvdDialog = new EditDvdDialog(GUI.this, dvd);
-					editDvdDialog.setVisible(true);
-					if(editDvdDialog.getDialogResult() == EditDvdDialog.OK){
-						GUI.this.fachkonzept.updateDVD(editDvdDialog.getDvdResult());
-						updateDvdTable();
-					}
-					
-				}
+				editDvd();
 			}
 		});
 		
@@ -229,13 +122,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
-				DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
-				if(dvd != null){
-					GUI.this.fachkonzept.deleteDVD(dvdid);
-					JOptionPane.showMessageDialog(GUI.this, "Die DVD \"" + dvd.getTitel() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-					updateDvdTable();
-				}
+				deleteDvd();
 			}
 		});
 		
@@ -243,30 +130,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String dvdTitel = GUI.this.panelDvd.getTxtDvdTitle().getText();
-				String dvdGenre = GUI.this.panelDvd.getTxtDvdGenre().getText();
-				try {
-					int dvdYear = Integer.valueOf(GUI.this.panelDvd.getTxtDvdYear().getText());
-					if(!dvdTitel.equals("")){
-						if(!dvdGenre.equals("")){
-							DVD dvd = new DVD(dvdTitel, dvdGenre, dvdYear);
-							GUI.this.fachkonzept.createDVD(dvd);
-							JOptionPane.showMessageDialog(GUI.this, "DVD wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-							GUI.this.panelDvd.getTxtDvdTitle().setText("");
-							GUI.this.panelDvd.getTxtDvdGenre().setText("");
-							GUI.this.panelDvd.getTxtDvdYear().setText("");
-							updateDvdTable();
-						} else {
-							JOptionPane.showMessageDialog(GUI.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-						}
-					} else {
-						JOptionPane.showMessageDialog(GUI.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-					}
-					
-				} catch (NumberFormatException nfe) {
-					JOptionPane.showMessageDialog(GUI.this, "Das Jahr darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
-				}
-				
+				addDvd();
 			}
 		});
 		
@@ -274,14 +138,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				GUI.this.panelDvd.getTxtDvdTitle().setText("");
-				GUI.this.panelDvd.getTxtDvdGenre().setText("");
-				GUI.this.panelDvd.getTxtDvdYear().setText("");
-				
-				GUI.this.panelDvd.getTableDvd().getSelectionModel().clearSelection();
-				
-				GUI.this.panelDvd.getBtnDelete().setEnabled(false);
-				GUI.this.panelDvd.getBtnEdit().setEnabled(false);
+				resetDvd();
 			}
 		});
 		
@@ -290,64 +147,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try{
-				String anrede = GUI.this.panelCustomers.getTxtTitle().getText();
-				String vorname = GUI.this.panelCustomers.getTxtFirstName().getText();
-				String nachname = GUI.this.panelCustomers.getTxtLastName().getText();
-				String strasse = GUI.this.panelCustomers.getTxtStreet().getText();
-				String hausnr = GUI.this.panelCustomers.getTxtNo().getText();
-				String plz = GUI.this.panelCustomers.getTxtZipCode().getText();
-				String ort = GUI.this.panelCustomers.getTxtCity().getText();
-				String telefon = GUI.this.panelCustomers.getTxtPhone().getText();
-			
-				if(!anrede.equals("")){
-					if(!vorname.equals("")){
-						if(!nachname.equals("")){
-							if(!strasse.equals("")){
-								if(!hausnr.equals("")){
-									if(!plz.equals("")){
-										if(!ort.equals("")){
-											if(!telefon.equals("")){
-												Kunde kunde = new Kunde(anrede, vorname, nachname, new Date(), plz, ort, strasse, Integer.valueOf(hausnr), telefon);
-												
-												GUI.this.fachkonzept.createKunde(kunde);
-												JOptionPane.showMessageDialog(GUI.this, "Kunde wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-												GUI.this.panelCustomers.getTxtTitle().setText("");
-												GUI.this.panelCustomers.getTxtFirstName().setText("");
-												GUI.this.panelCustomers.getTxtLastName().setText("");
-												GUI.this.panelCustomers.getTxtStreet().setText("");
-												GUI.this.panelCustomers.getTxtNo().setText("");
-												GUI.this.panelCustomers.getTxtZipCode().setText("");
-												GUI.this.panelCustomers.getTxtCity().setText("");
-												GUI.this.panelCustomers.getTxtPhone().setText("");
-												updateKundenTable();
-											}else {
-												JOptionPane.showMessageDialog(GUI.this, "Die Telefonnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-											}
-										}else {
-											JOptionPane.showMessageDialog(GUI.this, "Der Ort darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-										}
-									}else {
-										JOptionPane.showMessageDialog(GUI.this, "Die Postleitzahl darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-									}
-								}else {
-									JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-								}
-							}else {
-								JOptionPane.showMessageDialog(GUI.this, "Die Straße darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-							}
-						}else {
-							JOptionPane.showMessageDialog(GUI.this, "Der Nachname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-						}
-					} else {
-						JOptionPane.showMessageDialog(GUI.this, "Der Vorname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-					}
-				} else {
-					JOptionPane.showMessageDialog(GUI.this, "Die Anrede darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
-				}
-			} catch (NumberFormatException nfe){
-				JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nur aus Ziffern bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
-			}
+				addCustomer();
 			} 
 		});
 		
@@ -355,19 +155,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				GUI.this.panelCustomers.getTxtTitle().setText("");
-				GUI.this.panelCustomers.getTxtFirstName().setText("");
-				GUI.this.panelCustomers.getTxtLastName().setText("");
-				GUI.this.panelCustomers.getTxtStreet().setText("");
-				GUI.this.panelCustomers.getTxtNo().setText("");
-				GUI.this.panelCustomers.getTxtZipCode().setText("");
-				GUI.this.panelCustomers.getTxtCity().setText("");
-				GUI.this.panelCustomers.getTxtPhone().setText("");
-				
-				GUI.this.panelCustomers.getTableCustomers().getSelectionModel().clearSelection();
-				
-				GUI.this.panelCustomers.getBtnDelete().setEnabled(false);
-				GUI.this.panelCustomers.getBtnEdit().setEnabled(false);
+				resetCustomer();
 			}
 		});
 		
@@ -375,13 +163,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
-				Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
-				if(kunde != null){
-					GUI.this.fachkonzept.deleteKunde(kdnr);
-					JOptionPane.showMessageDialog(GUI.this, "Der Kunde \"" + kunde.getVorname() + " " + kunde.getNachname() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-					updateKundenTable();
-				}
+				deleteCustomer();
 			}
 		});
 		
@@ -389,17 +171,7 @@ public class GUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
-				Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
-				if(kunde != null){
-					EditCustomerDialog editCustomerDialog = new EditCustomerDialog(GUI.this, kunde);
-					editCustomerDialog.setVisible(true);
-					if(editCustomerDialog.getDialogResult() == EditCustomerDialog.OK){
-						GUI.this.fachkonzept.updateKunde(editCustomerDialog.getKunde());
-						updateKundenTable();
-					}
-					
-				}
+				editCustomer();
 			}
 		});
 		
@@ -410,7 +182,279 @@ public class GUI extends JFrame {
 	}
 	
 	/**
-	 * Aktualisiert die Einträge in der DVD Tabelle
+	 * Oeffnet Dialog zum bearbeiten des ausgewaehlten Kunden.
+	 */
+	private void editCustomer() {
+		int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
+		Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
+		if(kunde != null){
+			EditCustomerDialog editCustomerDialog = new EditCustomerDialog(GUI.this, kunde);
+			editCustomerDialog.setVisible(true);
+			if(editCustomerDialog.getDialogResult() == EditCustomerDialog.OK){
+				GUI.this.fachkonzept.updateKunde(editCustomerDialog.getKunde());
+				updateKundenTable();
+			}
+			
+		}
+	}
+
+	/**
+	 * Loescht ausgewaehlten Kunden.
+	 */
+	private void deleteCustomer() {
+		int kdnr = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
+		Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdnr);
+		if(kunde != null){
+			GUI.this.fachkonzept.deleteKunde(kdnr);
+			JOptionPane.showMessageDialog(GUI.this, "Der Kunde \"" + kunde.getVorname() + " " + kunde.getNachname() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+			updateKundenTable();
+		}
+	}
+
+	/**
+	 * Setzt alle Felder im Kunden-Tab zurueck.
+	 */
+	private void resetCustomer() {
+		GUI.this.panelCustomers.getTxtTitle().setText("");
+		GUI.this.panelCustomers.getTxtFirstName().setText("");
+		GUI.this.panelCustomers.getTxtLastName().setText("");
+		GUI.this.panelCustomers.getTxtStreet().setText("");
+		GUI.this.panelCustomers.getTxtNo().setText("");
+		GUI.this.panelCustomers.getTxtZipCode().setText("");
+		GUI.this.panelCustomers.getTxtCity().setText("");
+		GUI.this.panelCustomers.getTxtPhone().setText("");
+		
+		GUI.this.panelCustomers.getTableCustomers().getSelectionModel().clearSelection();
+		
+		GUI.this.panelCustomers.getBtnDelete().setEnabled(false);
+		GUI.this.panelCustomers.getBtnEdit().setEnabled(false);
+	}
+
+	/**
+	 * Fuegt neuen Kunden hinzu.
+	 */
+	private void addCustomer() {
+		try{
+			String anrede = GUI.this.panelCustomers.getTxtTitle().getText();
+			String vorname = GUI.this.panelCustomers.getTxtFirstName().getText();
+			String nachname = GUI.this.panelCustomers.getTxtLastName().getText();
+			String strasse = GUI.this.panelCustomers.getTxtStreet().getText();
+			String hausnr = GUI.this.panelCustomers.getTxtNo().getText();
+			String plz = GUI.this.panelCustomers.getTxtZipCode().getText();
+			String ort = GUI.this.panelCustomers.getTxtCity().getText();
+			String telefon = GUI.this.panelCustomers.getTxtPhone().getText();
+		
+			if(!anrede.equals("")){
+				if(!vorname.equals("")){
+					if(!nachname.equals("")){
+						if(!strasse.equals("")){
+							if(!hausnr.equals("")){
+								if(!plz.equals("")){
+									if(!ort.equals("")){
+										if(!telefon.equals("")){
+											Kunde kunde = new Kunde(anrede, vorname, nachname, new Date(), plz, ort, strasse, Integer.valueOf(hausnr), telefon);
+											
+											GUI.this.fachkonzept.createKunde(kunde);
+											JOptionPane.showMessageDialog(GUI.this, "Kunde wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+											GUI.this.panelCustomers.getTxtTitle().setText("");
+											GUI.this.panelCustomers.getTxtFirstName().setText("");
+											GUI.this.panelCustomers.getTxtLastName().setText("");
+											GUI.this.panelCustomers.getTxtStreet().setText("");
+											GUI.this.panelCustomers.getTxtNo().setText("");
+											GUI.this.panelCustomers.getTxtZipCode().setText("");
+											GUI.this.panelCustomers.getTxtCity().setText("");
+											GUI.this.panelCustomers.getTxtPhone().setText("");
+											updateKundenTable();
+										}else {
+											JOptionPane.showMessageDialog(GUI.this, "Die Telefonnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+										}
+									}else {
+										JOptionPane.showMessageDialog(GUI.this, "Der Ort darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									}
+								}else {
+									JOptionPane.showMessageDialog(GUI.this, "Die Postleitzahl darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								}
+							}else {
+								JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(GUI.this, "Die Straße darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(GUI.this, "Der Nachname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+					}
+				} else {
+					JOptionPane.showMessageDialog(GUI.this, "Der Vorname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(GUI.this, "Die Anrede darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (NumberFormatException nfe){
+			JOptionPane.showMessageDialog(GUI.this, "Die Hausnummer darf nur aus Ziffern bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * Setzt alle Felder im DVD-Tab zurueck.
+	 */
+	private void resetDvd() {
+		GUI.this.panelDvd.getTxtDvdTitle().setText("");
+		GUI.this.panelDvd.getTxtDvdGenre().setText("");
+		GUI.this.panelDvd.getTxtDvdYear().setText("");
+		
+		GUI.this.panelDvd.getTableDvd().getSelectionModel().clearSelection();
+		
+		GUI.this.panelDvd.getBtnDelete().setEnabled(false);
+		GUI.this.panelDvd.getBtnEdit().setEnabled(false);
+	}
+
+	/**
+	 * Fuegt eine neue DVD hinzu.
+	 */
+	private void addDvd() {
+		String dvdTitel = GUI.this.panelDvd.getTxtDvdTitle().getText();
+		String dvdGenre = GUI.this.panelDvd.getTxtDvdGenre().getText();
+		try {
+			int dvdYear = Integer.valueOf(GUI.this.panelDvd.getTxtDvdYear().getText());
+			if(!dvdTitel.equals("")){
+				if(!dvdGenre.equals("")){
+					DVD dvd = new DVD(dvdTitel, dvdGenre, dvdYear);
+					GUI.this.fachkonzept.createDVD(dvd);
+					JOptionPane.showMessageDialog(GUI.this, "DVD wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+					GUI.this.panelDvd.getTxtDvdTitle().setText("");
+					GUI.this.panelDvd.getTxtDvdGenre().setText("");
+					GUI.this.panelDvd.getTxtDvdYear().setText("");
+					updateDvdTable();
+				} else {
+					JOptionPane.showMessageDialog(GUI.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}
+			} else {
+				JOptionPane.showMessageDialog(GUI.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			}
+			
+		} catch (NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(GUI.this, "Das Jahr darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+
+	/**
+	 * Loescht die ausgewaehlte DVD.
+	 */
+	private void deleteDvd() {
+		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
+		DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
+		if(dvd != null){
+			GUI.this.fachkonzept.deleteDVD(dvdid);
+			JOptionPane.showMessageDialog(GUI.this, "Die DVD \"" + dvd.getTitel() + "\" wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+			updateDvdTable();
+		}
+	}
+
+	/**
+	 * Oeffnet Dialog zum bearbeiten der ausgewaehlten DVD.
+	 */
+	private void editDvd() {
+		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
+		DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
+		if(dvd != null){
+			int dvd_nr = dvd.getDvd_nr();
+			EditDvdDialog editDvdDialog = new EditDvdDialog(GUI.this, dvd);
+			editDvdDialog.setVisible(true);
+			if(editDvdDialog.getDialogResult() == EditDvdDialog.OK){
+				GUI.this.fachkonzept.updateDVD(editDvdDialog.getDvdResult());
+				updateDvdTable();
+			}
+		}
+	}
+
+	/**
+	 * Oeffnet Dialog zum bearbeiten der ausgewaehlten Ausleihe.
+	 */
+	private void editLending() {
+		int verleihid = Integer.valueOf((String) panelLending.getTableLending().getValueAt(panelLending.getTableLending().getSelectedRow(), 0));
+		Ausleihe ausleihe = GUI.this.fachkonzept.getVerleihByID(verleihid);
+		if(ausleihe != null){
+			EditLendingDialog editLendingDialog = new EditLendingDialog(GUI.this, ausleihe);
+			editLendingDialog.setVisible(true);
+			if(editLendingDialog.getDialogResult() == EditLendingDialog.OK){
+				GUI.this.fachkonzept.updateVerleih(editLendingDialog.getAusleihe());
+				updateLendingTable();
+			}
+		}
+	}
+
+	/**
+	 * Fuegt eine neue Ausleihe hinzu.
+	 */
+	private void addLending() {
+		int dvd_nr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
+		int kunden_nr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
+		
+		GUI.this.fachkonzept.createVerleih(new Ausleihe(dvd_nr, kunden_nr, new Date(), null));
+		JOptionPane.showMessageDialog(GUI.this, "Die Leihe wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+		updateLendingTable();
+	}
+
+	/**
+	 * Setzt alle Felder im Verleih-Tab zurueck.
+	 */
+	private void resetLending() {
+		GUI.this.panelLending.getTxtCustomerNo().setText("");
+		GUI.this.panelLending.getTxtDvdNo().setText("");
+		GUI.this.panelLending.getTxtDvdTitle().setText("");
+		GUI.this.panelLending.getTxtFirstName().setText("");
+		GUI.this.panelLending.getTxtLastName().setText("");
+		
+		GUI.this.panelLending.getTableLending().getSelectionModel().clearSelection();
+		
+		GUI.this.panelLending.getBtnDelete().setEnabled(false);
+		GUI.this.panelLending.getBtnEdit().setEnabled(false);
+		GUI.this.panelLending.getBtnOk().setEnabled(false);
+	}
+
+	/**
+	 * Fuellt Felder im Verleih-Tab mit passenden Kunden / DVD Attributen.
+	 */
+	private void checkLending() {
+		boolean kundeOk = true;
+		boolean dvdOk = true;
+		GUI.this.panelLending.getBtnOk().setEnabled(false);
+		try {
+			int kdNr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
+			Kunde kunde = GUI.this.fachkonzept.getKundeByID(kdNr);
+			if(kunde != null){
+				GUI.this.panelLending.getTxtFirstName().setText(kunde.getVorname());
+				GUI.this.panelLending.getTxtLastName().setText(kunde.getNachname());
+			} else {
+				JOptionPane.showMessageDialog(GUI.this, "Der Kunde mit der Kundennummer \"" + kdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				kundeOk = false;
+			}
+		} catch (NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(GUI.this, "Die Kundennummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			kundeOk = false;
+		}
+		
+		try {
+			int dvdNr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
+			DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdNr);
+			if(dvd != null){
+				GUI.this.panelLending.getTxtDvdTitle().setText(dvd.getTitel());
+			} else {
+				JOptionPane.showMessageDialog(GUI.this, "Der DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				dvdOk = false;
+			}
+		} catch (NumberFormatException nfe) {
+			JOptionPane.showMessageDialog(GUI.this, "Die DVD-Nummer darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+			dvdOk = false;
+		}
+		
+		if(kundeOk && dvdOk){
+			GUI.this.panelLending.getBtnOk().setEnabled(true);
+		}
+	}
+
+	/**
+	 * Aktualisiert die Eintraege in der DVD Tabelle
 	 */
 	private void updateDvdTable(){
 		List<DVD> dvdlist = fachkonzept.getAllDVDs();
@@ -431,7 +475,7 @@ public class GUI extends JFrame {
 	}
 	
 	/**
-	 * Aktualisiert die Einträge in der KundenTabelle
+	 * Aktualisiert die Eintraege in der KundenTabelle
 	 */
 	private void updateKundenTable(){
 		List<Kunde> kundenlist = fachkonzept.getAllKunden();
@@ -451,10 +495,9 @@ public class GUI extends JFrame {
 	}
 	
 	/**
-	 * Aktualisiert die Einträge in der Leih-Tabelle
+	 * Aktualisiert die Eintraege in der Leih-Tabelle
 	 */
 	private void updateLendingTable() {
-		DateFormat df = new SimpleDateFormat("dd.MM.YYYY, HH:mm");
 		List<Ausleihe> verleihlist = fachkonzept.getAllVerleihe();
 		DefaultTableModel model = (DefaultTableModel) panelLending.getTableLending().getModel();
 		// Tabelle leeren
@@ -464,12 +507,12 @@ public class GUI extends JFrame {
 			for (Ausleihe verleih : verleihlist) {
 				String rueckgabe = "";
 				if(verleih.getRueckgabe() != null)
-					rueckgabe = df.format(verleih.getRueckgabe().toString());
+					rueckgabe = Helper.getDDMMYYYDate(verleih.getRueckgabe());
 				model.addRow(new String[]{
 						String.valueOf(verleih.getLeihvorgangs_nr()),
 						fachkonzept.getDVDByID(verleih.getDvd_nr()).getTitel(),
 						fachkonzept.getKundeByID(verleih.getKunden_nr()).getNachname() + ", " + fachkonzept.getKundeByID(verleih.getKunden_nr()).getVorname(),
-						df.format(verleih.getAusleihe()),
+						Helper.getDDMMYYYDate(verleih.getAusleihe()),
 						rueckgabe
 				});
 			}
@@ -477,7 +520,7 @@ public class GUI extends JFrame {
 	}
 	
 	/**
-	 * Löscht alle Elemente eines DefaultTableModel
+	 * Loescht alle Elemente eines DefaultTableModel
 	 * @param model
 	 */
 	private void clearTablemodel(DefaultTableModel model){
@@ -486,42 +529,5 @@ public class GUI extends JFrame {
 //			model.removeRow(i);
 //		}
 		model.setRowCount(0);
-	}
-
-	/**
-	 * Überträgt Parameter der ausgewählten DVD in der Tabelle in die Textfelder
-	 */
-	private void dvdTableListSelectionChanged(){
-		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
-		DVD dvd = fachkonzept.getDVDByID(dvdid);
-		//panelDvd.getTxtDvdNo().setText(String.valueOf(dvd.getDvd_nr()));
-		panelDvd.getTxtDvdTitle().setText(dvd.getTitel());
-		panelDvd.getTxtDvdGenre().setText(dvd.getGenre());
-		panelDvd.getTxtDvdYear().setText(String.valueOf(dvd.getErscheinungsjahr()));
-	}
-	
-	/**
-	 * Überträgt Parameter des ausgewählten Kunden in der Tabelle in die Textfelder
-	 */
-	private void customerTableListSelectionChanged(){
-		int customerid = Integer.valueOf((String) panelCustomers.getTableCustomers().getValueAt(panelCustomers.getTableCustomers().getSelectedRow(), 0));
-		Kunde kunde = fachkonzept.getKundeByID(customerid);
-		//panelCustomers.getTxtCustomerNo().setText(String.valueOf(kunde.getKunden_nr()));
-		panelCustomers.getTxtTitle().setText(kunde.getAnrede());
-		panelCustomers.getTxtFirstName().setText(kunde.getVorname());
-		panelCustomers.getTxtLastName().setText(kunde.getNachname());
-		panelCustomers.getTxtZipCode().setText(kunde.getPlz());
-		panelCustomers.getTxtCity().setText(kunde.getOrt());
-		panelCustomers.getTxtStreet().setText(kunde.getStrasse());
-		panelCustomers.getTxtPhone().setText(kunde.getTelefonnr());
-	}
-	
-	/**
-	 * Überträgt Parameter der ausgewählten Leihe in der Tabelle in die Textfelder
-	 */
-	private void lendingTableListSelectionChanged(){
-		//TODO: Kann nicht auf einzelnes Lending zugreifen
-		int lendingid = Integer.valueOf((String) panelLending.getTableLending().getValueAt(panelLending.getTableLending().getSelectedRow(), 0));
-		//Verleih verleih = fachkonzept.getVerleihById(lendingid);
 	}
 }
