@@ -240,4 +240,14 @@ public class Fachkonzept implements IFachkonzept {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
+
+	@Override
+	public Ausleihe getVerleihByID(int verleihID) {
+		for(Ausleihe ausleihe : this.verleiheList) {
+			if(ausleihe.getLeihvorgangs_nr() == verleihID) {
+				return ausleihe;
+			} 
+		}
+		return null;
+	}
 }

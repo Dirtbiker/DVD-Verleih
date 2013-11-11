@@ -28,6 +28,7 @@ public interface IFachkonzept {
 
 	public List<Ausleihe> getAllVerleihe();
 	public List<Ausleihe> getKundenVerleih(int kundenNummer);
+	public Ausleihe getVerleihByID(int verleihID);
 	public void updateVerleih(Ausleihe updateVerleih);
 	public void createVerleih(Ausleihe neuerVerleih);	
 	
