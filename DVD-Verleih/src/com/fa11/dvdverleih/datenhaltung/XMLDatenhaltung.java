@@ -79,7 +79,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 		int index = 0;
 		for (Kunde kunde2 : kundenList) {
 			if (kunde2.equals(kunde)) {
-				kundenList.set(index, kunde2);
+				kundenList.set(index, kunde);
 			}
 			index++;
 		}
@@ -115,7 +115,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 		int index = 0;
 		for (DVD dvd2 : dvdList) {
 			if (dvd2.equals(dvd)) {
-				dvdList.set(index, dvd2);
+				dvdList.set(index, dvd);
 			}
 		}
 		store.setDvdList(dvdList);
