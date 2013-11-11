@@ -1,6 +1,9 @@
 package com.fa11.dvdverleih.ui;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -10,6 +13,11 @@ public class Helper {
 		Helper.readString();
 	}
 
+	public static String getDDMMYYYDate(Date date){
+		DateFormat df = new SimpleDateFormat("dd.MM.YYYY");
+		return df.format(date);
+	}
+	
 	public static String readString() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
