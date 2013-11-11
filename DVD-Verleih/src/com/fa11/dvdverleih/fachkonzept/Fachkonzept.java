@@ -39,10 +39,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.verleiheList = datenhaltung.getAusleiheList();
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -67,10 +70,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.kundenList = this.datenhaltung.updateKunde(kundenDaten);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -82,10 +88,13 @@ public class Fachkonzept implements IFachkonzept {
 					this.kundenList = this.datenhaltung.deleteKunde(kunde);
 				} catch (FileNotFoundException | ClassNotFoundException e) {
 					JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehlende oder fehlerhafte Dateien!");
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim Datenbankzugriff!");
 				} catch (JAXBException e) {
 					JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim XML-Zugriff!");
 				}
 			}
 		}	
@@ -109,10 +118,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.kundenList = this.datenhaltung.addKunde(kundenDaten);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -137,10 +149,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.DVDList = this.datenhaltung.updateDVD(updateDVD);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -152,10 +167,13 @@ public class Fachkonzept implements IFachkonzept {
 					this.DVDList = this.datenhaltung.deleteDVD(dvd);
 				} catch (FileNotFoundException | ClassNotFoundException e) {
 					JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehlende oder fehlerhafte Dateien!");
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim Datenbankzugriff!");
 				} catch (JAXBException e) {
 					JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim XML-Zugriff!");
 				}
 			}
 		}	
@@ -179,11 +197,14 @@ public class Fachkonzept implements IFachkonzept {
 			this.DVDList = this.datenhaltung.addDVD(dvdDaten);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
-		}	
+			System.err.println("Fehler beim XML-Zugriff!");
+		}
 	}
 
 	@Override
@@ -221,10 +242,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.verleiheList = this.datenhaltung.addAusleihe(neuerVerleih);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -234,10 +258,13 @@ public class Fachkonzept implements IFachkonzept {
 			this.verleiheList = this.datenhaltung.updateAusleihe(updateVerleih);
 		} catch (FileNotFoundException | ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
 			JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+			System.err.println("Fehler beim XML-Zugriff!");
 		}
 	}
 
@@ -249,5 +276,25 @@ public class Fachkonzept implements IFachkonzept {
 			} 
 		}
 		return null;
+	}
+
+	@Override
+	public void deleteVerleih(int verleihNummer) {
+		for(Ausleihe verleih : this.verleiheList) {
+			if(verleihNummer == verleih.getLeihvorgangs_nr()) {
+				try {
+					this.verleiheList = this.datenhaltung.deleteAusleihe(verleih);
+				} catch (FileNotFoundException | ClassNotFoundException e) {
+					JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehlende oder fehlerhafte Dateien!");
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim Datenbankzugriff!");
+				} catch (JAXBException e) {
+					JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
+					System.err.println("Fehler beim XML-Zugriff!");
+				}
+			}
+		}		
 	}
 }
