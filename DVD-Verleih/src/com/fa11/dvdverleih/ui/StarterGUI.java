@@ -151,9 +151,13 @@ public class StarterGUI extends JFrame {
 //							null);
 					
 					if(cmbData.getSelectedIndex() == 0){
+						setVisible(false);
+						dispose();
 						new TUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.xml)));
 					}
 					else if (cmbData.getSelectedIndex() == 1){
+						setVisible(false);
+						dispose();
 						new TUI(new Fachkonzept(DatenhaltungFactory.getDatenhaltung(DatenhaltungType.sqlite)));
 					}
 				}
