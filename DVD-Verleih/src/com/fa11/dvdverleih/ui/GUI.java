@@ -2,13 +2,9 @@ package com.fa11.dvdverleih.ui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.font.NumericShaper;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,17 +13,13 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
 import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
-import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
+import com.fa11.dvdverleih.fachkonzept.FachkonzeptUtility;
 import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
 
 /**
@@ -196,8 +188,7 @@ public class GUI extends JFrame {
 		int verleihnr = Integer.valueOf((String) panelLending.getTableLending().getValueAt(panelLending.getTableLending().getSelectedRow(), 0));
 		Ausleihe ausleihe = GUI.this.fachkonzept.getVerleihByID(verleihnr);
 		if(ausleihe != null){
-			//TODO Ausleihe kann nicht durch Fachkonzept geloescht werden
-			//GUI.this.fachkonzept.deleteVerleih(verleihnr);
+			GUI.this.fachkonzept.deleteVerleih(verleihnr);
 			JOptionPane.showMessageDialog(GUI.this, "Die Ausleihe wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
 			updateLendingTable();
 		}
@@ -379,7 +370,6 @@ public class GUI extends JFrame {
 		int dvdid = Integer.valueOf((String) panelDvd.getTableDvd().getValueAt(panelDvd.getTableDvd().getSelectedRow(), 0));
 		DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdid);
 		if(dvd != null){
-			int dvd_nr = dvd.getDvd_nr();
 			EditDvdDialog editDvdDialog = new EditDvdDialog(GUI.this, dvd);
 			editDvdDialog.setVisible(true);
 			if(editDvdDialog.getDialogResult() == EditDvdDialog.OK){
@@ -409,12 +399,17 @@ public class GUI extends JFrame {
 	 * Fuegt eine neue Ausleihe hinzu.
 	 */
 	private void addLending() {
-		int dvd_nr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
-		int kunden_nr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
-		
-		GUI.this.fachkonzept.createVerleih(new Ausleihe(dvd_nr, kunden_nr, new Date(), null));
-		JOptionPane.showMessageDialog(GUI.this, "Die Leihe wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
-		updateLendingTable();
+		if(GUI.this.panelLending.getChkAvailable().isSelected()) {
+			int dvd_nr = Integer.valueOf(GUI.this.panelLending.getTxtDvdNo().getText());
+			int kunden_nr = Integer.valueOf(GUI.this.panelLending.getTxtCustomerNo().getText());
+			
+			GUI.this.fachkonzept.createVerleih(new Ausleihe(dvd_nr, kunden_nr, new Date(), null));
+			JOptionPane.showMessageDialog(GUI.this, "Die Leihe wurde erfolgreich hinzugefügt!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+			updateLendingTable();
+		}
+		else {
+			JOptionPane.showMessageDialog(GUI.this, "Die DVD ist nicht verfügbar oder wurde noch nicht geprüft!", "Fehler", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	/**
@@ -426,6 +421,7 @@ public class GUI extends JFrame {
 		GUI.this.panelLending.getTxtDvdTitle().setText("");
 		GUI.this.panelLending.getTxtFirstName().setText("");
 		GUI.this.panelLending.getTxtLastName().setText("");
+		GUI.this.panelLending.getChkAvailable().setSelected(false);
 		
 		GUI.this.panelLending.getTableLending().getSelectionModel().clearSelection();
 		
@@ -461,6 +457,12 @@ public class GUI extends JFrame {
 			DVD dvd = GUI.this.fachkonzept.getDVDByID(dvdNr);
 			if(dvd != null){
 				GUI.this.panelLending.getTxtDvdTitle().setText(dvd.getTitel());
+				if(FachkonzeptUtility.isDVDAvailable(dvd.getDvd_nr(), GUI.this.fachkonzept)) {
+					panelLending.getChkAvailable().setSelected(true);
+				}
+				else {
+					panelLending.getChkAvailable().setSelected(false);
+				}
 			} else {
 				JOptionPane.showMessageDialog(GUI.this, "Der DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
 				dvdOk = false;

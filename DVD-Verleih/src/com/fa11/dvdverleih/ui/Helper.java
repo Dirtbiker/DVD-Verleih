@@ -31,6 +31,7 @@ public class Helper {
 			}
 			scanner.nextLine();
 		} while(!korrekt);
+		scanner.close();
 		return temp;
 	}
 	
@@ -47,6 +48,7 @@ public class Helper {
 			}
 			scanner.nextLine();
 		} while(!korrekt);
+		scanner.close();
 		return temp.charAt(0);
 	}
 	
@@ -63,6 +65,7 @@ public class Helper {
 			}
 			scanner.nextLine();
 		} while(!korrekt);
+		scanner.close();
 		return temp.toLowerCase().charAt(0);
 	}
 
@@ -80,6 +83,7 @@ public class Helper {
 			}
 			scanner.nextLine();
 		} while(!korrekt);
+		scanner.close();
 		return temp;
 	}
 	

@@ -8,7 +8,7 @@ public class FachkonzeptUtility {
 		DVD thisOne = fachkonzept.getDVDByID(dvdNummer);
 		
 		for(Ausleihe currentAusleihe : fachkonzept.getAllVerleihe()) {
-			if(currentAusleihe.equals(thisOne) && currentAusleihe.getRueckgabe() == null) {
+			if(currentAusleihe.getDvd_nr() == thisOne.getDvd_nr() && currentAusleihe.getRueckgabe() == null) {
 				return false;
 			}
 		}
