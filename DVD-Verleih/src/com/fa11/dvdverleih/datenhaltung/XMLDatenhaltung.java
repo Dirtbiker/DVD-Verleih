@@ -117,6 +117,7 @@ public class XMLDatenhaltung implements IDatenhaltung {
 			if (dvd2.equals(dvd)) {
 				dvdList.set(index, dvd);
 			}
+			index++;
 		}
 		store.setDvdList(dvdList);
 		close();
