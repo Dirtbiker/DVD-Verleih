@@ -308,4 +308,10 @@ public class EditCustomerDialog extends JDialog {
 		return dialogResult;
 	}
 
+	public Kunde getKunde() {
+		return kunde;
+	}
+	
+	
+
 }
