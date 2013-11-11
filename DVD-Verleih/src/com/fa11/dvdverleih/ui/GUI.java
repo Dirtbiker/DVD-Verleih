@@ -464,7 +464,7 @@ public class GUI extends JFrame {
 					panelLending.getChkAvailable().setSelected(false);
 				}
 			} else {
-				JOptionPane.showMessageDialog(GUI.this, "Der DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(GUI.this, "Die DVD mit der Nummer \"" + dvdNr + "\" wurde nicht gefunden!", "Fehler", JOptionPane.ERROR_MESSAGE);
 				dvdOk = false;
 			}
 		} catch (NumberFormatException nfe) {
