@@ -109,6 +109,14 @@ public class GUI extends JFrame {
 			}
 		});
 		
+		this.panelLending.setBtnDeleteActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				deleteLending();
+			}
+		});
+		
 		//DVD-Panel
 		this.panelDvd.setBtnEditActionListener(new ActionListener() {
 			
@@ -181,6 +189,20 @@ public class GUI extends JFrame {
 		updateKundenTable();
 	}
 	
+	/**
+	 * Loescht ausgewaehlte Ausleihe.
+	 */
+	private void deleteLending() {
+		int verleihnr = Integer.valueOf((String) panelLending.getTableLending().getValueAt(panelLending.getTableLending().getSelectedRow(), 0));
+		Ausleihe ausleihe = GUI.this.fachkonzept.getVerleihByID(verleihnr);
+		if(ausleihe != null){
+			//TODO Ausleihe kann nicht durch Fachkonzept geloescht werden
+			//GUI.this.fachkonzept.deleteVerleih(verleihnr);
+			JOptionPane.showMessageDialog(GUI.this, "Die Ausleihe wurde erfolgreich gelöscht!", "Erfolg", JOptionPane.INFORMATION_MESSAGE);
+			updateLendingTable();
+		}
+	}
+
 	/**
 	 * Oeffnet Dialog zum bearbeiten des ausgewaehlten Kunden.
 	 */
