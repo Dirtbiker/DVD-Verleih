@@ -421,14 +421,14 @@ public class TUI {
 				DVD dvd = fachkonzept.getDVDByID(verleih.getDvd_nr());
 				String rueckgabe = "";
 				if (verleih.getRueckgabe() != null)
-					rueckgabe = Helper.getDDMMYYYDate(verleih.getRueckgabe());
+					rueckgabe = Helper.getDDMMYYYYString(verleih.getRueckgabe());
 				System.out
 						.printf("%4d %-5s %-30s %-30s %-30s %4d %-10s %-10s\n",
 								verleih.getLeihvorgangs_nr(),
 								kunde.getAnrede(), kunde.getVorname(),
 								kunde.getNachname(), dvd.getTitel(),
 								dvd.getErscheinungsjahr(),
-								Helper.getDDMMYYYDate(verleih.getAusleihe()),
+								Helper.getDDMMYYYYString(verleih.getAusleihe()),
 								rueckgabe);
 			}
 		} else {
@@ -542,7 +542,7 @@ public class TUI {
 			System.out.println("Kundennummer:          "
 					+ ausleihe.getKunden_nr());
 			System.out.println("Ausleihe (DD.MM.YYYY): "
-					+ Helper.getDDMMYYYDate(ausleihe.getAusleihe()));
+					+ Helper.getDDMMYYYYString(ausleihe.getAusleihe()));
 			do {
 				korrekt = true;
 				System.out.print("Rückgabe (DD.MM.YYYY): ");

@@ -14,11 +14,16 @@ import java.util.Scanner;
  */
 public class Helper {
 
-	public static String getDDMMYYYDate(Date date) {
+	public static String getDDMMYYYYString(Date date) {
 		DateFormat df = new SimpleDateFormat("dd.MM.YYYY");
 		return df.format(date);
 	}
 
+	/**
+	 * Liest String von der Konsole ein
+	 * 
+	 * @return String
+	 */
 	public static String readString() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
@@ -34,6 +39,11 @@ public class Helper {
 		return temp;
 	}
 
+	/**
+	 * Liest char von der Konsole ein
+	 * 
+	 * @return Character
+	 */
 	public static char readChar() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
@@ -50,6 +60,11 @@ public class Helper {
 		return temp.charAt(0);
 	}
 
+	/**
+	 * Liest char von der Konsole ein und gibt in als Kleinbuchstabe zurueck
+	 * 
+	 * @return Character
+	 */
 	public static char readToLowerChar() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
@@ -66,6 +81,11 @@ public class Helper {
 		return temp.toLowerCase().charAt(0);
 	}
 
+	/**
+	 * Liest Integer von der Konsole ein
+	 * 
+	 * @return Integer
+	 */
 	public static int readInt() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
@@ -83,8 +103,11 @@ public class Helper {
 		return temp;
 	}
 
+	/**
+	 * Wartet in der Konsole so lange, bis Enter oder Return gedrueckt wurde
+	 */
 	public static void warteAufTaste() {
-		System.out.print("Drücken Sie eine beliebige Taste um fortzufahren...");
+		System.out.print("Drücken Sie ENTER um fortzufahren...");
 		try {
 			System.in.read();
 		} catch (IOException e) {

@@ -648,7 +648,7 @@ public class GUI extends JFrame {
 			for (Ausleihe verleih : verleihlist) {
 				String rueckgabe = "";
 				if (verleih.getRueckgabe() != null)
-					rueckgabe = Helper.getDDMMYYYDate(verleih.getRueckgabe());
+					rueckgabe = Helper.getDDMMYYYYString(verleih.getRueckgabe());
 				model.addRow(new String[] {
 						String.valueOf(verleih.getLeihvorgangs_nr()),
 						fachkonzept.getDVDByID(verleih.getDvd_nr()).getTitel(),
@@ -657,7 +657,7 @@ public class GUI extends JFrame {
 								+ ", "
 								+ fachkonzept.getKundeByID(
 										verleih.getKunden_nr()).getVorname(),
-						Helper.getDDMMYYYDate(verleih.getAusleihe()), rueckgabe });
+						Helper.getDDMMYYYYString(verleih.getAusleihe()), rueckgabe });
 			}
 		}
 	}

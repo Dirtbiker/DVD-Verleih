@@ -223,9 +223,9 @@ public class EditLendingDialog extends JDialog {
 		this.txtKunde.setText(String.valueOf(this.leihe.getKunden_nr()));
 		this.txtDVD.setText(String.valueOf(this.leihe.getDvd_nr()));
 		this.txtAusleihe
-				.setText(Helper.getDDMMYYYDate(this.leihe.getAusleihe()));
+				.setText(Helper.getDDMMYYYYString(this.leihe.getAusleihe()));
 		if (this.leihe.getRueckgabe() != null) {
-			this.txtRueckgabe.setText(Helper.getDDMMYYYDate(this.leihe
+			this.txtRueckgabe.setText(Helper.getDDMMYYYYString(this.leihe
 					.getRueckgabe()));
 		}
 	}
