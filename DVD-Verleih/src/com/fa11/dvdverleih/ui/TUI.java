@@ -19,15 +19,18 @@ import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
 public class TUI {
 	private IFachkonzept fachkonzept;
 
-	public static void main(String[] args) {
-		new TUI(new Fachkonzept(new XMLDatenhaltung()));
-	}
-
+	/**
+	 * Erstellt eine TUI
+	 * @param fachkonzept
+	 */
 	public TUI(IFachkonzept fachkonzept) {
 		this.fachkonzept = fachkonzept;
 		this.showMainMenu();
 	}
 
+	/**
+	 * Zeigt das Hauptmenu an
+	 */
 	private void showMainMenu() {
 		char auswahl;
 		boolean korrekt;
@@ -116,6 +119,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt alle DVDs an
+	 */
 	private void alleDvdsAnzeigen() {
 		System.out.println("DVD-Übersicht\n");
 		for (DVD dvd : fachkonzept.getAllDVDs()) {
@@ -127,6 +133,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt alle Kunden an
+	 */
 	private void alleKundenAnzeigen() {
 		System.out.println("Kundenübersicht\n");
 		if (fachkonzept.getAllKunden() != null) {
@@ -150,6 +159,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt einen Kunden an
+	 */
 	private void kundeAnzeigen() {
 		System.out.println("Kunden anzeigen\n");
 		int kundennummer;
@@ -174,6 +186,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Fuegt einen neuen Kunden hinzu
+	 */
 	private void neuerKunde() {
 		System.out.println("Kunde hinzufügen\n");
 		String anrede;
@@ -220,6 +235,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Bearbeitet einen Kunden
+	 */
 	private void kundeBearbeiten() {
 		System.out.println("Kunde bearbeiten\n");
 		String anrede;
@@ -297,6 +315,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Loescht einen Kunden
+	 */
 	private void kundeLoeschen() {
 		System.out.println("Kunde löschen\n");
 		System.out.print("Kundennummer des zu löschenden Kunden: ");
@@ -315,6 +336,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt eine DVD an
+	 */
 	private void dvdAnzeigen() {
 		System.out.println("DVD anzeigen\n");
 		int nummer;
@@ -329,6 +353,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Fuegt eine neue DVD hinzu
+	 */
 	private void neueDvd() {
 		System.out.println("DVD hinzufügen\n");
 		String titel;
@@ -345,6 +372,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Bearbeitet eine DVD
+	 */
 	private void dvdBearbeiten() {
 		System.out.println("DVD bearbeiten\n");
 		String titel;
@@ -382,6 +412,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Loescht eine DVD
+	 */
 	private void dvdLoeschen() {
 		System.out.println("DVD löschen\n");
 		System.out.print("Nummer der zu löschenden DVD: ");
@@ -400,6 +433,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt alle Leihvorgaenge an
+	 */
 	private void alleLeihvorgaengeAnzeigen() {
 		System.out.println("Leihvorgang-Übersicht\n");
 		if (fachkonzept.getAllVerleihe() != null) {
@@ -424,6 +460,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Zeigt alle Leihvorgaenge eines Kunden an
+	 */
 	private void leihvorgängeEinesKundenAnzeigen() {
 		System.out.println("Leihvorgang-Übersicht\n");
 		System.out.print("Kundennummer: ");
@@ -447,6 +486,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Fuegt einen neuen Leihvorgang hinzu
+	 */
 	private void neuerLeihvorgang() {
 		System.out.println("Leihvorgang hinzufügen\n");
 		int dvd_nr;
@@ -503,6 +545,9 @@ public class TUI {
 		Helper.warteAufTaste();
 	}
 
+	/**
+	 * Bearbeitet einen Leihvorgang
+	 */
 	private void leihvorgangBearbeiten() {
 		int leihvorgangsnummer;
 		Ausleihe ausleihe;
