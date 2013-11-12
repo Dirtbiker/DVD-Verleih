@@ -21,6 +21,11 @@ import com.fa11.dvdverleih.datenhaltung.DatenhaltungFactory;
 import com.fa11.dvdverleih.datenhaltung.DatenhaltungType;
 import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 
+/**
+ * GUI zum Auswaehlen der Datenhaltung
+ * 
+ * @author Timo Raschke
+ */
 public class StarterGUI extends JFrame {
 
 	private static final long serialVersionUID = -6090691783379043704L;
@@ -29,27 +34,6 @@ public class StarterGUI extends JFrame {
 	private JLabel lblDatenhaltung;
 	private JComboBox<String> cmbData;
 	private JButton btnStarten;
-
-	/**
-	 * StarterGUI testweise starten
-	 */
-	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					StarterGUI frame = new StarterGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * StarterGUI erstellen
