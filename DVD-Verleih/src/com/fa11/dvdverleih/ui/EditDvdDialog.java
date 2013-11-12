@@ -24,8 +24,14 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Dialog zum Bearbeiten von DVDs
+ * 
+ * @author Timo Raschke
+ */
 public class EditDvdDialog extends JDialog {
 
+	private static final long serialVersionUID = 3342985094357382264L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
 	
@@ -37,7 +43,7 @@ public class EditDvdDialog extends JDialog {
 	private DVD dvd;
 
 	/**
-	 * Create the dialog.
+	 * Erstellt den Dialog
 	 */
 	public EditDvdDialog(Component owner, DVD dvd) {
 		this.dvd = dvd;
