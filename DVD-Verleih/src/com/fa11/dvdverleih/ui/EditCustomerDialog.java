@@ -297,7 +297,7 @@ public class EditCustomerDialog extends JDialog {
 		this.txtAnrede.setText(kunde.getAnrede());
 		this.txtHausnr.setText(String.valueOf(kunde.getHausnr()));
 		this.txtNachname.setText(kunde.getNachname());
-		this.txtOrt.setText(kunde.getNachname());
+		this.txtOrt.setText(kunde.getOrt());
 		this.txtPLZ.setText(kunde.getPlz());
 		this.txtStrasse.setText(kunde.getStrasse());
 		this.txtTel.setText(kunde.getTelefonnr());
