@@ -4,25 +4,63 @@ import java.awt.EventQueue;
 
 import javax.swing.UIManager;
 
+import com.fa11.dvdverleih.datenhaltung.DatenhaltungFactory;
+import com.fa11.dvdverleih.datenhaltung.DatenhaltungType;
+import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.ui.StarterGUI;
+import com.fa11.dvdverleih.ui.TUI;
 
 public class DVDVerleih {
 
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
+		if (args.length != 0) {
+			switch (args[0]) {
+			case "sqlite":
+				new TUI(new Fachkonzept(
+						DatenhaltungFactory
+								.getDatenhaltung(DatenhaltungType.sqlite)));
+				break;
+			case "xml":
+				new TUI(new Fachkonzept(
+						DatenhaltungFactory
+								.getDatenhaltung(DatenhaltungType.xml)));
+				break;
+			default:
 				try {
-					StarterGUI frame = new StarterGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (Throwable e) {
 					e.printStackTrace();
 				}
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							StarterGUI frame = new StarterGUI();
+							frame.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				break;
 			}
-		});
+		} else {
+			try {
+				UIManager.setLookAndFeel(UIManager
+						.getSystemLookAndFeelClassName());
+			} catch (Throwable e) {
+				e.printStackTrace();
+			}
+			EventQueue.invokeLater(new Runnable() {
+				public void run() {
+					try {
+						StarterGUI frame = new StarterGUI();
+						frame.setVisible(true);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
 	}
 }
