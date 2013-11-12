@@ -1,9 +1,3 @@
-/**
- * @author Marco de Haan
- * Created: 20.09.2013
- * 
- */
-
 package com.fa11.dvdverleih.fachkonzept;
 
 import java.util.List;
@@ -11,7 +5,10 @@ import java.util.List;
 import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-
+/**
+ * Interface zum Fachkonzept
+ * @author Marco de Haan
+ */
 public interface IFachkonzept {
 	
 	public Kunde getKundeByID(int kundenNummer);

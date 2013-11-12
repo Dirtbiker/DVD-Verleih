@@ -1,8 +1,3 @@
-/**
- * @author Marco de Haan
- * Created: 20.09.2013
- * 
- */
 package com.fa11.dvdverleih.fachkonzept;
 
 import java.io.FileNotFoundException;
@@ -18,8 +13,8 @@ import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
 import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
-
 /**
+ * Das Fachkonzept des DVD-Verleihs
  * @author Marco de Haan
  *
  */
@@ -29,7 +24,11 @@ public class Fachkonzept implements IFachkonzept {
 	private List<Kunde> kundenList;
 	private List<DVD> DVDList;
 	private List<Ausleihe> verleiheList;
-	
+	/**
+	 * Konstruktor zum instantiieren des Fachkonzepts mit gegebener Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	public Fachkonzept(IDatenhaltung datenhaltung) {
 		this.datenhaltung = datenhaltung;
 		
@@ -49,6 +48,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Selektiert ein Kundenobjekt anhand der Kundennummer
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public Kunde getKundeByID(int kundenNummer) {
 		for(Kunde kunde : this.kundenList) {
@@ -59,11 +63,21 @@ public class Fachkonzept implements IFachkonzept {
 		return null;
 	}
 
+	/**
+	 * Selektiert eine Liste aller vorhandenen Kunden
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public List<Kunde> getAllKunden() {		
 		return this.kundenList;
 	}
 
+	/**
+	 * Akualisiert die Daten eines gegebenen Kunden in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void updateKunde(Kunde kundenDaten) {
 		try {
@@ -80,6 +94,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Löscht einen Kunden aus der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void deleteKunde(int kundenNummer) {
 		for(Kunde kunde : this.kundenList) {
@@ -100,6 +119,11 @@ public class Fachkonzept implements IFachkonzept {
 		}	
 	}
 
+	/**
+	 * Speichert einen neuen Kunden in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void createKunde(Kunde kundenDaten) {
 		
@@ -128,6 +152,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Selektiert ein DVD-Objekt anhand der DVD-Nummer
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public DVD getDVDByID(int dvdNummer) {		
 		for(DVD dvd : this.DVDList) {
@@ -138,11 +167,21 @@ public class Fachkonzept implements IFachkonzept {
 		return null;
 	}
 
+	/**
+	 * Selektiert eine Liste aller DVDs
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public List<DVD> getAllDVDs() {		
 		return this.DVDList;
 	}
 
+	/**
+	 * Aktualisiert die Daten eines gegebenen DVD-Objekts in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void updateDVD(DVD updateDVD) {
 		try {
@@ -159,6 +198,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Löscht eine DVD aus der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void deleteDVD(int dvdNummer) {
 		for(DVD dvd : this.DVDList) {
@@ -175,10 +219,16 @@ public class Fachkonzept implements IFachkonzept {
 					JOptionPane.showMessageDialog(null, "Fehler beim XML-Zugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
 					System.err.println("Fehler beim XML-Zugriff!");
 				}
+				return;
 			}
 		}	
 	}
 
+	/**
+	 * Speichert eine neue DVD in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void createDVD(DVD dvdDaten) {
 		
@@ -207,11 +257,21 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Selektiert eine Liste aller Leihvorgänge
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public List<Ausleihe> getAllVerleihe() {
 		return this.verleiheList;
 	}
 
+	/**
+	 * Selektiert eine Liste aller Leihvorgänge für einen bestimmten Kunden
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public List<Ausleihe> getKundenVerleih(int kundenNummer) {
 		List<Ausleihe> kundenVerleihe = new ArrayList<Ausleihe>();
@@ -224,6 +284,11 @@ public class Fachkonzept implements IFachkonzept {
 		return kundenVerleihe;
 	}
 
+	/**
+	 * Speichert einen neuen Verleihvorgang in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void createVerleih(Ausleihe neuerVerleih) {
 
@@ -252,6 +317,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Aktualisiert die Daten eines gegebenen Verleihvorgangs in der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void updateVerleih(Ausleihe updateVerleih) {
 		try {
@@ -268,6 +338,11 @@ public class Fachkonzept implements IFachkonzept {
 		}
 	}
 
+	/**
+	 * Selektiert einen Verleihvorgang anhand der ID 
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public Ausleihe getVerleihByID(int verleihID) {
 		for(Ausleihe ausleihe : this.verleiheList) {
@@ -278,6 +353,11 @@ public class Fachkonzept implements IFachkonzept {
 		return null;
 	}
 
+	/**
+	 * Löscht einen Verleihvorgang aus der Datenhaltung
+	 * @author Marco de Haan
+	 *
+	 */
 	@Override
 	public void deleteVerleih(int verleihNummer) {
 		for(Ausleihe verleih : this.verleiheList) {
