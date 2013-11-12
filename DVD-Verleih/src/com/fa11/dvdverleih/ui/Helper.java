@@ -24,12 +24,11 @@ public class Helper {
 		String temp = "";
 		do{
 			korrekt = true;
-				temp = scanner.next();
-			if(temp == "") {
+				temp = scanner.nextLine();
+			if(temp.equals("")) {
 				System.out.print("Falsche Eingabe, nochmals versuchen: ");
 				korrekt = false;
 			}
-			scanner.nextLine();
 		} while(!korrekt);
 //		scanner.close();
 		return temp;
