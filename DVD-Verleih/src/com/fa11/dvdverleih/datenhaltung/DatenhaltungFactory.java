@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.fa11.dvdverleih.datenhaltung;
 
 /**
@@ -9,6 +6,11 @@ package com.fa11.dvdverleih.datenhaltung;
  */
 public class DatenhaltungFactory {
 
+	/**
+	 * <code>getDatenhaltung</code> erstellt je nach Parameter die entsprechende Datenhaltung. 
+	 * @param datenhaltungType
+	 * @return IDatenhaltung
+	 */
 	public static IDatenhaltung getDatenhaltung (DatenhaltungType datenhaltungType) {
 		IDatenhaltung iDatenhaltung = null;
 		switch (datenhaltungType) {
