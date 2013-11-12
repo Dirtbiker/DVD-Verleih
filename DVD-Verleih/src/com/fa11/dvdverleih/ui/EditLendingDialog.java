@@ -22,11 +22,13 @@ import javax.swing.border.EmptyBorder;
 
 import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
 
+/**
+ * Dialog zum Bearbeiten von Ausleihen
+ * 
+ * @author Timo Raschke
+ */
 public class EditLendingDialog extends JDialog {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
@@ -40,7 +42,7 @@ public class EditLendingDialog extends JDialog {
 	private JTextField txtRueckgabe;
 
 	/**
-	 * Create the dialog.
+	 * Dialog erstellen
 	 */
 	public EditLendingDialog(Component owner, Ausleihe leihe) {
 		this.leihe = leihe;
