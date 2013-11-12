@@ -26,6 +26,7 @@ public class Helper {
 	 */
 	public static String readString() {
 		boolean korrekt = true;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
 		do {
@@ -46,6 +47,7 @@ public class Helper {
 	 */
 	public static char readChar() {
 		boolean korrekt = true;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
 		do {
@@ -67,6 +69,7 @@ public class Helper {
 	 */
 	public static char readToLowerChar() {
 		boolean korrekt = true;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
 		do {
@@ -88,6 +91,7 @@ public class Helper {
 	 */
 	public static int readInt() {
 		boolean korrekt = true;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		int temp = 0;
 		do {
