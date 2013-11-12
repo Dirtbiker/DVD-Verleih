@@ -11,11 +11,12 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-
+/**
+ * Angepasste Tabelle für die Darstellung der Verleihvorgänge, Kunden und DVDs
+ * @author Marco de Haan
+ */
 public class DVDVerleihTable extends JTable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public DVDVerleihTable(String[] columnTitles, int rows) {
