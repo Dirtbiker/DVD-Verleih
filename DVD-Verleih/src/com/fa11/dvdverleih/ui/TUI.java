@@ -139,6 +139,7 @@ public class TUI {
 	}
 
 	private void kundeAnzeigen() {
+		System.out.println("Kunden anzeigen\n");
 		int kundennummer;
 		Kunde kunde;
 		System.out.println("Kunden anzeigen\n");
@@ -163,6 +164,7 @@ public class TUI {
 	}
 
 	private void neuerKunde() {
+		System.out.println("Kunde hinzufügen\n");
 		String anrede;
 		String vorname;
 		String nachname;
@@ -206,10 +208,11 @@ public class TUI {
 	}
 
 	private void kundeBearbeiten() {
-
+		System.out.println("Kunde bearbeiten\n");
 	}
 
 	private void kundeLoeschen() {
+		System.out.println("Kunde löschen\n");
 		System.out.print("Kundennummer des zu löschenden Kunden: ");
 		try {
 			Kunde kunde = fachkonzept.getKundeByID(Helper.readInt());
@@ -227,6 +230,7 @@ public class TUI {
 	}
 
 	private void dvdAnzeigen() {
+		System.out.println("DVD anzeigen\n");
 		int nummer;
 		DVD dvd;
 		System.out.print("DVD-Nummer: ");
@@ -240,6 +244,7 @@ public class TUI {
 	}
 
 	private void neueDvd() {
+		System.out.println("DVD hinzufügen\n");
 		String titel;
 		String genre;
 		int erscheinungsjahr;
@@ -255,10 +260,42 @@ public class TUI {
 	}
 
 	private void dvdBearbeiten() {
-
+		System.out.println("DVD bearbeiten\n");
+		String titel;
+		String genre;
+		int erscheinungsjahr;
+		int dvd_nr;
+		DVD dvd;
+		System.out.print("DVD-Nr.: ");
+		dvd_nr = Helper.readInt();
+		dvd = fachkonzept.getDVDByID(dvd_nr);
+		if(dvd != null){
+			System.out.println("Wenn keine Änderungen vorgenommen werden sollen, \"-1\" eintragen!");
+			System.out.print("Titel (" + dvd.getTitel() + "): ");
+			titel = Helper.readString();
+			System.out.print("Genre (" + dvd.getGenre() + "): ");
+			genre = Helper.readString();
+			System.out.print("Jahr (" + dvd.getErscheinungsjahr() + ": ");
+			erscheinungsjahr = Helper.readInt();
+			
+			if(!titel.equals("-1"))
+				dvd.setTitel(titel);
+			if(!genre.equals("-1"))
+				dvd.setGenre(genre);
+			if(erscheinungsjahr != -1)
+				dvd.setErscheinungsjahr(erscheinungsjahr);
+			
+			fachkonzept.updateDVD(dvd);
+			System.out.println("DVD wurde bearbeitet!");
+		} else {
+			System.out.println("DVD mit der Nummer \"" + dvd_nr + "\" wurde nicht gefunden!");
+		}
+		
+		Helper.warteAufTaste();
 	}
 
 	private void dvdLoeschen() {
+		System.out.println("DVD löschen\n");
 		System.out.print("Nummer der zu löschenden DVD: ");
 		try {
 			DVD dvd = fachkonzept.getDVDByID(Helper.readInt());
@@ -320,6 +357,7 @@ public class TUI {
 	}
 
 	private void neuerLeihvorgang() {
+		System.out.println("Leihvorgang hinzufügen\n");
 		int dvd_nr;
 		int kunden_nr;
 		Date ausleihe = null;
