@@ -34,7 +34,7 @@ public class EditCustomerDialog extends JDialog {
 	private static final long serialVersionUID = 1257636699266058429L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
-	
+
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtAnrede;
 	private JTextField txtVorname;
@@ -61,10 +61,12 @@ public class EditCustomerDialog extends JDialog {
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(this.contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPanel.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0,
+				0.0, 0.0, 0.0, Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblAnrede = new JLabel("Anrede");
@@ -225,7 +227,7 @@ public class EditCustomerDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						try{
+						try {
 							String anrede = txtAnrede.getText();
 							String vorname = txtVorname.getText();
 							String nachname = txtNachname.getText();
@@ -234,54 +236,107 @@ public class EditCustomerDialog extends JDialog {
 							String plz = txtPLZ.getText();
 							String ort = txtOrt.getText();
 							String telefon = txtTel.getText();
-						
-							if(!anrede.equals("")){
-								if(!vorname.equals("")){
-									if(!nachname.equals("")){
-										if(!strasse.equals("")){
-											if(!hausnr.equals("")){
-												if(!plz.equals("")){
-													if(!ort.equals("")){
-														if(!telefon.equals("")){
-															EditCustomerDialog.this.kunde.setHausnr(Integer.valueOf(hausnr));
-															EditCustomerDialog.this.kunde.setAnrede(anrede);
-															EditCustomerDialog.this.kunde.setNachname(nachname);
-															EditCustomerDialog.this.kunde.setOrt(ort);
-															EditCustomerDialog.this.kunde.setPlz(plz);
-															EditCustomerDialog.this.kunde.setStrasse(strasse);
-															EditCustomerDialog.this.kunde.setTelefonnr(telefon);
-															EditCustomerDialog.this.kunde.setVorname(vorname);
+
+							if (!anrede.equals("")) {
+								if (!vorname.equals("")) {
+									if (!nachname.equals("")) {
+										if (!strasse.equals("")) {
+											if (!hausnr.equals("")) {
+												if (!plz.equals("")) {
+													if (!ort.equals("")) {
+														if (!telefon.equals("")) {
+															EditCustomerDialog.this.kunde
+																	.setHausnr(Integer
+																			.valueOf(hausnr));
+															EditCustomerDialog.this.kunde
+																	.setAnrede(anrede);
+															EditCustomerDialog.this.kunde
+																	.setNachname(nachname);
+															EditCustomerDialog.this.kunde
+																	.setOrt(ort);
+															EditCustomerDialog.this.kunde
+																	.setPlz(plz);
+															EditCustomerDialog.this.kunde
+																	.setStrasse(strasse);
+															EditCustomerDialog.this.kunde
+																	.setTelefonnr(telefon);
+															EditCustomerDialog.this.kunde
+																	.setVorname(vorname);
 															dialogResult = EditCustomerDialog.OK;
-															EditCustomerDialog.this.setVisible(false);
-															EditCustomerDialog.this.dispose();
-														}else {
-															JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Telefonnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+															EditCustomerDialog.this
+																	.setVisible(false);
+															EditCustomerDialog.this
+																	.dispose();
+														} else {
+															JOptionPane
+																	.showMessageDialog(
+																			EditCustomerDialog.this,
+																			"Die Telefonnummer darf nicht leer sein!",
+																			"Fehler",
+																			JOptionPane.ERROR_MESSAGE);
 														}
-													}else {
-														JOptionPane.showMessageDialog(EditCustomerDialog.this, "Der Ort darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+													} else {
+														JOptionPane
+																.showMessageDialog(
+																		EditCustomerDialog.this,
+																		"Der Ort darf nicht leer sein!",
+																		"Fehler",
+																		JOptionPane.ERROR_MESSAGE);
 													}
-												}else {
-													JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Postleitzahl darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+												} else {
+													JOptionPane
+															.showMessageDialog(
+																	EditCustomerDialog.this,
+																	"Die Postleitzahl darf nicht leer sein!",
+																	"Fehler",
+																	JOptionPane.ERROR_MESSAGE);
 												}
-											}else {
-												JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Hausnummer darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+											} else {
+												JOptionPane
+														.showMessageDialog(
+																EditCustomerDialog.this,
+																"Die Hausnummer darf nicht leer sein!",
+																"Fehler",
+																JOptionPane.ERROR_MESSAGE);
 											}
-										}else {
-											JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Straﬂe darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+										} else {
+											JOptionPane
+													.showMessageDialog(
+															EditCustomerDialog.this,
+															"Die Straﬂe darf nicht leer sein!",
+															"Fehler",
+															JOptionPane.ERROR_MESSAGE);
 										}
-									}else {
-										JOptionPane.showMessageDialog(EditCustomerDialog.this, "Der Nachname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									} else {
+										JOptionPane
+												.showMessageDialog(
+														EditCustomerDialog.this,
+														"Der Nachname darf nicht leer sein!",
+														"Fehler",
+														JOptionPane.ERROR_MESSAGE);
 									}
 								} else {
-									JOptionPane.showMessageDialog(EditCustomerDialog.this, "Der Vorname darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									JOptionPane
+											.showMessageDialog(
+													EditCustomerDialog.this,
+													"Der Vorname darf nicht leer sein!",
+													"Fehler",
+													JOptionPane.ERROR_MESSAGE);
 								}
 							} else {
-								JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Anrede darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(
+										EditCustomerDialog.this,
+										"Die Anrede darf nicht leer sein!",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
 							}
-						} catch (NumberFormatException nfe){
-							JOptionPane.showMessageDialog(EditCustomerDialog.this, "Die Hausnummer darf nur aus Ziffern bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+						} catch (NumberFormatException nfe) {
+							JOptionPane
+									.showMessageDialog(
+											EditCustomerDialog.this,
+											"Die Hausnummer darf nur aus Ziffern bestehen!",
+											"Fehler", JOptionPane.ERROR_MESSAGE);
 						}
-					} 
+					}
 				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -310,6 +365,11 @@ public class EditCustomerDialog extends JDialog {
 		this.txtVorname.setText(kunde.getVorname());
 	}
 
+	/**
+	 * Gibt Dialogergebnis zurueck
+	 * 
+	 * @return dialogResult
+	 */
 	public int getDialogResult() {
 		return dialogResult;
 	}
@@ -317,7 +377,5 @@ public class EditCustomerDialog extends JDialog {
 	public Kunde getKunde() {
 		return kunde;
 	}
-	
-	
 
 }

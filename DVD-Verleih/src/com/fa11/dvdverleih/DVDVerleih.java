@@ -10,6 +10,11 @@ import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.ui.StarterGUI;
 import com.fa11.dvdverleih.ui.TUI;
 
+/**
+ * Startklasse des DVD Verleihs
+ * 
+ * @author Timo
+ */
 public class DVDVerleih {
 
 	public static void main(String[] args) {
@@ -26,41 +31,32 @@ public class DVDVerleih {
 								.getDatenhaltung(DatenhaltungType.xml)));
 				break;
 			default:
-				try {
-					UIManager.setLookAndFeel(UIManager
-							.getSystemLookAndFeelClassName());
-				} catch (Throwable e) {
-					e.printStackTrace();
-				}
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							StarterGUI frame = new StarterGUI();
-							frame.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				startGui();
 				break;
 			}
 		} else {
-			try {
-				UIManager.setLookAndFeel(UIManager
-						.getSystemLookAndFeelClassName());
-			} catch (Throwable e) {
-				e.printStackTrace();
-			}
-			EventQueue.invokeLater(new Runnable() {
-				public void run() {
-					try {
-						StarterGUI frame = new StarterGUI();
-						frame.setVisible(true);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-			});
+			startGui();
 		}
+	}
+
+	/**
+	 * Startet die GUI
+	 */
+	public static void startGui() {
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					StarterGUI frame = new StarterGUI();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 	}
 }

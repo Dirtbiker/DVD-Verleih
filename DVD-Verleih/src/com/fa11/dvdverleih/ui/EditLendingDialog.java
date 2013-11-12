@@ -32,7 +32,7 @@ public class EditLendingDialog extends JDialog {
 	private static final long serialVersionUID = 1L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
-	
+
 	private int dialogResult;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtKunde;
@@ -55,10 +55,12 @@ public class EditLendingDialog extends JDialog {
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(this.contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPanel.rowHeights = new int[] { 0, 0, 0, 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblKunde = new JLabel("Kunde:");
@@ -128,30 +130,57 @@ public class EditLendingDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(!EditLendingDialog.this.txtKunde.getText().equals("")){
-							if(!EditLendingDialog.this.txtDVD.getText().equals("")){
+						if (!EditLendingDialog.this.txtKunde.getText().equals(
+								"")) {
+							if (!EditLendingDialog.this.txtDVD.getText()
+									.equals("")) {
 								try {
-									DateFormat df = new SimpleDateFormat("dd.MM.YYYY");
-									EditLendingDialog.this.leihe.setAusleihe(df.parse(EditLendingDialog.this.txtAusleihe.getText()));
-									EditLendingDialog.this.leihe.setDvd_nr(Integer.valueOf(EditLendingDialog.this.txtDVD.getText()));
-									EditLendingDialog.this.leihe.setKunden_nr(Integer.valueOf(EditLendingDialog.this.txtKunde.getText()));
-									EditLendingDialog.this.leihe.setRueckgabe(df.parse(EditLendingDialog.this.txtRueckgabe.getText()));
-									
+									DateFormat df = new SimpleDateFormat(
+											"dd.MM.YYYY");
+									EditLendingDialog.this.leihe.setAusleihe(df
+											.parse(EditLendingDialog.this.txtAusleihe
+													.getText()));
+									EditLendingDialog.this.leihe.setDvd_nr(Integer
+											.valueOf(EditLendingDialog.this.txtDVD
+													.getText()));
+									EditLendingDialog.this.leihe.setKunden_nr(Integer
+											.valueOf(EditLendingDialog.this.txtKunde
+													.getText()));
+									EditLendingDialog.this.leihe.setRueckgabe(df
+											.parse(EditLendingDialog.this.txtRueckgabe
+													.getText()));
+
 									EditLendingDialog.this.dialogResult = EditLendingDialog.OK;
 									EditLendingDialog.this.setVisible(false);
 									EditLendingDialog.this.dispose();
 								} catch (NumberFormatException e) {
-									JOptionPane.showMessageDialog(EditLendingDialog.this, "Kundennummer und DVD dürfen nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									JOptionPane
+											.showMessageDialog(
+													EditLendingDialog.this,
+													"Kundennummer und DVD dürfen nur aus Zahlen bestehen!",
+													"Fehler",
+													JOptionPane.ERROR_MESSAGE);
 								} catch (ParseException e) {
-									JOptionPane.showMessageDialog(EditLendingDialog.this, "Das Datum muss das Format DD.MM.YYYY haben!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									JOptionPane
+											.showMessageDialog(
+													EditLendingDialog.this,
+													"Das Datum muss das Format DD.MM.YYYY haben!",
+													"Fehler",
+													JOptionPane.ERROR_MESSAGE);
 								}
 							} else {
-								JOptionPane.showMessageDialog(EditLendingDialog.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(
+										EditLendingDialog.this,
+										"Das Genre darf nicht leer sein!",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
 							}
 						} else {
-							JOptionPane.showMessageDialog(EditLendingDialog.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(
+									EditLendingDialog.this,
+									"Der Titel darf nicht leer sein!",
+									"Fehler", JOptionPane.ERROR_MESSAGE);
 						}
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -171,8 +200,7 @@ public class EditLendingDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
-		
+
 		{
 			JLabel lblRueckgabe = new JLabel("R\u00FCckgabe:");
 			GridBagConstraints gbc_lblRueckgabe = new GridBagConstraints();
@@ -191,21 +219,28 @@ public class EditLendingDialog extends JDialog {
 			contentPanel.add(this.txtRueckgabe, gbc_txtRueckgabe);
 			this.txtRueckgabe.setColumns(10);
 		}
-		
+
 		this.txtKunde.setText(String.valueOf(this.leihe.getKunden_nr()));
 		this.txtDVD.setText(String.valueOf(this.leihe.getDvd_nr()));
-		this.txtAusleihe.setText(Helper.getDDMMYYYDate(this.leihe.getAusleihe()));
-		if(this.leihe.getRueckgabe() != null){
-			this.txtRueckgabe.setText(Helper.getDDMMYYYDate(this.leihe.getRueckgabe()));
+		this.txtAusleihe
+				.setText(Helper.getDDMMYYYDate(this.leihe.getAusleihe()));
+		if (this.leihe.getRueckgabe() != null) {
+			this.txtRueckgabe.setText(Helper.getDDMMYYYDate(this.leihe
+					.getRueckgabe()));
 		}
 	}
 
-	public Ausleihe getAusleihe(){
+	public Ausleihe getAusleihe() {
 		return this.leihe;
 	}
 
+	/**
+	 * Gibt Dialogergebnis zurueck
+	 * 
+	 * @return dialogResult
+	 */
 	public int getDialogResult() {
 		return dialogResult;
 	}
-	
+
 }

@@ -19,6 +19,7 @@ public class TUI {
 
 	/**
 	 * Erstellt eine TUI
+	 * 
 	 * @param fachkonzept
 	 */
 	public TUI(IFachkonzept fachkonzept) {
@@ -94,7 +95,7 @@ public class TUI {
 					alleLeihvorgaengeAnzeigen();
 					break;
 				case 'l':
-					leihvorgängeEinesKundenAnzeigen();
+					leihvorgaengeEinesKundenAnzeigen();
 					break;
 				case 'm':
 					neuerLeihvorgang();
@@ -123,8 +124,6 @@ public class TUI {
 	private void alleDvdsAnzeigen() {
 		System.out.println("DVD-Übersicht\n");
 		for (DVD dvd : fachkonzept.getAllDVDs()) {
-			// System.out.println(dvd.getDvd_nr() + " " + dvd.getTitel() + " " +
-			// dvd.getGenre() + " " + dvd.getErscheinungsjahr());
 			System.out.printf("%4d %-30s %-20s %4d\n", dvd.getDvd_nr(),
 					dvd.getTitel(), dvd.getGenre(), dvd.getErscheinungsjahr());
 		}
@@ -138,11 +137,6 @@ public class TUI {
 		System.out.println("Kundenübersicht\n");
 		if (fachkonzept.getAllKunden() != null) {
 			for (Kunde kunde : fachkonzept.getAllKunden()) {
-				// System.out.println(kunde.getKunden_nr() + " "
-				// + kunde.getAnrede() + " " + kunde.getVorname() + " "
-				// + kunde.getNachname() + " " + kunde.getStrasse() + " "
-				// + kunde.getHausnr() + " " + kunde.getPlz() + " "
-				// + kunde.getOrt());
 				System.out.printf(
 						"%4d %-5s %-30s %-30s %-30s %4d %-5s %-15s\n",
 						kunde.getKunden_nr(), kunde.getAnrede(),
@@ -241,14 +235,11 @@ public class TUI {
 		String anrede;
 		String vorname;
 		String nachname;
-		Date geburtstag = null;
 		String plz;
 		String ort;
 		String strasse;
 		int hausnummer;
 		String telefon_nummer;
-		SimpleDateFormat sdfGeburtstag = new SimpleDateFormat("dd.MM.yyyy");
-		boolean korrekt = true;
 		int kundennr;
 		Kunde kunde;
 
@@ -257,14 +248,14 @@ public class TUI {
 		kunde = fachkonzept.getKundeByID(kundennr);
 		if (kunde != null) {
 			System.out
-			.println("Wenn keine Änderungen vorgenommen werden sollen, \"-1\" eintragen!");
+					.println("Wenn keine Änderungen vorgenommen werden sollen, \"-1\" eintragen!");
 			System.out.print("Anrede (" + kunde.getAnrede() + "): ");
 			anrede = Helper.readString();
-			System.out.print("Vorname (" + kunde.getVorname() +"): ");
+			System.out.print("Vorname (" + kunde.getVorname() + "): ");
 			vorname = Helper.readString();
 			System.out.print("Nachname (" + kunde.getNachname() + "): ");
 			nachname = Helper.readString();
-			System.out.print("Straße (" + kunde .getStrasse() + "): ");
+			System.out.print("Straße (" + kunde.getStrasse() + "): ");
 			strasse = Helper.readString();
 			System.out.print("Hausnummer (" + kunde.getHausnr() + "): ");
 			hausnummer = Helper.readInt();
@@ -272,18 +263,6 @@ public class TUI {
 			plz = Helper.readString();
 			System.out.print("Ort (" + kunde.getOrt() + "): ");
 			ort = Helper.readString();
-//			do {
-//				korrekt = true;
-//				System.out.print("Geburtstag (DD.MM.YYYY): ");
-//				String tmp = Helper.readString();
-//				if (!tmp.equals("-1")) {
-//					try {
-//						geburtstag = sdfGeburtstag.parse(Helper.readString());
-//					} catch (ParseException e) {
-//						korrekt = false;
-//					}
-//				}
-//			} while (!korrekt);
 			System.out.print("Telefonnummer (" + kunde.getTelefonnr() + "): ");
 			telefon_nummer = Helper.readString();
 
@@ -303,7 +282,7 @@ public class TUI {
 				kunde.setOrt(ort);
 			if (!telefon_nummer.equals("-1"))
 				kunde.setTelefonnr(telefon_nummer);
-			
+
 			fachkonzept.updateKunde(kunde);
 
 			System.out.println("\nKunde wurde hinzugefügt!");
@@ -461,7 +440,7 @@ public class TUI {
 	/**
 	 * Zeigt alle Leihvorgaenge eines Kunden an
 	 */
-	private void leihvorgängeEinesKundenAnzeigen() {
+	private void leihvorgaengeEinesKundenAnzeigen() {
 		System.out.println("Leihvorgang-Übersicht\n");
 		System.out.print("Kundennummer: ");
 		int temp = Helper.readInt();
@@ -552,23 +531,25 @@ public class TUI {
 		Date rueckgabe = null;
 		boolean korrekt;
 		SimpleDateFormat sdfGeburtstag = new SimpleDateFormat("dd.MM.yyyy");
-		
+
 		System.out.println("Leihvorgang bearbeiten\n");
 		System.out.print("Leihvorgangsnummer:      ");
 		leihvorgangsnummer = Helper.readInt();
 		ausleihe = fachkonzept.getVerleihByID(leihvorgangsnummer);
-		if(ausleihe != null){
-			System.out.println("DVD-Nr:                " + ausleihe.getDvd_nr());
-			System.out.println("Kundennummer:          " + ausleihe.getKunden_nr());
-			System.out.println("Ausleihe (DD.MM.YYYY): " + Helper.getDDMMYYYDate(ausleihe.getAusleihe()));
+		if (ausleihe != null) {
+			System.out
+					.println("DVD-Nr:                " + ausleihe.getDvd_nr());
+			System.out.println("Kundennummer:          "
+					+ ausleihe.getKunden_nr());
+			System.out.println("Ausleihe (DD.MM.YYYY): "
+					+ Helper.getDDMMYYYDate(ausleihe.getAusleihe()));
 			do {
 				korrekt = true;
 				System.out.print("Rückgabe (DD.MM.YYYY): ");
 				try {
 					String tmp = Helper.readString();
 					if (!tmp.equals("-1"))
-						rueckgabe = sdfGeburtstag
-								.parse(Helper.readString());
+						rueckgabe = sdfGeburtstag.parse(Helper.readString());
 					else
 						rueckgabe = null;
 				} catch (ParseException e) {

@@ -13,64 +13,64 @@ import java.util.Scanner;
  * @author Timo
  */
 public class Helper {
-	
-	public static String getDDMMYYYDate(Date date){
+
+	public static String getDDMMYYYDate(Date date) {
 		DateFormat df = new SimpleDateFormat("dd.MM.YYYY");
 		return df.format(date);
 	}
-	
+
 	public static String readString() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
-		do{
+		do {
 			korrekt = true;
-				temp = scanner.nextLine();
-			if(temp.equals("")) {
+			temp = scanner.nextLine();
+			if (temp.equals("")) {
 				System.out.print("Falsche Eingabe, nochmals versuchen: ");
 				korrekt = false;
 			}
-		} while(!korrekt);
+		} while (!korrekt);
 		return temp;
 	}
-	
+
 	public static char readChar() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
-		do{
+		do {
 			korrekt = true;
-				temp = scanner.next();
-			if(temp == "") {
+			temp = scanner.next();
+			if (temp == "") {
 				System.out.print("Falsche Eingabe, nochmals versuchen: ");
 				korrekt = false;
 			}
 			scanner.nextLine();
-		} while(!korrekt);
+		} while (!korrekt);
 		return temp.charAt(0);
 	}
-	
+
 	public static char readToLowerChar() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
 		String temp = "";
-		do{
+		do {
 			korrekt = true;
-				temp = scanner.next();
-			if(temp == "") {
+			temp = scanner.next();
+			if (temp == "") {
 				System.out.print("Falsche Eingabe, nochmals versuchen: ");
 				korrekt = false;
 			}
 			scanner.nextLine();
-		} while(!korrekt);
+		} while (!korrekt);
 		return temp.toLowerCase().charAt(0);
 	}
 
-	public static int readInt(){
+	public static int readInt() {
 		boolean korrekt = true;
 		Scanner scanner = new Scanner(System.in);
 		int temp = 0;
-		do{
+		do {
 			korrekt = true;
 			try {
 				temp = scanner.nextInt();
@@ -79,10 +79,10 @@ public class Helper {
 				korrekt = false;
 			}
 			scanner.nextLine();
-		} while(!korrekt);
+		} while (!korrekt);
 		return temp;
 	}
-	
+
 	public static void warteAufTaste() {
 		System.out.print("Drücken Sie eine beliebige Taste um fortzufahren...");
 		try {

@@ -34,7 +34,7 @@ public class EditDvdDialog extends JDialog {
 	private static final long serialVersionUID = 3342985094357382264L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
-	
+
 	private int dialogResult;
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtTitle;
@@ -56,10 +56,12 @@ public class EditDvdDialog extends JDialog {
 		this.contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(this.contentPanel, BorderLayout.CENTER);
 		GridBagLayout gbl_contentPanel = new GridBagLayout();
-		gbl_contentPanel.columnWidths = new int[]{0, 0, 0};
-		gbl_contentPanel.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_contentPanel.columnWeights = new double[]{0.0, 1.0, Double.MIN_VALUE};
-		gbl_contentPanel.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPanel.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPanel.rowHeights = new int[] { 0, 0, 0, 0 };
+		gbl_contentPanel.columnWeights = new double[] { 0.0, 1.0,
+				Double.MIN_VALUE };
+		gbl_contentPanel.rowWeights = new double[] { 0.0, 0.0, 0.0,
+				Double.MIN_VALUE };
 		contentPanel.setLayout(gbl_contentPanel);
 		{
 			JLabel lblTitleDesc = new JLabel("Titel:");
@@ -125,25 +127,42 @@ public class EditDvdDialog extends JDialog {
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
-						if(!EditDvdDialog.this.txtTitle.getText().equals("")){
-							if(!EditDvdDialog.this.txtGenre.getText().equals("")){
+						if (!EditDvdDialog.this.txtTitle.getText().equals("")) {
+							if (!EditDvdDialog.this.txtGenre.getText().equals(
+									"")) {
 								try {
-									EditDvdDialog.this.dvd.setTitel(EditDvdDialog.this.txtTitle.getText());
-									EditDvdDialog.this.dvd.setGenre(EditDvdDialog.this.txtGenre.getText());
-									EditDvdDialog.this.dvd.setErscheinungsjahr(Integer.valueOf(EditDvdDialog.this.txtYear.getText()));
+									EditDvdDialog.this.dvd
+											.setTitel(EditDvdDialog.this.txtTitle
+													.getText());
+									EditDvdDialog.this.dvd
+											.setGenre(EditDvdDialog.this.txtGenre
+													.getText());
+									EditDvdDialog.this.dvd.setErscheinungsjahr(Integer
+											.valueOf(EditDvdDialog.this.txtYear
+													.getText()));
 									EditDvdDialog.this.dialogResult = EditDvdDialog.OK;
 									EditDvdDialog.this.setVisible(false);
 									EditDvdDialog.this.dispose();
 								} catch (NumberFormatException e) {
-									JOptionPane.showMessageDialog(EditDvdDialog.this, "Das Jahr darf nur aus Zahlen bestehen!", "Fehler", JOptionPane.ERROR_MESSAGE);
+									JOptionPane
+											.showMessageDialog(
+													EditDvdDialog.this,
+													"Das Jahr darf nur aus Zahlen bestehen!",
+													"Fehler",
+													JOptionPane.ERROR_MESSAGE);
 								}
 							} else {
-								JOptionPane.showMessageDialog(EditDvdDialog.this, "Das Genre darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+								JOptionPane.showMessageDialog(
+										EditDvdDialog.this,
+										"Das Genre darf nicht leer sein!",
+										"Fehler", JOptionPane.ERROR_MESSAGE);
 							}
 						} else {
-							JOptionPane.showMessageDialog(EditDvdDialog.this, "Der Titel darf nicht leer sein!", "Fehler", JOptionPane.ERROR_MESSAGE);
+							JOptionPane.showMessageDialog(EditDvdDialog.this,
+									"Der Titel darf nicht leer sein!",
+									"Fehler", JOptionPane.ERROR_MESSAGE);
 						}
-						
+
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -163,18 +182,23 @@ public class EditDvdDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
+
 		this.txtTitle.setText(dvd.getTitel());
 		this.txtGenre.setText(dvd.getGenre());
 		this.txtYear.setText(String.valueOf(dvd.getErscheinungsjahr()));
 	}
 
-	public DVD getDvdResult(){
+	public DVD getDvd() {
 		return this.dvd;
 	}
 
+	/**
+	 * Gibt Dialogergebnis zurueck
+	 * 
+	 * @return dialogResult
+	 */
 	public int getDialogResult() {
 		return dialogResult;
 	}
-	
+
 }

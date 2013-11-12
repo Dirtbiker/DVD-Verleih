@@ -103,5 +103,4 @@ public class StarterGUI extends JFrame {
 		pack();
 		setLocationRelativeTo(null);
 	}
-
 }
