@@ -21,7 +21,6 @@ import javax.swing.table.TableRowSorter;
  * DVD-Verwaltungspanel
  * 
  * @author Timo Raschke
- * @version 1.0
  */
 public class PanelDvd extends JPanel {
 	

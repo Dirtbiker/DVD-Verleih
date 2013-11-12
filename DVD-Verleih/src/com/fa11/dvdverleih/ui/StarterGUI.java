@@ -1,6 +1,5 @@
 package com.fa11.dvdverleih.ui;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -14,7 +13,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import com.fa11.dvdverleih.datenhaltung.DatenhaltungFactory;
@@ -75,11 +73,13 @@ public class StarterGUI extends JFrame {
 		this.btnStarten.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if (cmbData.getSelectedIndex() == 0) {
+					// XML
 					JFrame gui = new GUI(new Fachkonzept(DatenhaltungFactory
 							.getDatenhaltung(DatenhaltungType.xml)));
 					gui.setVisible(true);
 					setVisible(false);
 				} else if (cmbData.getSelectedIndex() == 1) {
+					// SQLite
 					JFrame gui = new GUI(new Fachkonzept(DatenhaltungFactory
 							.getDatenhaltung(DatenhaltungType.sqlite)));
 					gui.setVisible(true);

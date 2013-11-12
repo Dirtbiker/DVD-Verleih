@@ -40,6 +40,7 @@ public class GUI extends JFrame {
 
 	/**
 	 * GUI erstellen
+	 * @param fachkonzept
 	 */
 	public GUI(IFachkonzept fachkonzept) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GUI.class.getResource("/com/fa11/dvdverleih/ui/ressources/dvd_unmount.png")));

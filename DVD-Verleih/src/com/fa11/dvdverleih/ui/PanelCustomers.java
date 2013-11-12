@@ -21,7 +21,6 @@ import javax.swing.table.TableRowSorter;
  * Kundenverwaltungspanel
  * 
  * @author Timo Raschke
- * @version 1.0
  */
 public class PanelCustomers extends JPanel {
 	

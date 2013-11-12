@@ -22,7 +22,6 @@ import javax.swing.table.TableRowSorter;
  * Leih-Verwaltungspanel
  * 
  * @author Timo Raschke
- * @version 1.0
  */
 public class PanelLending extends JPanel {
 	

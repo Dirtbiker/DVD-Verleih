@@ -3,11 +3,9 @@ package com.fa11.dvdverleih.ui;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import com.fa11.dvdverleih.datenhaltung.XMLDatenhaltung;
 import com.fa11.dvdverleih.datenhaltung.tables.DVD;
 import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
 import com.fa11.dvdverleih.datenhaltung.tables.Ausleihe;
-import com.fa11.dvdverleih.fachkonzept.Fachkonzept;
 import com.fa11.dvdverleih.fachkonzept.IFachkonzept;
 
 /**
