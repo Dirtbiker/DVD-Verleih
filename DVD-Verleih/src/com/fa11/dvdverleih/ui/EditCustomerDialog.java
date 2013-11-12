@@ -24,8 +24,14 @@ import com.fa11.dvdverleih.datenhaltung.tables.Kunde;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Dialog zum Bearbeiten von Kunden
+ * 
+ * @author Timo Raschke
+ */
 public class EditCustomerDialog extends JDialog {
 
+	private static final long serialVersionUID = 1257636699266058429L;
 	public final static int OK = 1;
 	public final static int ABORT = 0;
 	
