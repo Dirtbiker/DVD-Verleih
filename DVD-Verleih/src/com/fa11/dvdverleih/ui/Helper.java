@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Helper {
 
 	public static String getDDMMYYYYString(Date date) {
-		DateFormat df = new SimpleDateFormat("dd.MM.YYYY");
+		DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 		return df.format(date);
 	}
 

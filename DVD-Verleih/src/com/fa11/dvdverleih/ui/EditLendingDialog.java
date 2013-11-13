@@ -136,7 +136,7 @@ public class EditLendingDialog extends JDialog {
 									.equals("")) {
 								try {
 									DateFormat df = new SimpleDateFormat(
-											"dd.MM.YYYY");
+											"dd.MM.yyyy");
 									EditLendingDialog.this.leihe.setAusleihe(df
 											.parse(EditLendingDialog.this.txtAusleihe
 													.getText()));

@@ -194,8 +194,8 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 						+ AusleiheFields.rueckgabe + ")"
 				+ " VALUES ('" 	+ ausleihe.getDvd_nr() + "', '"
 								+ ausleihe.getKunden_nr() + "', '"
-								+ ausleihe.getAusleihe() + "', '"
-								+ ausleihe.getRueckgabe() + "');");
+								+ ausleihe.getAusleihe() + "', "
+								+ ausleihe.getRueckgabe() + ");");
 		close();
         return getAusleiheList();
 	}
