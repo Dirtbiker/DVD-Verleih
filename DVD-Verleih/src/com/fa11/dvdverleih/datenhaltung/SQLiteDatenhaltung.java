@@ -206,9 +206,9 @@ public class SQLiteDatenhaltung implements IDatenhaltung {
 		statement.executeUpdate("UPDATE " + Table.T_AUSLEIHE + 
 				" SET "	+ AusleiheFields.f_dvd_nr + "=" + ausleihe.getDvd_nr() + ","
 						+ AusleiheFields.f_kunden_nr + "=" + ausleihe.getKunden_nr() + ","
-						+ AusleiheFields.ausleihe + "='" + ausleihe.getAusleihe() + ","
+						+ AusleiheFields.ausleihe + "='" + ausleihe.getAusleihe() + "',"
 						+ AusleiheFields.rueckgabe + "='" + ausleihe.getRueckgabe() + "'" + 
-				" WHERE " + DVDFields.p_dvd_nr + "=" + ausleihe.getLeihvorgangs_nr() + ";");
+				" WHERE " + AusleiheFields.p_leihvorgangs_nr + "=" + ausleihe.getLeihvorgangs_nr() + ";");
 		close();
         return getAusleiheList();
 	}

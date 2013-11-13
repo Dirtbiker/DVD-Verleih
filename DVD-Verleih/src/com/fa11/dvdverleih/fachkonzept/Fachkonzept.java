@@ -330,6 +330,7 @@ public class Fachkonzept implements IFachkonzept {
 			JOptionPane.showMessageDialog(null, "Fehlende oder fehlerhafte Dateien!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
 			System.err.println("Fehlende oder fehlerhafte Dateien!");
 		} catch (SQLException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Fehler beim Datenbankzugriff!", "Fehler!", JOptionPane.INFORMATION_MESSAGE);
 			System.err.println("Fehler beim Datenbankzugriff!");
 		} catch (JAXBException e) {
